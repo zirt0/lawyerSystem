@@ -162,30 +162,6 @@
                                         <i class="fontello-params"></i>
                                         <span>Settings</span>
                                     </a>
-                                    <ul>
-                                        <li>
-                                            <a href="invoice.html" title="Invoice">Invoice</a>
-                                        </li>
-                                        <li>
-                                            <a href="pricing_table.html" title="Pricing Table">Pricing Table</a>
-                                        </li>
-                                        <li>
-                                            <a href="time-line.html" title="Time Line">Time Line</a>
-                                        </li>
-                                        <li>
-                                            <a href="login.html" title="Chart">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="map.html" title="Lock Screen">Map</a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html" title="404 Error Page">404 Error Page</a>
-                                        </li>
-                                        <li>
-                                            <a href="500.html" title="500 Error Page">500 Error Page</a>
-                                        </li>
-
-                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -266,7 +242,7 @@
 
                                                             <div ng-repeat="x in searchPeople | filter:searchboxTop ">
                                                                 <i class="icon-user"></i>
-                                                                <a href="#/customers/{{x.id}}" ng-click="searchboxTop = ''">
+                                                                <a href="/#/customers/{{x.id}}" ng-click="searchboxTop = ''">
                                                                     <h3>{{x.fname}} {{x.lname}} <span class="text-green fontello-record"></span></h3>
                                                                     <p>{{x.company}}</p>
                                                                 </a>
