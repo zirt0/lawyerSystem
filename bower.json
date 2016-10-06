@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "foundation-apps": "~1.2.0",
-    "angular-cookies": "^1.5.5",
+    "angular-cookies": "^1.5.8",
     "angular-sanitize": "^1.5.5",
     "angular-footable": "^1.0.3",
     "at-table": "^1.0.7",
@@ -36,6 +36,7 @@
     "angular-base64": "^2.0.5",
     "angular-file-saver": "^1.1.2",
     "angular-utf8-base64": "^0.0.5",
-    "angular-datepicker": "^2.0.3"
+    "angular-datepicker": "^2.0.3",
+    "angular-route": "^1.5.8"
   }
 }

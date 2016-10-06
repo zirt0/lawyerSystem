@@ -7,7 +7,7 @@
 //$conn = new mysqli("localhost", "root", "", "suleyok47_say");
 header('Content-Type: text/html; charset=utf-8');
 
-$conn = new mysqli("localhost", "root", "karlik", "customersystem");
+$conn = new mysqli("localhost", "root", "!onlinedev1812#", "customersystem");
  // $argHost = "localhost";
  // $argUsername = "root";
  // $argPassword = "karlik";
@@ -21,5 +21,8 @@ $conn = new mysqli("localhost", "root", "karlik", "customersystem");
  //    mysql_query("set names 'utf8'",$dbLink);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+	//echo "not connected";   
+ die("Connection failed: " . $conn->connect_error);
+}else{
+	//echo "connected";
+}
