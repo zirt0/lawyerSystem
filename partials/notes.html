@@ -1,0 +1,36 @@
+<div class="large-12">
+    <div class="box no-padding" style="margin-top: 0px;">
+                
+        <div class="box-header bg-brown">
+            <!-- tools box -->
+            <div class="pull-right box-tools text-white">
+
+                <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                </span>
+                <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                </span>
+            </div>
+            <h3 class="box-title text-white"><i class="icon-view-list text-white"></i>
+                <span class="text-white">Interne Notities<small></small></span>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="internnotes" style="display: block;">
+            <div class="events-nest">
+                <ul>
+
+                    <li ng-repeat="x in notes_from" ng-mouseenter="makelarger()" ng-mouseleave="makesmaller()" ng-class="large_height">
+                        <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                        </h4>
+                        <p>{{x.content}}</p>
+                        <p><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></p>
+                    </li>
+                    <li ng-show="!notes_from.length"><div>Geen notities</div></li>
+                </ul>
+                <button class="bg-brown expand small-text-center"> <small>Bekijk alle notities</small></button>
+
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>

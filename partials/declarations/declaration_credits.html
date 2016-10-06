@@ -1,0 +1,19 @@
+<row>
+
+<table class="sm-large-4 columns">
+	<tr>
+		<th>ID</th>
+		<th>Case</th>
+		<th>Bedrag <small>Ex btw</small></th>
+		<th>Bekijk</th>
+
+	</tr>
+	<tr ng-repeat='x in declaration_credits.credits'>
+		<td>{{x.id}}</td>
+		<td>{{x.casename}}</td>
+		<td>&euro; {{x.price_ex_btw}}</td>
+		<th><a href='/#/declarations/{{x.id}}/credits' class='button tiny radius bg-green'>Bekijk</a></th>
+
+	</tr>
+</table>
+</row>

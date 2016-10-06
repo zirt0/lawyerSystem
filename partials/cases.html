@@ -1,0 +1,36 @@
+<!-- <div ng-repeat="case in cases">{{case.case_name}} {{case.id}}</div> -->
+<div class="large-12 columns no-padding"><input type="text" class="form-control" ng-model="query" ng-change="updateFilteredList()" placeholder="Zoeken"></div>
+   <!-- <div class="large-2 columns ">
+      <a class="button bg-green small" href="#/customers/add/customer">Klant Aanmaken</a>
+   </div> -->
+<table class="table table-striped table-bordered"
+  at-table at-paginate at-list="filteredList">
+  <thead></thead>
+  <tbody>
+    <tr>
+    <td at-title="Dossier">
+    	<i ng-if="filteredList[$index].confidential === '1'" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
+      <a href="/#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}} </a> 
+
+    </td>
+      <td at-title="Client">
+        <a href="/#/customers/{{filteredList[$index].customer_id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
+
+
+      </td>
+      <td at-title="status">
+        <div class="tiny expand button bg-light-green" ng-if="filteredList[$index].status === '0'">In Behandeling</div>
+        <div class="tiny expand button bg-red" ng-if="filteredList[$index].status != '0'">Gesloten</div>
+
+      </td>
+      <td at-title="Aangemaakt">
+      	{{filteredList[$index].create_date}}
+      </td>
+      <td at-title="">
+      	<a class="button tiny radius bg-green" href="/#/cases/{{filteredList[$index].case_id}}">Bekijk</a>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+<at-pagination at-list="filteredList" at-config="config"></at-pagination>

@@ -1,0 +1,75 @@
+<div class="small-12 columns">
+	<div class="panel">
+		<table class="small-12">
+			<tr>
+				<th>ID</th>
+				<th>Gebruikersnaam</th>
+				<th>Naam</th>
+				<th>Status</th>
+				<th>Uurtarief</th>
+				<th>Rol</th>
+				<th>Wachtwoord</th>				
+				<th>Verwijder</th>
+
+			</tr>
+		  	<tr ng-repeat="x in gebruikers">
+			    <td>{{ x.id }}</td>
+			    <td>{{ x.username }}</td>
+			    <td>{{ x.fname }} {{ x.lname }}</td>
+			    <td>{{ x.status }}</td>
+			    <td>&euro; {{ x.hourrate }}</td>
+			    <td>{{ x.role }}</td>
+			    <td><button ng-click="showPasswordModal(x.id)" class="tiny button bg-yellow radius"><i class="fontello-lock-1 "></i>Wijzig Wachtwoord</button></td>
+			    <td><button ng-click="removeUser(x.id)" class="tiny button alert radius"><i class="fa fa-trash"></i><i class="fa fa-times" aria-hidden="true"></i> Verwijder</button></td>
+
+		  	</tr>
+		</table>
+		<a ng-click="showUserModal()" class="button button-3d button-primary button-rounded succes">Nieuwe gebruiker</a>	</div>
+		<div ng-if="passwordChange" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position: fixed;">
+            <h2>Wijzig wachtwoord</h2>
+            <p>
+            	<label>Wachtwoord</label>
+            	<input name="firstPassword" ng-class="password.firstPasswordError" class="small-6 columns" type="password" ng-model="password.firstPass"/>
+            </p>
+            <p>
+            	<label>Nogmaals Wachtwoord</label>
+            	<input class="small-6 columns" ng-class="password.secondPasswordError" type="password" ng-model="password.secondPass" />
+            </p>
+            <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p>
+            <p><a ng-click="savePassword()" class="secondary button bg-green">Wachtwoord Opslaan</a>
+            </p>
+            <a ng-click="closePasswordModal()" class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div ng-if="addUser.modal" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position: fixed;">
+            <h2>Nieuwe Gebruiker</h2>
+            <p>
+            	<label>Gebruikersnaam</label>
+            	<input name="username" ng-class="addUser.usernameError" class="small-6 columns" type="text" ng-model="addUser.username"/>
+            </p>
+            <p>
+            	<label>Voornaam</label>
+            	<input name="fname" ng-class="addUser.fnameError" class="small-6 columns" type="text" ng-model="addUser.fname"/>
+            </p>
+            <p>
+            	<label>Achternaam</label>
+            	<input name="lname" ng-class="addUser.lnameError" class="small-6 columns" type="text" ng-model="addUser.lname"/>
+            </p>
+            <p>
+            	<label>Uurtarief</label>
+            	<input name="hourrate" ng-class="addUser.hourrateError" class="small-6 columns" type="text" ng-model="addUser.hourrate"/>
+            </p>
+            <p>
+            	<label>Wachtwoord</label>
+            	<input class="small-6 columns" ng-class="addUser.firstPasswordError" type="password" ng-model="addUser.firstPassword" />
+            </p>
+            <p>
+            	<label>Nogmaals Wachtwoord</label>
+            	<input class="small-6 columns" ng-class="addUser.secondPasswordError" type="password" ng-model="addUser.secondPassword" />
+            </p>
+            <!-- <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p> -->
+            <p><a ng-click="saveNewUser()" class="secondary button bg-green">Opslaan</a>
+            </p>
+            <a ng-click="closeUserModal()" class="close-reveal-modal">&#215;</a>
+        </div>
+</div>

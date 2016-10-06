@@ -1,0 +1,22 @@
+<row style="display: inline-block; width: 100%;">
+<div class="right">
+Totaal belaste verschotten: &euro; {{declaration_credits.total_tax}}<br>
+Totaal onbelaste verschotten: &euro; {{declaration_credits.total_no_tax}}
+</div>
+<table class="sm-large-4 columns">
+	<tr>
+		<th>ID</th>
+		<th>Beschrijving</th>
+		<th>Bedrag <small>Ex btw</small></th>
+		<th>BTW</th>
+
+	</tr>
+	<tr ng-repeat='x in declaration_credits.credits'>
+		<td>{{x.id}}</td>
+		<td>{{x.credit_name}}</td>
+		<td>&euro; {{x.price_ex_btw}}</td>
+		<td ng-if="x.btw === '1'">Wel</td>
+		<td ng-if="x.btw === '0'">Geen</td>
+	</tr>
+</table>
+</row>

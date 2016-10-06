@@ -1,0 +1,128 @@
+<div class="settings">
+<!-- <ul class="tabs" data-tab="" id="responsiveTabsDemo">
+    <li class="tab-title" ng-class="{'active' : webTabs[0]}"><a ng-click="tabs(0)">Algemeen</a>
+    </li>
+    <li class="tab-title" ng-class="{'active' : webTabs[1]}"><a ng-click="tabs(1)">Huisstijl</a>
+    </li>
+    <li class="tab-title" ng-class="{'active' : webTabs[2]}"><a ng-click="tabs(2)">3</a>
+    </li>
+    <li class="tab-title" ng-class="{'active' : webTabs[3]}"><a ng-click="tabs(3)">4</a>
+    </li>
+</ul>  -->
+<div class="tabs-content edumix-tab-horz">
+    
+    <div class="content clearfix" ng-class="{'active' : webTabs[0]}" id="panel1">
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Declaratie Toevoegen:</strong> 
+        </div>
+        <div class="small-6 columns">
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="text" ng-model="declaration_add" placeholder=" Declaratienaam"/>
+                </div>
+                <div class="small-6 columns">
+                    <button ng-click="add_declartion()" class="tiny bg-green radius"><i class="fa fa-plus" aria-hidden="true"></i> Voeg declaratie</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+           
+            <strong>Declaratie typen:</strong>  
+        </div>
+        <div class="small-6 columns">
+            <div class="small-12 columns declaration_settings">        
+               
+                    <div ng-repeat="x in declarations" class="alert-box radius tiny bg-light-green">
+                        {{x.declaration_name}}
+                        <a ng-click="remove_declartion(x.id)" class="close">×</a>
+                    </div>
+            </div>  
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Checklist item toevoegen:</strong> 
+        </div>
+        <div class="small-6 columns">
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="text" ng-model="client_checklist_add" placeholder=" Checklist item toevoegen"/>
+                </div>
+                <div class="small-6 columns">
+                    <button ng-click="add_client_checklist()" class="tiny bg-green radius"><i class="fa fa-plus" aria-hidden="true"></i> Voeg Item</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Client Checklist</strong> 
+        </div>
+        <div class="small-6 columns">
+            <div class="small-12 columns declaration_settings">        
+               
+                    <div ng-repeat="x in client_checklist track by $index" class="alert-box radius tiny bg-light-green">
+                        {{x.name}}
+                        <a ng-click="remove_client_checklist($index)" class="close">×</a>
+                    </div>
+            </div>  
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Factuur Volgnummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.invoice_number'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("invoice_number", settings.invoice_number)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+
+ 
+ </div>
+
+
+
+ 
+ </div>
+
+ <div class="tabs-content edumix-tab-horz">
+    
+    <div class="content" ng-class="{'active' : webTabs[1]}" id="panel1">
+    <h2>2</h2>
+
+
+    <div class="small-12 columns">tekst 2 </div>
+ 
+ </div>
+
+ <div class="tabs-content edumix-tab-horz">
+    
+    <div class="content" ng-class="{'active' : webTabs[2]}" id="panel1">
+    <h2>3</h2>
+
+
+    <div class="small-12 columns"> tekst 3 </div>
+ 
+ </div>
+
+ <div class="tabs-content edumix-tab-horz">
+    
+    <div class="content" ng-class="{'active' : webTabs[3]}" id="panel1">
+    <h2>4</h2>
+
+
+    <div class="small-12 columns"> tekst 4</div>
+ 
+ </div>
+ </div>

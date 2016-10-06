@@ -1,0 +1,131 @@
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+
+                    </div>
+                    <h3 class="box-title"><i class="fa fa-users"></i>
+                        <span>Account</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                    <div class="large-12 columns">
+
+                            <h6>Profiel</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                                <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Naam:</strong></label> 
+                            </div>
+                             <div ng-show="!editProfileDetails" class="large-6 columns">
+                                 <input type="text" id="case_name" ng-model="userDetails.fname" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
+                             </div>
+                             <div ng-show="editProfileDetails" class="large-6 columns">
+                                 {{userDetails.fname}}
+                             </div>
+
+<!-- <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
+                        </div>
+                        
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+
+                                <label for="comment"><strong>Achternaam:</strong></label> </div>
+                             <div ng-show="!editProfileDetails" class="large-6 columns" id="comment">
+                                <input type="text" ng-model="userDetails.lname" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.comment.$error.$invalid">Tell us your name.</div>
+                             </div>
+                             <div ng-show="editProfileDetails" class="large-6 columns">
+                                 {{userDetails.lname}}
+                             </div>
+                        </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+
+                                <label for="comment"><strong>Uurloon:</strong></label> </div>
+                             <div ng-show="!editProfileDetails" class="large-6 columns" id="comment">
+                                 <input type="text" id="case_name" ng-model="userDetails.hourrate" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
+                             </div>
+                             <div ng-show="editProfileDetails" class="large-6 columns">
+                                &euro; {{userDetails.hourrate}}
+                             </div>
+                        </div>
+                        
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+                    </div>
+                        <span class="box-btn" data-widget="collapse">
+                        <a ng-show="editProfileDetails"  ng-click="editProfile()" class="tiny radius button bg-yellow right">Bewerk</a>
+                    </span>
+
+                    <span class="box-btn" data-widget="collapse">
+                        <a ng-show="!editProfileDetails"  ng-click="cancelProfile()" class="tiny radius button bg-red right">Cancel</a>
+                    </span>
+
+                    <span class="box-btn" data-widget="collapse">
+                        <a ng-show="!editProfileDetails"  ng-click="saveProfile()" class="tiny radius button bg-green right">Opslaan</a>
+                    </span>
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- zaak aanmaken -->
+
+        <div class="large-6 columns">
+
+            <div class="box bg-black">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="text-white fontello-folder"></i>
+                        <span>Gebruikergegevens</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="large-12 box-body " style="display: inline-block;">
+                    <div class="large-6 columns text-white">
+                     <strong>Wachtwoord:</strong> 
+                    </div>
+                    <div class="large-6 columns text-white">
+                      <button ng-click="showPasswordModal(userDetails.id)" class="button bg-orange tiny radius">Wijzig uw wachtwoord</button>
+                    </div>
+
+                </div>
+                <!-- end .timeline -->
+            </div>
+            <!-- box -->
+        </div>
+
+        <div ng-if="passwordChange" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position: fixed;">
+            <h2>Wijzig wachtwoord</h2>
+            <p>
+                <label>Wachtwoord</label>
+                <input name="firstPassword" ng-class="password.firstPasswordError" class="small-6 columns" type="password" ng-model="password.firstPass"/>
+            </p>
+            <p>
+                <label>Nogmaals Wachtwoord</label>
+                <input class="small-6 columns" ng-class="password.secondPasswordError" type="password" ng-model="password.secondPass" />
+            </p>
+            <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p>
+            <p><a ng-click="savePassword()" class="secondary button bg-green">Wachtwoord Opslaan</a>
+            </p>
+            <a ng-click="closePasswordModal()" class="close-reveal-modal">&#215;</a>
+        </div>

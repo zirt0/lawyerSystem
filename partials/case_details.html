@@ -1,0 +1,722 @@
+  <!-- Container Begin -->
+    <div class="row" style="margin-top:-20px">
+        <!-- zaak aanmaken -->
+        <div class="large-5 columns">
+
+            <div class="box">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                         <span class="box-btn" data-widget="collapse"> <i ng-if="case.confidential === true" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
+                        </span>
+                        
+                    </div>
+
+                    <h3 class="box-title"><i class="fa fa-users"></i>
+                        <span>Dossier</span> 
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                    <div class="large-12 columns">
+
+                            <h6>Zaaknaam:  {{case.casename}}</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                                <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Zaaknaam:</strong></label> 
+                            </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="case_name" ng-model="case.casename" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.casename}}
+                             </div>
+
+<!-- <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
+                        </div>
+                        
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+
+                                <label for="comment"><strong>Beschrijving:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns" id="comment"><textarea  ng-model="case.comment">
+                                 <div ng-show="caseCreate.case.comment.$error.$invalid">Tell us your name.</div>
+                             </textarea>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.comment}}
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="typezaak"><strong>Type zaak:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <select id="typezaak" ng-model="case.case_type">
+                                    <option ng-repeat="type in case_type_all" value="{{type.id}}">{{type.case_name}}</option>
+
+                                 </select>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                
+                                 <div ng-repeat="type in case_type_all" ng-if="type.id == case.case_type">{{type.case_name}}</div>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="process"><strong>Procedure:</strong></label> </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="process" type="checkbox" ng-model="case.process">
+                                  <label for="process">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.process)">
+                                 {{case.process}} 
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="process"><strong>Wederpartij:</strong></label> </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="opponentcheck" type="checkbox" ng-model="case.opponentcheck">
+                                  <label for="opponentcheck">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.opponentcheck)">
+                                 {{case.opponentcheck}}
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                                <label for="confidential">
+                                    <strong>Vertrouwelijk:</strong>
+                                </label>
+                            </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round trust">
+                                  <input id="confidential" type="checkbox" ng-model="case.confidential">
+                                  <label for="confidential">
+                                      <span class="switch-icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.confidential)">
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="toevoeging"><strong>Toevoeging:</strong></label> </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="toevoeging" type="checkbox" ng-model="case.toevoeging">
+                                  <label for="toevoeging">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.toevoeging)">
+                             </div>
+                        </div>
+                        <div ng-show="case.eigenbijdrage" class="large-12 columns">
+                            <div class="large-6 columns"><label for="toevoegingbedrag"><strong>Eigen bijdage:</strong> </label></div>
+                             
+                             <div class="large-6 columns">
+                                <input type="number" min="0.00" step="1.00" id="toevoegingbedrag" ng-model="case.toevoegingbedrag">
+                               
+                             </div>
+                        </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="office_charge"><strong>Kantoor:</strong></label> </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="office_charge" type="checkbox" ng-model="case.office_charge">
+                                  <label for="office_charge">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.office_charge)">
+                                 {{case.office_charge}}
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="btw"><strong>BTW:</strong></label> </div>
+                             
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="btw" type="checkbox" ng-model="case.btw">
+                                  <label for="btw">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.btw)">
+                             </div>
+                            </div>
+                        
+                       
+                        </div>
+                        <span class="box-btn" data-widget="collapse">
+                        <a ng-show="editCaseDetails"  ng-click="editCase()" class="tiny radius button bg-yellow right">Bewerk</a>
+                    </span>
+                    <span class="box-btn" data-widget="collapse">
+                        <a ng-show="!editCaseDetails"  ng-click="cancelCase()" class="tiny radius button bg-red right">Cancel</a>
+                    </span>
+                    <span class="box-btn" data-widget="collapse">
+                        <a ng-show="!editCaseDetails"  ng-click="saveCase()" class="tiny radius button bg-green right">Opslaan</a>
+                    </span>
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- zaak aanmaken -->
+        
+        <div class="large-4 columns">
+
+            <div class="box bg-black">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="text-white fontello-folder"></i>
+                        <span>Clientgegevens</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="large-12 box-body " style="display: inline-block;">
+                    <div class="large-6 columns text-white">{{case.fname}} {{case.lname}} <span ng-if="case.company"> - {{case.company}}</span><br>
+                         {{case.address}}<br>
+                         {{case['zipcode']}} {{case['city']}}<br>
+                         <br>
+                         <strong>Contactinfo</strong><br>
+                         <strong>Tel: </strong>{{case.tel}}<br> 
+                         <strong>Email: </strong><a href="mailto:{{case.email}}">{{case.email}}</a>
+                    </div>
+                    <div class="large-6 columns text-white">
+                    <strong>BTW-nr: </strong>{{case.btwnr}}<br>
+                    <strong>KvK: </strong>{{case.kvk}}<br>
+                    <strong>Banknr: </strong>{{case.banknr}}<br>
+                    </div>
+
+                </div>
+                <!-- end .timeline -->
+            </div>
+            <!-- box -->
+
+             <!-- wederpartij -->
+            <div class="box bg-light-green" ng-show="case.opponentcheck">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="fontello-folder text-white"></i>
+                        <span class="text-white">Wederpartij</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="large-12 box-body " style="display: inline-block;">
+                        <div class="large-12 columns"">
+                            <div class="large-6 columns">
+                                <label for="opp_lawyer"><strong>Advocaat Wederpartij:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lawyer" ng-model="case.opp_lawyer">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_lawyer}}
+                             </div>
+                        </div>
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Bedrijf:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_company">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_company}}
+                             </div>
+                             
+                        </div>
+
+                         <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_fname"><strong>Voornaam:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_fname" ng-model="case.opp_fname">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_fname}}
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Achternaam:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_lname">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_lname}} 
+                             </div>
+                       
+                        </div>
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Tel:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_tel">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_tel}}
+                             </div>
+                             
+                        </div>
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Email:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_email">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_email}}
+                             </div>
+                             
+                        </div>
+
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Adres:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_address">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_address}}
+                             </div>
+                             
+                        </div>
+
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Postcode:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_zipcode">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_zipcode}}
+                             </div>
+                             
+                        </div>
+
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>City:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_city">
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_city}}
+                             </div>
+                             
+                        </div>
+
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Opmerking:</strong></label> </div>
+                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                                 <textarea id="opp_lname" ng-model="case.opp_comment"></textarea>
+                             </div>
+                             <div ng-show="editCaseDetails" class="large-6 columns">
+                                 {{case.opp_comment}}
+                             </div>
+                             
+                        </div>
+
+                </div>
+                <!-- end .timeline -->
+            </div>
+            <!-- box -->
+        </div>
+
+        <div class="large-3 columns">
+
+        <div class="box ">
+            <!-- notititiebutton --> 
+            <div class="large-12 columns no-padding">           
+                <a ng-click="showModal()" class="button expand radius button-3d button-primary button-rounded succes text-black" style="background-color: #fdf59a; box-shadow: #e0b414 1px 1px 1px;"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Maak Notitie</a>
+            </div>
+             <!-- <div class="large-6     columns no-padding">  
+            
+                <a ng-click="showAppointmentModal()" class="button tiny radius  button-3d button-primary button-rounded bg-red text-white" style="background-color: #fdf59a; box-shadow: #e0b414 1px 1px 1px;"> <i class="fa fa-calendar" aria-hidden="true"></i>  Maak Afspraak</a>
+            </div> -->
+            <!-- notititiebutton -->
+            </div>
+       
+            
+            <!-- timeline item -->
+            <div class="box large-12 columns no-padding bg-transparent" style="margin-top: 0px;">
+                <div class="box-header bg-brown">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools text-white">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title text-white"><i class="icon-view-list text-white"></i>
+                        <span class="text-white">Interne Notities<small></small></span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="internnotes" style="display: block;">
+                    <div class="events-nest">
+                        <ul>
+
+                            <li ng-repeat="x in notes_from | limitTo:5" ng-mouseenter="makelarger()" ng-mouseleave="makesmaller()" ng-class="large_height">
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                </h4>
+                                <p>{{x.content}}</p>
+                                <p><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></p>
+                            </li>
+                            <li ng-show="!notes_from.length"><div>Geen notities</div></li>
+                        </ul>
+                        <button class="bg-brown expand small-text-center"><a ng-href="/#/cases/{{caseDetail.caseId}}/notes/" class="text-white"> <small>Bekijk alle notities van dossier</small></a></button>
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            
+        </div>
+        
+        <!-- Notities -->
+        <div class="large-6 columns">
+            
+        </div>
+        <!-- Notities -->
+        <div class="box" style="display: inline-block;">
+        <div class="box bg-light-green flipInX" ng-if="declaration_saved">
+                        <div class="box-header bg-light-green ">
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <span class="box-btn" data-widget="remove"><i class="icon-cross"></i></span>
+                            </div>
+                            <h3 class="box-title ">
+                                <i class="text-white  icon-thumbs-up"></i>
+                                 <span class="text-white">SUCCESS</span>
+                            </h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body " style="display: block;">
+                            <p class="text-white"><strong>Well done!</strong> Declaratie is succesvol opgeslagen</p>
+                        </div>
+                    </div>
+        <div class="box bg-yellow" ng-if="declaration_error">
+                <div class="box-header bg-yellow">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+        </span>
+                    </div>
+                    <h3 class="box-title "><i class="text-white fontello-warning"></i>
+        <span class="text-white">WARNING</span>
+    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: block;">
+                    <p class="text-white"><strong>Warning!</strong> Vul alle velden in</p>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="box" style="background: #f9f9f9;">
+                    <div class="box-header bg-transparent">
+                        <!-- tools box -->
+                        <h3 class="box-title"><i class="fontello-chart-pie-outline"></i>
+                            <span>Uren registratie</span>
+                        </h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body " style="display: inline-block;" >
+                    
+                        <div class="large-12 columns">
+                        <div style="margin:0" class="row summary-border-top">
+                                <div class="large-6 columns">
+                                    <div class="summary-nest">
+                                        <h2 class="text-black"><small>&euro;</small><span class="counter-up" interval="1000">{{declaration.amount}}</span></h2>
+                                        <p>Totaal:</p>
+                                    </div>
+
+                                </div>
+                                <div class="large-6 columns summary-border-left">
+                                    <div class="summary-nest">
+                                        <h2 class="text-black"><span class="counter-up">{{declaration.time}}</span><small>Minuten:</small></h2>
+                                        <p>Tijd</p>
+                                    </div>
+                                </div>
+                            </div>
+                         <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="declaratie"><strong>Type Declaratie</strong></label> </div>
+                                 <div class="large-6 columns">
+                                     <select id="declaratie" ng-model="declaration.choice">
+                                        <option ng-repeat="type in declaration_type" value="{{type.id}}">{{type.declaration_name}}</option>
+
+                                     </select>
+
+                                 </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="declaratie"><strong>Tijd bijhouden</strong></label> </div>
+                                 <div class="large-6 columns">
+                                     <button ng-disabled="stopButton" ng-click="startClock()" class="button secondary radius tiny" ng-class="{'bg-green': startButton}">Start</button>
+                            <button ng-disable="startButton" ng-click="finishClock()" class="button secondary radius tiny" ng-class="{'bg-red': stopButton}">Stop</button>
+
+                                 </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="prognose"><strong>Minuten</strong><small> (Handmatig invoeren)</small></label> </div>
+                                 <div class="large-6 columns">
+                                    <input type="text" min="0.00" step="1.00" id="prognose" ng-model="declaration.time">
+                                </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="betaald"><strong>Info</strong></label> </div>
+                                 <div class="large-6 columns">
+                                    <textarea ng-model="declaration.info" placeholder="Omschrijving werkzaamheden"></textarea>
+                                 </div>
+                            </div>
+
+                            <button ng-click="declaration_save()" class="button expand radius bg-green">Opslaan</button>
+                            
+                        </div>
+
+                    </div>
+
+
+                    <!-- end .timeline -->
+                </div>
+            </div>
+
+            <!-- declaraties summary -->
+            <div class="large-4 columns">
+                <div class="box" style="background: #f9f9f9;">
+                    <div class="box-header bg-transparent">
+
+                        <h3 class="box-title"><i class="fontello-chart-pie-outline"></i>
+                            <span>Uitgaves</span>
+                        </h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body " style="display: inline-block;" >
+                        <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="declaratie"><strong>Beschrijving uitgave</strong></label> </div>
+                                 <div class="large-6 columns">
+                                    <input type="text" id="payoutname" ng-model="declaration_credits.credit_name" ng-class="declaration_credits.credit_namError" placeholder="belasting, incasso enz">
+
+                                 </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="prognose"><strong>Bedrag</strong><small> Ex.btw</small></label> </div>
+                                 <div class="large-6 columns">
+                                    <input type="text" min="0.00" step="1.00" id="paymentamount" ng-model="declaration_credits.price_ex_btw" placeholder="&euro;" ng-class="declaration_credits.price_ex_btwError">
+                                </div>
+                            </div>
+
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="declaratie"><strong>BTW</strong></label> </div>
+                                     <div class="switch round">
+                                      <input id="paymenttax" type="checkbox" ng-model="declaration_credits.btw">
+                                      <label for="paymenttax">
+                                          <span class="switch-on">Ja</span>
+                                          <span class="switch-off">Nee</span>
+                                      </label>
+                                    </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <button class="button expand radius bg-green" ng-click="paymentSave()" >Opslaan</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="large-4 columns">
+                <div class="box" style="background: #f9f9f9;">
+                    <div class="box-header bg-transparent">
+
+                        <h3 class="box-title"><i class="fontello-chart-pie-outline"></i>
+                            <span>Financeel</span>
+                        </h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body " style="display: inline-block; width: 100%" >
+                        <div class="large-12 columns">
+                            <!-- <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="belang"><strong>Belang</strong></label> </div>
+                                 <div ng-show="!editCaseDetails" class="large-6 columns">
+                                    <input type="text" min="0.00" step="1.00" id="belang" ng-model="case.belang">
+                                 </div>
+                                 <div ng-show="editCaseDetails" class="large-6 columns">
+                                    {{case.belang}}
+                                 </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="prognose"><strong>Prognose</strong></label> </div>
+                                 <div ng-show="!editCaseDetails" class="large-6 columns">
+                                    <input type="text" min="0.00" step="1.00" id="prognose" ng-model="case.prognose">
+                                1</div>
+                                <div ng-show="editCaseDetails" class="large-6 columns">
+                                    {{case.prognose}}
+                                 </div>
+                            </div>
+                            <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="betaald"><strong>Betaald</strong></label> </div>
+                                 <div ng-show="!editCaseDetails" class="large-6 columns">
+                                    <input type="text" min="0.00" step="1.00" id="betaald" ng-model="case.betaald">
+                                 </div>
+                                 <div ng-show="editCaseDetails" class="large-6 columns">
+                                    testing
+                                 </div>
+                            </div> -->
+                            <div class="large-12 columns">
+                                <div class="large-12 columns">
+                                <strong>Niet gedeclareerde uren</strong>
+                                </div>
+                            <table class="large-12 columns">
+                            <tr>
+                                <th>Declar.type</th>
+                                <th>Declaratie</th>
+                                <th>Tijd</th>
+                                <th>Datum</th>
+
+                            </tr>
+                                <tr ng-repeat="x in declaration_summary track by $index" class="fadeIn animated">
+                                    <td>{{x.declaration_name}}</td>
+                                    <td>&euro; {{x.amount}}</td>
+                                    <td>{{x.time}}</td>
+                                    <td>{{x.declaration_date}}</td>
+
+                                </tr>
+                            </table>
+                            <a href="/#/declarations/{{caseDetail.caseId}}" class="button expand bg-green radius">Totale overzicht</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+         <div class="large-12 columns">
+            <button class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier afsluiten</button>
+            <button class="tiny radius button bg-green right" ng-click="createCase()" >Opslaan</button>
+        </div>
+        <!-- <pre>form={{caseCreate.case.case_name}}</pre>
+ -->
+    </div>
+    
+    <div ng-if="notes.modal" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position:fixed; background-color: #fdf59a;">
+            <h2><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Maak Notitie</h2>
+            <p>
+              <label>Aan gebruiker<small> Niet verplicht!</small></label>
+            <select ng-model="notes.to_user_id" ng-class="notes.to_user_idError">
+             <!--  <option ng-value="0">Algemeen</option>  --> 
+              <option ng-repeat="x in notes.users" value="{{x.id}}">{{x.fname}} {{x.lname}}</option>
+              
+            </select>
+            </p>
+            <p>
+              <label>Content</label>
+              <textarea name="content" rows="8" ng-class="notes.contentError" class="small-12 columns" ng-model="notes.content"/></textarea>
+            </p>
+            <!-- <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p> -->
+            <p><a ng-click="saveNote()" class="secondary button bg-green">Opslaan</a>
+            </p>
+            <a ng-click="closeModal()" class="close-reveal-modal">&#215;</a>
+        </div>
+    <!-- End of Container Begin -->
+
+    <div ng-if="appointment.modal" id="firstModal" class="reveal-modal open bg-red animate-if" style="display: block; visibility: visible; position:fixed;">
+            <h2 class="text-white"><i class="fa fa-calendar" aria-hidden="true"></i> Maak Afspraak</h2>
+            <p>
+                <label class="text-white">Aan gebruiker<small class="text-white"> Niet verplicht!</small></label>
+                <select ng-model="appointment.to_user_id" ng-class="appointment.to_user_idError">
+                 <!--  <option ng-value="0">Algemeen</option>  --> 
+                  <option ng-repeat="x in notes.users" value="{{x.id}}">{{x.fname}} {{x.lname}}</option>
+                </select>
+            </p>
+            <p>
+                <label class="text-white">Datum</label>
+                <input type="date" name="" ng-model="appointment.date">
+            </p>
+            <p>
+              <label class="text-white">Content</label>
+              <textarea name="content" rows="8" ng-class="appointment.contentError" class="small-12 columns" ng-model="appointment.content"/></textarea>
+              </p>
+            <p class="text-right text-white">
+              <label class="text-white">Verstuur naar klant    </label>
+              <input type="radio" name="pokemon" value="ja" id="Nee"><label for="Ja" class="text-white">Ja</label>
+              <input type="radio" name="pokemon" value="nee" id="Nee"><label for="Nee" class="text-white">Nee</label>
+            </p>
+
+            <!-- <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p> -->
+            <p><a ng-click="saveAppointmentModal()" class="secondary button bg-green">Opslaan</a>
+            </p>
+            <a ng-click="closeAppointmentModal()" class="close-reveal-modal">&#215;</a>
+        </div>
+    <!-- End of Container Begin -->

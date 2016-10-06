@@ -1,0 +1,113 @@
+<!-- Notities -->
+        <div class="large-12 columns">
+           
+                <div class="switch right">
+                    <span ng-if="!args.readed">Interne Notities (Alle notities)</span>
+                    <span ng-if="args.readed">Toon alle berichten</span>
+                  <input id="exampleCheckboxSwitch" type="checkbox" ng-model="args.readed">
+                  <label for="exampleCheckboxSwitch"></label>
+                </div> 
+        
+        </div>
+
+        <div class="large-6 columns" style="display: none;">
+            <!-- timeline item -->
+            <div class="box">
+                <div class="box-header bg-red">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title "><i class="icon-calendar text-white"></i>
+                        <span class="text-white">EVENTS</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="display: block;">
+                    <div class="events-nest">
+                        <div class="bg-green text-black">
+                            <h1 class="text-black"><b class="counter-up-fast">25</b></h1>
+                            <span>3 Event</span>
+                            <p>Monday <i class="fontello-record"></i> Februari 2015</p>
+
+                        </div>
+                        <ul>
+                            <li>
+                                <h4><span class="counter-up-fast">08</span>:00<small>PM</small></h4>
+                                <p>Mathematic Lesson <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i>
+                                </p>
+                            </li>
+                            <li>
+                                <h4><span class="counter-up-fast">09</span>:<span class="counter-up-fast">30</span><small>PM</small></h4>
+                                <p>Meeting With Josh<i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i>
+                                </p>
+                            </li>
+                            <li>
+                                <h4><span class="counter-up-fast">12</span>:<span class="counter-up-fast">15</span><small>PM</small></h4>
+                                <p>Launch time<i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i>
+                                </p>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+
+
+
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="large-6 columns left">
+            <!-- timeline item -->
+
+            <div class="box" style="overflow: hidden;">
+
+                <div class="box-header bg-brown ">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span> 
+                    </div>
+                    <h3 class="box-title text-white">
+
+                        <i class="icon-view-list"></i>
+                        <span class="text-white" ng-if="!args.readed">Interne Notities (Alle notities)</span>
+                        <span class="text-white" ng-if="args.readed">Interne Notities (Niet gelezen notities)</span>
+
+                    </h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="internnotes" style="display: block;">
+                    <div class="events-nest">
+                        <ul>
+
+                            <li ng-repeat="x in notes" class="notitions slideInLeft animated">
+                                <a ng-if="x.read === '0'" ng-click="markasRead(x.id, $index)" alt="markeer als gelezen" class="text-blue fontello-record right"></a>
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                </h4>
+                                <p>
+                                {{x.content}} 
+                                <span class="clear"><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></span></p>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- Notities -->

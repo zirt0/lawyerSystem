@@ -1,0 +1,57 @@
+<div class="box-body" style="display: block;">
+                        <div class="row">
+
+                            <div class="large-12 columns">
+                                <div class="row">
+                                    <div class="edumix-signup-panel">
+                                        <p class="welcome"> Welkom bij Koker Advocaten
+                                        </p>
+                                        <form>
+                                            <div class="row collapse">
+                                                <div class="small-2  columns">
+                                                    <span class="prefix bg-green"><i class="text-white icon-user"></i></span>
+                                                </div>
+                                                <div class="small-10  columns">
+                                                    <input ng-class="loginError.username" ng-model="login.username" type="text" placeholder="Gebruikersnaam">
+                                                </div>
+                                            </div>
+                                            <div class="row collapse">
+                                                <div class="small-2 columns ">
+                                                    <span class="prefix bg-green"><i class="text-white icon-lock"></i></span>
+                                                </div>
+                                                <div class="small-10 columns ">
+                                                    <input ng-class="loginError.password" ng-model="login.password" type="password" placeholder="Wachtwoord" ng-keyup="$event.keyCode == 13 && submitLogin()">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- <p>Already have an account? <a href="#">Forgot password ?</a>
+                                        </p> -->
+                                        <a ng-click="submitLogin()" class="bg-green"><span>Inloggen</span> </a>
+                                        <br>
+                                        <!-- <h2><span>Connect with</span></h2> -->
+
+                                        <div class="box bg-red" ng-if="loginError.notification">
+                                            <div class="box-header bg-red">
+                                                <!-- tools box -->
+                                                <div class="pull-right box-tools">
+                                                    <span class="box-btn" data-widget="remove"><i class="icon-cross"></i></span>
+                                                </div>
+                                                <h3 class="box-title ">
+                                                    <i class="text-white  fontello-warning"></i>
+                                                     <span class="text-white">Login mislukt</span>
+                                                </h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body " style="display: block;">
+                                                <p class="text-white" ng-bind-html="loginError.notificationText"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>

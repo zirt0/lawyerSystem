@@ -1,0 +1,193 @@
+<div class="row" style="margin-top:-20px">
+    <div class="large-8 columns">
+        <div class="box bg-transparent ">
+            <!-- /.box-header -->
+            <div class="box-header no-pad bg-transparent">
+
+                <h3 style="margin-bottom:20px;" class="box-title">
+                    <span>Declaraties</span>
+                </h3>
+
+
+            </div>
+            <div class="box-body no-pad">
+
+                <div id="line-chart" style="height: 235px;"></div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <div class="large-4 columns">
+        <div class="box bg-transparent ">
+            <!-- /.box-header -->
+            <div class="box-header no-pad bg-transparent">
+
+                <h3 style="margin:0 20px 0 -5px; width: 100%;" class="box-title">
+                    <span>STATS</span> 
+                    <div class="right" style="width: 200px;">
+                        <select ng-model="args.last_months">
+                          <option value="1">afgelopen 1 maand</option>
+                          <option value="3">afgelopen 3 maand</option>
+                          <option value="6">afgelopen 6 maand</option>
+                          <option value="12">afgelopen 1 jaar</option>
+                        </select>
+                    </div>
+                </h3>
+
+
+            </div>
+            <div style="margin:15px 0 0" class="box-body no-pad">
+
+                <div class="stats-wrap">
+                    <h2><b class="counter-up" style="color:#666;"> &euro; {{dashboard.total_amount}}</b> <span  style="background:#666;" ><b class="counter-up">{{dashboard.count_declaraties}}</b> declaraties</span></h2>
+                    <p class="text-grey">Aan declaraties<small>Afgelopen {{args.last_months}} <span ng-if="args.last_months == 1">maand</span><span ng-if="args.last_months != 1">maanden</span></small>
+                    </p>
+
+                    <h4><b class="counter-up" style="color:#888;">{{dashboard.count_declaration}}</b> <!-- <span style="background:#888;">+<b class="counter-up">5</b>%</span> --></h4>
+                    <p>Nieuwe zaken <small>Afgelopen 1 maand</small>
+                    </p>
+
+                    <h4 style="color:#333;"><b class="counter-up">{{dashboard.count_customers}}</b><!--  <span  style="background:#333;">+<b class="counter-up">12,5</b></span> --></h4>
+                    <p>Nieuwe clienten <small>Afgelopen 1 maand</small>
+                    </p>
+
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-4 columns">
+        <!-- timeline item -->
+        <div class="box">
+            <div class="box-header bg-transparent">
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+
+                    <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                    </span>
+                    <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                    </span>
+                </div>
+                <h3 class="box-title"><i class="fa fa-users" aria-hidden="true"></i>
+                    <span>Nieuwe Clienten</span>
+                </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                <div class="events-nest">
+                    <!-- <div class="bg-green text-black">
+                        <h1 class="text-black"><b class="counter-up-fast">25</b></h1>
+                        <span>3 Event</span>
+                        <p>Monday <i class="fontello-record"></i> Februari 2015</p>
+
+                    </div> -->
+                    <ul>
+
+                        <li ng-repeat="x in customers | orderBy:-date_add:true | limitTo: 5">
+                            <h4><small><span class="counter-up-fast">{{x.date_add}} </span></small>
+                            </h4><p>{{x.fname}} {{x.lname}} <small>{{x.company}}</small><a href="/#/customers/{{x.id}}"class="right button bg-green tiny radius">Bekijk</a><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->
+                            </p>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="large-4 columns">
+        <!-- timeline item -->
+        <div class="box">
+            <div class="box-header bg-transparent">
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+
+                    <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                    </span>
+                    <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                    </span>
+                </div>
+                <h3 class="box-title"><i class="icon-view-list"></i>
+                    <span>Laatste werkzaamheden</span>
+                </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                <div class="events-nest">
+                    <ul>
+
+                        <li ng-repeat="x in declaration_items | limitTo:5 | orderBy:'declaration_date':true">
+                            <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span> - </a> <em>{{x.fname | limitTo: 1}}. {{x.lname}}</em></small>
+                            </h4>
+                            <p>{{x.declaration_name}} <small>{{x.company}}</small>
+                            <span class="right text-right" style="font-size: 9px;">{{x.time}}min<br>&euro; {{x.amount}}</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->
+                            </p>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="large-4 columns">
+        <!-- timeline item -->
+        <div class="box">
+            <div class="box-header bg-transparent">
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+
+                    <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                    </span>
+                    <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                    </span>
+                </div>
+                <h3 class="box-title"><i class="fa fa-refresh" aria-hidden="true"></i>
+                    <span>Abonnementen</span>
+                </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                <div class="events-nest">
+                    <ul>
+
+                        <li ng-repeat="x in subscriptions">
+                            <h4><small><a href="/#/customers/{{x.customer_id}}">{{x.fname}} {{x.lname}} </span> - </a> 
+                            <em>{{x.company}}</em></small>
+                            </h4>
+                            <p><small>{{x.minutes_used}}</small>/{{x.minutes}} <small>Minuten Verbruikt</small>
+                            <span class="right text-right">&euro; {{x.amount}}<br>
+                                <span class="right text-right" style="font-size: 9px; color: white; padding: 1px 6px;
+    border-radius: 3px;background-color: {{colorGenerator(x.diffDate)}}">{{x.diffDate}} Dagen verlopen</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->                    </span>
+                            <div class="progress small radius" style="padding: 0px; margin: 0px;">
+                                <span class="meter bg-light-green" style="width:{{x.minutes_used / x.minutes * 100 }}%; top: 0;left: 0;"><small>Verbruik</small></span>
+                            </div>
+                            </p>
+
+                        </li>
+                        <li>
+                        <a href="/#/subscriptions" class="button radius expand bg-light-green">Bekijk alle abonnementen</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+</div>

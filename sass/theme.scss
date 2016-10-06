@@ -1,0 +1,651 @@
+/*------------------------------------------------------------------
+[Core General Stylesheet]
+
+Project:    Edumix Foundation Dashboard Template
+Version:    1.2
+Last change:    11/03/2014 [fixed Float bug, vf]
+Author:matirasa
+-------------------------------------------------------------------*/
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+//Font 
+$font-title: "Montserrat", sans-serif;
+$font-text: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$fontawesome: "FontAwesome", sans-serif;
+$entypo: "entypo", sans-serif;
+//Background Color
+$primary-color: #2f323a;
+//text color
+$main-text-color:#222;
+//master value
+$no-pad:0px!important;
+$pad:10px!important;
+$pad-twenty:20px!important;
+$pad-forty:40px!important;
+$margin:10px!important;
+$text-right:right!important;
+$text-left:left!important;
+// Master Color
+$white:#fff;
+$gray:#777;
+$gray-blue: #EEF1F7;
+$black: #222A38;
+$black-solid: #000000;
+$red: #F20556;
+$yellow: #f39c12;
+$aqua: #0ABAEF;
+$blue:#5C9DF5;
+$light-blue: #3c8dbc;
+$dark-blue: #0F5593;
+$green: #92CD18;
+$light-green:#45B6B0;
+$navy: #001f3f;
+$teal: #B5AB8A;
+$olive:#3d9970;
+$lime: #01ff70;
+$orange: #FF884D;
+$red-orange: #e83922;
+$fuchsia: #f012be;
+$purple:#932ab6;
+$maroon: #85144b;
+$transparent: transparent;
+$opacity: rgba(0, 0, 0, 0.5);
+$opacity-one: rgba(0, 0, 0, 0.3);
+//-----------------------------------------------------------------------------//
+[class*="entypo-"]:before {
+    font-family: $entypo;
+}
+/* fontawesome */
+
+[class*="fontawesome-"]:before {
+    font-family: $fontawesome;
+}
+body {
+    font-family: $font-text!important;
+    background: $primary-color;
+    padding: 0;
+    font-size: 13px!important;
+    color: #888!important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-title!important;
+    font-weight: bold;
+}
+p {
+    font-size: 14px!important;
+}
+blockquote {
+    margin: 0 0 1.25rem;
+    padding: 0.5625rem 1.25rem 0 1.1875rem;
+    border-left: 3px solid #8c92a3;
+    font-family: $font-title;
+    font-size: 16px;
+    font-style: italic;
+    color: $main-text-color;
+}
+ul, ol, dl {
+    font-size: 13px;
+}
+/*
+Preloader
+ */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2F323A;
+    /* change if the mask should have another color then white */
+    
+    z-index: 9999;
+    /* makes sure it stays on top */
+}
+#status {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    /* centers the loading animation horizontally one the screen */
+    
+    top: 50%;
+    /* centers the loading animation vertically one the screen */
+    
+//    background-image: url(/img/puff.svg);
+    /* path to your loading animation */
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -100px 0 0 -100px;
+    /* is width and height divided by two */
+}
+.slide-out-div {
+    padding: 20px 5px;
+    width: 60px;
+    background: #fff;
+    position: relative;
+    z-index: 9999;
+}
+.handle {
+    background: #0D0C0E;
+    color: #fff;
+    width: 40px;
+    height: 50px;
+    text-align: center;
+    display: block;
+    left: -36px!important;
+}
+/*
+Value Master
+ */
+.fixed-nest{
+    position: fixed!important;
+}
+.no-pad {
+    padding: $no-pad;
+}
+.pad {
+    padding: $pad;
+}
+.pad-twenty {
+    padding: $pad-twenty;
+}
+.pad-forty {
+    padding: $pad-forty;
+}
+.margin {
+    margin: $margin;
+}
+.margin-center {
+    margin: 10px 0;
+}
+.margin-left {
+    margin: 0 40px 0 0;
+}
+.padding-content {
+    padding: 0 15%;
+}
+.height-tiny {
+    height: 8px!important;
+}
+.radius {
+    border-radius: 3px!important;
+}
+.inline {
+    display: inline;
+    width: auto;
+}
+.text-right {
+    text-align: $text-right;
+}
+.text-left {
+    text-align: $text-left;
+}
+/*
+Master Background Color
+ */
+
+.bg-light-green, .bg-dark-blue, .bg-red, .bg-yellow, .bg-aqua, .bg-blue, .bg-light-blue, .bg-green, .bg-navy, .bg-teal, .bg-olive, .bg-lime, .bg-orange, .bg-fuchsia, .bg-purple, .bg-maroon, .bg-black {
+    color: #f9f9f9 !important;
+}
+.bg-white {
+    background: $white !important;
+}
+.bg-gray {
+    background: $gray !important;
+}
+.bg-gray-blue {
+    background: $gray-blue !important;
+}
+.bg-black {
+    background: $black !important;
+}
+.bg-black-solid {
+    background: $black-solid !important;
+}
+.bg-red {
+    background: $red !important;
+}
+.bg-yellow {
+    background: $yellow !important;
+}
+.bg-aqua {
+    background-color: $aqua !important;
+}
+.bg-blue {
+    background-color: $blue !important
+}
+.bg-light-blue {
+    background-color: $light-blue !important;
+}
+.bg-dark-blue {
+    background-color: $dark-blue !important;
+}
+.bg-green {
+    background-color: $green !important;
+}
+.bg-light-green {
+    background-color: $light-green !important;
+}
+.bg-navy {
+    background-color: $navy !important;
+}
+.bg-teal {
+    background-color: $teal !important;
+}
+.bg-olive {
+    background-color: $olive !important;
+}
+.bg-lime {
+    background-color: $lime !important;
+}
+.bg-orange {
+    background-color: $orange !important;
+}
+.bg-red-orange {
+    background-color: $red-orange !important;
+}
+.bg-fuchsia {
+    background-color: $fuchsia !important;
+}
+.bg-purple {
+    background-color: $purple !important;
+}
+.bg-maroon {
+    background-color: $maroon !important;
+}
+.bg-transparent {
+    background: $transparent !important;
+}
+.bg-opacity {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+.bg-opacity-one {
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+.bg-opacity-white {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+.bg-opacity-white-btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+.bg-opacity-white-btn:hover {
+    background: rgba(255, 255, 255, 0.4) !important;
+    color: white!important;
+}
+.border-gray {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2)!important;
+}
+/*
+Master Text Color
+ */
+
+.text-opacity {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+.text-black {
+    color: $black!important;
+}
+.text-red {
+    color: $red !important;
+}
+.text-gray {
+    color: $gray !important;
+}
+.text-amber {
+    color: #ffffff!important;
+}
+.text-yellow {
+    color: #f39c12 !important;
+}
+.text-aqua {
+    color: #0ABAEF!important;
+}
+.text-blue {
+    color: #5C9DF5 !important;
+}
+.text-dark-blue {
+    color: #0F5593 !important;
+}
+.text-light-blue {
+    color: #3c8dbc !important;
+}
+.text-green {
+    color: #92CD18!important;
+}
+.text-navy {
+    color: #B7C1D3 !important;
+}
+.text-teal {
+    color: #39cccc !important;
+}
+.text-olive {
+    color: #3d9970 !important;
+}
+.text-lime {
+    color: #01ff70 !important;
+}
+.text-orange {
+    color: #FF884D !important;
+}
+.text-fuchsia {
+    color: #f012be !important;
+}
+.text-purple {
+    color: #932ab6 !important;
+}
+.text-maroon {
+    color: #85144b !important;
+}
+.text-white {
+    color: #ffffff!important;
+}
+.border-green {
+    border-color: #37A8AF!important;
+}
+.border-blue {
+    border-color: #3E739D!important;
+}
+.border-aqua {
+    border-color: #0090D9!important;
+}
+.text-opacity {
+    color: rgba(255, 255, 255, 0.7)!important;
+}
+/*
+Hide elements by display none only
+*/
+
+.hide {
+    display: none !important;
+}
+/* Remove borders */
+
+.no-border {
+    border: 0px !important;
+}
+/* Remove padding */
+
+.no-padding {
+    padding: 0px !important;
+}
+/* Remove margins */
+
+.no-margin {
+    margin: 0px !important;
+}
+/* Remove box shadow */
+
+.no-shadow {
+    box-shadow: none!important;
+}
+.border {
+    border-bottom: 1px !important;
+}
+.star {
+    color: red!important;
+}
+/* font style for title */
+
+.font-title {
+    font-family: 'Montserrat', sans-serif!important;
+}
+.font-uppercase {
+    text-transform: uppercase!important;
+}
+.font-medium {
+    font-size: 14px!important;
+}
+// Top Bar Menu Stylesheet 
+@import 'topbar';
+//Side Bar stylesheet
+@import 'sidebar';
+//Side Bar stylesheet
+@import 'content';
+
+.edumix-login-title span {
+    background: none repeat scroll 0% 0% #395F97;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    font-weight: 400 !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 20px !important;
+    border-radius: 3px;
+    color: #fff;
+    margin: 0 0 0 20px;
+}
+.edumix-signup-panel a span {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    background: #92CD18;
+}
+.edumix-signup-panel h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+}
+.edumix-signup-panel h2 span {
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    padding: 0 15px;
+}
+.edumix-signup-panel h2:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #000;
+    position: relative;
+    top: 8px;
+    z-index: 0;
+}
+.edumix-footer-panel a span {
+    display: block;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: uppercase;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    text-transform: capitalize;
+    margin: 0 0 10px 0;
+}
+.profile {
+    background: #111;
+    width: 100%;
+    position: relative;
+    top: -13px;
+    left: 0;
+    height: 100px;
+    font-size: 13px;
+    margin: 0;
+    padding: 15px 5px;
+    border-radius: 4px 4px 0 0;
+}
+.profile h3 small {
+    margin-left: 6px;
+    color: #fff;
+    letter-spacing: 2px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 2px 6px;
+    border-radius: 15px;
+    position: relative;
+    top: -3px;
+}
+
+i.fontello-cancel-circled.red {
+    color: #F20556;
+}
+
+i.fontello-check.green{
+    color: #43ac6a;
+}
+
+.bg-light-green label, .bg-light-green .large-6 {
+    color: white;
+}
+
+.box-body .large-12 .large-12 {
+    margin: 10px 0;
+}
+
+.settings .alert-box {
+    margin-right: 3px;
+    margin-bottom: 5px;
+    display: inline-block;
+    font-size: 11px;
+    padding: 10px 28px 10px 5px;
+}
+.settings .declaration_settings{
+    padding: 10px;
+    background-color: rgba(231, 231, 231, 0.5);
+    box-shadow: inset 1px 2px 4px;
+}
+
+.expired_subsciption{
+    color: #F20556;
+    text-align: center;
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.subscription_item {
+        border-top: 1px solid rgba(128, 128, 128, 0.09);
+}
+
+.internnotes .events-nest ul li {
+    list-style: none;
+    background-color: #fdf59a;
+    padding: 1px 0px;
+    margin-bottom: 1px;
+    //max-height: 73px;
+    overflow: scroll;
+}
+.internnotes ul li p {
+    padding: 0 10%;
+    margin-bottom: 2px;
+}
+
+.internnotes ul li p span {
+    display: block;
+    margin-top: 7px;
+    font-weight: bold;
+    text-align: right;
+}
+
+#paper-bg {
+   // display: inline-block;
+}
+
+.switch-icon {
+    position: absolute;
+    left: -71px;
+    top: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    width: 20px;
+}
+
+.switch-on {
+  position: absolute;
+  left: -55px;
+  top: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+
+
+.switch-off {
+  position: absolute;
+  left: -25px;
+  top: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+
+  .trust.switch input:checked + label {
+    background-color: #43AC6A;
+}
+
+.internnotes li div   {
+    margin: 0px;
+    padding: 20px;
+    text-align: center;
+    margin: 12px;
+}
+
+.bg-brown {
+    background-color: #a0672b !important;
+}
+.bg-notes {
+    background-color: #fdf59a !important;
+}
+
+.dropdown-nest li a.bg-notes {
+    background-color: #fdf59a !important;
+}
+
+
+ul.dropdown.dropdown-nest.searchresult {
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+}
+
+li.largeheight {
+    max-height: none !important;
+}
+
+li.smallheight {
+    //max-height: 73px !important;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+i.fontello-cancel-circled.red {
+    border: none !important;
+}
+
+.events-nest div {
+    background: none;
+}
+
+span.label.edumix-noft {
+    border: 2px solid red !important;
+}
+
+.succesmodalbox{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+}
+.succesmodalbox.ng-leave {
+    -webkit-animation-name: slideOutRight;
+    animation-name: slideOutRight;
+}
+
+.settings .row {
+    border-top: 1px solid #d4d4d4;
+    padding: 20px;
+}

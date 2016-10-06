@@ -1,0 +1,346 @@
+  <!-- Container Begin -->
+    <div class="row" style="margin-top:-20px">
+    <style type="text/css">
+.switch-icon {
+    position: absolute;
+    left: -71px;
+    top: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    width: 20px;
+}
+
+.switch-on {
+  position: absolute;
+  left: -55px;
+  top: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+
+
+.switch-off {
+  position: absolute;
+  left: -25px;
+  top: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+
+  .trust.switch input:checked + label {
+    background-color: #43AC6A;
+  }
+
+    </style>
+        <!-- zaak aanmaken -->
+        <form name="caseCreate">
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fa fa-users"></i>
+                        <span>Zaak Aanmaken</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                    <div class="large-12 columns">
+
+                            <h6>Algemeen</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                                <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Zaaknaam:</strong></label> 
+                            </div>
+                             <div class="large-6 columns">
+                                 <input type="text" id="case_name" ng-model="case.case_name" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
+                             </div>
+<!-- <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+
+                                <label for="comment"><strong>Beschrijving:</strong></label> </div>
+                             <div class="large-6 columns" id="comment"><textarea  ng-model="case.comment">
+                                 <div ng-show="caseCreate.case.comment.$error.$invalid">Tell us your name.</div>
+                             </textarea></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="typezaak"><strong>Type zaak:</strong></label> </div>
+                             <div class="large-6 columns">
+                                 <select id="typezaak" ng-model="case.case_type">
+                                    <option ng-repeat="type in case_type_all" value="{{type.id}}">{{type.case_name}}</option>
+
+                                 </select>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="process"><strong>Procedure:</strong></label> </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="process" type="checkbox" ng-model="case.process">
+                                  <label for="process">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="process"><strong>Wederpartij:</strong></label> </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="opponentcheck" type="checkbox" ng-model="case.opponentcheck">
+                                  <label for="opponentcheck">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                                <label for="confidential">
+                                    <strong>Vertrouwelijk:</strong>
+                                </label>
+                            </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round trust">
+                                  <input id="confidential" type="checkbox" ng-model="case.confidential">
+                                  <label for="confidential">
+                                      <span class="switch-icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="toevoeging"><strong>Toevoeging:</strong></label> </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="toevoeging" type="checkbox" ng-model="case.toevoeging">
+                                  <label for="toevoeging">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                        </div>
+                        <div ng-show="case.eigenbijdrage" class="large-12 columns">
+                            <div class="large-6 columns"><label for="toevoegingbedrag"><strong>Eigen bijdage:</strong> </label></div>
+                             
+                             <div class="large-6 columns">
+                                <input type="number" min="0.00" step="1.00" id="toevoegingbedrag" ng-model="case.toevoegingbedrag">
+                               
+                             </div>
+                        </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="office_charge"><strong>Kantoor:</strong></label> </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="office_charge" type="checkbox" ng-model="case.office_charge">
+                                  <label for="office_charge">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="btw"><strong>BTW:</strong></label> </div>
+                             
+                             <div class="large-6 columns">
+
+                               <div class="switch round">
+                                  <input id="btw" type="checkbox" ng-model="case.btw">
+                                  <label for="btw">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                  </label>
+                                </div>
+                             </div>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- zaak aanmaken -->
+
+        <div class="large-6 columns">
+
+            <div class="box bg-black">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="text-white fontello-folder"></i>
+                        <span>Clientgegevens</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="large-12 box-body " style="display: inline-block;">
+                    <div class="large-6 columns text-white">{{customer.fname}} {{customer.lname}} <span ng-if="customer.company"> - {{customer.company}}</span><br>
+                         {{customer.address}}<br>
+                         {{customer['zipcode']}} {{customer['city']}}<br>
+                         <br>
+                         <strong>Contactinfo</strong><br>
+                         <strong>Tel: </strong>{{customer.tel}}<br> 
+                         <strong>Email: </strong>{{customer.email}}
+                    </div>
+                    <div class="large-6 columns text-white">
+                    <strong>BTW-nr: </strong>{{customer.btwnr}}<br>
+                    <strong>KvK: </strong>{{customer.kvk}}<br>
+                    <strong>Banknr: </strong>{{customer.banknr}}<br>
+                    </div>
+
+                </div>
+                <!-- end .timeline -->
+            </div>
+            <!-- box -->
+        </div>
+
+        <div class="large-6 columns"  ng-show="case.opponentcheck">
+
+            <div class="box bg-light-green">
+
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="fontello-folder text-white"></i>
+                        <span class="text-white">Wederpartij</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="large-12 box-body " style="display: inline-block;">
+                        <div class="large-12 columns"">
+                            <div class="large-6 columns">
+                                <label for="opp_lawyer"><strong>Advocaat:</strong></label> </div>
+                             <div class="large-6 columns">
+                                 <input type="text" id="opp_lawyer" ng-model="case.opp_lawyer">
+                             </div>
+                        </div>
+
+                         <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_fname"><strong>Voornaam:</strong></label> </div>
+                             <div class="large-6 columns">
+                                 <input type="text" id="opp_fname" ng-model="case.opp_fname">
+                             </div>
+
+                        </div>
+                        <div class="large-12 columns"">
+
+                            <div class="large-6 columns">
+                                <label for="opp_lname"><strong>Achternaam:</strong></label> </div>
+                             <div class="large-6 columns">
+                                 <input type="text" id="opp_lname" ng-model="case.opp_lname">
+                             </div>
+                             
+                        </div>
+                </div>
+                <!-- end .timeline -->
+            </div>
+            <!-- box -->
+        </div>
+
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fontello-chart-pie-outline"></i>
+                        <span>Financeel</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                     <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="belang"><strong>Belang</strong></label> </div>
+                             <div class="large-6 columns">
+                             <input type="number" min="0.00" step="1.00" id="belang" ng-model="case.belang"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="prognose"><strong>Prognose</strong></label> </div>
+                             <div class="large-6 columns">
+                             <input type="number" min="0.00" step="1.00" id="prognose" ng-model="case.prognose"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="betaald"><strong>Betaald</strong></label> </div>
+                             <div class="large-6 columns">
+                             <input type="number" min="0.00" step="1.00" id="betaald" ng-model="case.betaald"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+
+         <div class="large-12 columns">
+            <button class="tiny radius button bg-green right" ng-click="createCase()" >Zaak Aanmaken</button>
+        </div>
+        <pre>form={{caseCreate.case.case_name}}</pre>
+
+
+
+    </div>
+    </form>
+    <!-- End of Container Begin -->

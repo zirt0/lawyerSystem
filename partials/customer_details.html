@@ -1,0 +1,350 @@
+  <!-- Container Begin -->
+    <div class="row" style="margin-top:-20px">
+
+        <!-- customerinfo -->
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fa fa-users"></i>
+                        <span>Cli&euml;ntegegevens</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                    <div class="large-12 columns">
+                            <h6>Algemeen</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Bedrijf:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.company}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Voornaam:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.fname}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Bedrijf:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.lname}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Tel:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.tel}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Tel </strong>(alternatief): </div>
+                             <div class="large-6 columns">{{customerDetails.alt_tel}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Email:</strong> </div>
+                             <div class="large-6 columns"><a href="mailto:{{customerDetails.email}}">{{customerDetails.email}}</a></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Branche:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.branche}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>BTW:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.btwnr}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>KvK:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.kvk}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Banknr:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.banknr}}</div>
+                        </div>
+                         <div class="large-12 columns">
+                            <br>
+                            <h6>Adres</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Straat + huisnr:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.address}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Postcode:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.zipcode}} {{customerDetails.city}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                            <h6>Correspondentieadress</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Straat + huisnr:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.cor_address}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Postcode:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.cor_zipcode}} {{customerDetails.cor_city}}</div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                            <h6>Opmerking</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Opmerking:</strong> </div>
+                             <div class="large-6 columns">{{customerDetails.comment}}</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- customerinfo -->
+
+        <!-- betaalde facturen -->
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="your-account">
+                    <div class="row">
+                        <div class="medium-3 columns">
+                            <!-- <div class="circle-progress"></div> -->
+                            <small class="text-centre"><strong>Betaalde facturen</strong></small>
+                            <div class="circlestat circliful" data-dimension="90" data-text="55%" data-width="8" data-fontsize="16" data-percent="55" data-fgcolor="#222" data-border="5" data-bgcolor="#D5DAE6" data-fill="#FFF" style="width: 90px;"><span class="circle-text" style="line-height: 90px; font-size: 16px;">55%</span></div>
+                        </div>
+                        <div class="medium-9 columns ">
+                            <div style="margin:0 10px;padding:0 0 0 20px" class="summary-border-left">
+                                <h4>Financieel</h4>
+                                <h6>Bekijk <strong>declaraties</strong> van Cli&euml;nt</h6>
+                                <ul>
+                                    <li class="label round bg-green"><a href="#"><i class="text-white fontello-location"></i></a>
+                                    </li>
+                                    <li class="label round bg-green"><a href="#"><i class="text-white fontello-user-add"></i></a>
+                                    </li>
+                                    <li class="label round bg-green"><a href="#"><i class="text-white fontello-loop"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="large-6 columns">
+            <!-- timeline item -->
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fa fa-refresh" aria-hidden="true"></i>
+                        <span>Abonnementen</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="display: block;">
+                <h6><small>Bekijk <strong>abonnement</strong> van Cliënt</small></h6>
+                    <div class="events-nest">
+                        <ul>
+
+                            <li ng-repeat="x in subscriptions" class="subscription_item">
+                                <h4><small><a href="/#/customers/{{x.customer_id}}">{{x.fname}} {{x.lname}} </span> - </a> 
+                                <em>{{x.company}}</em></small> <span class="expired_subsciption" style="color: #F20556;" ng-if="x.diffDate <= 0">VERLOPEN</span>
+                                </h4>
+                                <p><small>{{x.minutes_used}}</small>/{{x.minutes}} <small>Minuten Verbruikt</small>
+                                <span class="right text-right">&euro; {{x.amount}}<br>
+                                    <span class="right text-right" style="font-size: 9px; color: white; padding: 1px 6px;
+        border-radius: 3px;background-color: {{colorGenerator(x.diffDate)}}">{{x.diffDate}} Dagen verlopen</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->                    </span>
+                                <div class="progress small radius" style="padding: 0px; margin: 0px; background: #daecec;">
+                                    <span class="meter bg-light-green" style="width:{{x.minutes_used / x.minutes * 100 }}%; top: 0;left: 0;"><small>Verbruik</small></span>
+                                </div>
+                                </p>
+
+                            </li>
+                        </ul>
+                        <button ng-show="!add_subscription_panel" class="button expand bg-green" ng-click="add_subscription($event)">Abonnement toeveogen <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                        <div ng-show="add_subscription_panel" class="bg-white if-animate">
+                            <label>Minuten
+                            <input type="text" ng-model="subscription.minutes">
+                            </label>
+                            <label>Bedrag
+                            <input type="text" ng-model="subscription.amount">
+                            </label>
+                            <label>Start Datum
+                            <input type="text" id="datetimepicker" ng-model="subscription.start_date" placeholder="jjjj-mm-dd">
+                            </label>
+                            <label>Eind Datum
+                            <input type="text" ng-model="subscription.end_date" placeholder="jjjj-mm-dd">
+                            </label>
+                            <div class="right bg-white">
+                                <button class="bg-green tiny radius" ng-click="save_subscription()">Opslaan</button>
+                                <button class="bg-red tiny radius" ng-click="cancel_subscription()  ">Annuleer</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <!-- betaalde facturen -->
+
+        <!-- widgets -->
+        <div class="large-3 columns">
+            <div class="bg-complete-profile">
+                <a href="/#/declaraties">
+                <span class="bg-green fontello-stopwatch"></span>
+                <!--   <img src="img/bag.png"> -->
+                <h6 class="bg-black text-white"><strong>Urenregistratie</strong></h6>
+                </a>
+            </div>
+        </div>
+        <div class="large-3 columns">
+            <div class="bg-complete-profile">
+                <a href="/#/invoices/{{customerId}}">
+                <span class="bg-green fontello-wallet"></span>
+                <!--   <img src="img/bag.png"> -->
+                <h6 class="bg-black text-white"><strong>Facturen</strong></h6>
+                </a>
+            </div>
+        </div>
+        <!-- widgets -->
+
+        <!-- Zaken -->
+        <div class="large-6 columns">
+            <!-- box -->
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="fontello-folder"></i>
+                        <span>Zaken</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div style="display: inline-block; width: 100%;" >
+                    <div class="large-12 columns">
+                        <table class="table table-striped no-border">
+                            <tr>
+                                <th>
+                                    Advocaat
+                                </th>
+                                <th>
+                                    Zaak
+                                </th>
+                                <th>
+                                    Datum-Tijd
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr ng-repeat="case in customerCases">
+                                <td>{{case.lawyerfname}} {{case.lawyerlname}}</td>
+                                <td>{{case.casename}}</td>
+                                <td>{{case.create_date}}</td>
+                                <td><a href="/#/cases/{{case.id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
+                            </tr>
+                            <tr ng-show="!customerCases.length"><td colspan="4" class="text-center">Geen zaken</td></tr>
+                           
+                        </table>
+                        <a href="/#/customers/{{customerId}}/create/" class="button expand bg-red">Nieuw zaak aanmaken</a>
+                    </div>
+                </div>
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- Zaken -->
+
+        <!-- logboek -->
+       <!--  <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fontello-user"></i>
+                        <span>Logboek</span>
+                    </h3>
+                </div>
+
+                <div class="box-body " style="display: inline-block; width: 100%;" >
+                <table class="table table-striped no-border">
+                            <tr>
+                                <th>
+                                    Gebruiker
+                                </th>
+                                <th>
+                                    Datum-Tijd
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Deniz Koker
+                                </td>
+                                <td>
+                                    27-12-2014 18:00:23
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Kubilay Akturk
+                                </td>
+                                <td>
+                                    26-12-2014 18:00:23
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Deniz Koker
+                                </td>
+                                <td>
+                                    26-12-2014 18:00:23
+                                </td>
+                            </tr>
+                        </table>
+                    
+ 
+                </div>
+
+
+            </div>
+        </div> -->
+        <!-- logboek -->
+
+
+
+         <!-- Klant creatie en mutatiedatum -->
+        <div class="large-12 columns text-right">
+        Creatiedatum: {{customerDetails.date_add}}
+        Mutatiedatum: {{customerDetails.date_mutation}}    
+        </div>
+        <!-- Klant creatie en mutatiedatum -->
+    </div>
+    <!-- End of Container Begin -->
