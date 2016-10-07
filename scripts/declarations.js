@@ -31,10 +31,10 @@ app.controller('declarationsCtrl',function($scope, $rootScope, $http){
 
 })
 
-app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParams, $http, base64, $window, $http){
+app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParams, $http, base64, $window, $http, $filter){
 
 	///for creating pdf
-	createPDFfunction($scope,$rootScope, base64, $window, $http);
+	createPDFfunction($scope,$rootScope, base64, $window, $http, $filter);
 	$scope.declarationDetail = {};
 	$scope.declarationDetail.case_id = "" + $routeParams.id + "";
 	$scope.caseDetails = {};
@@ -48,11 +48,23 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	$scope.args.from_month = "" + $scope.args.from_month + "" ;
 	$scope.args.fileURLs = "lala";
 
+
+
+	$scope.invoiceInfo = {}
+	$scope.invoiceInfo.case_id = $scope.declarationDetail.case_id;
+	$scope.invoiceInfo.invoiceId = "";
+	$scope.invoiceInfo.discountType = 'none';
+	
+	
+
+
 	$http.post("server/read.php",{'subject': "casedetail", 'id': $scope.args.case_id})
 		.success(function (response) {
 			
 			$scope.caseDetails = response;
 			console.log($scope.caseDetails)
+			$scope.invoiceInfo.customerInfo = $scope.caseDetails;
+			console.log($scope.invoiceInfo);
 
 	});
 
@@ -346,8 +358,8 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 
 
-	$scope.invoiceInfo = {}
-	$scope.invoiceInfo.discountType = 'none';
+	
+	//console.log($scope.invoiceInfo.customerInfo.customerInfo.company);
 	
 	$scope.downloadInvoice = function(invoiced){
 

@@ -145,21 +145,13 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 		}).success(function (response) {
 			//$scope.case = response;
 
+			$rootScope.succesModalBox(true, "Declaratie is succesvol opgeslagen");
+
 			$scope.declaration_saved = true;
 			$scope.declaration.time = 0 ;
 			$scope.declaration.info = ""
-			
-			
+						
 			$scope.loadDeclaration();
-			setTimeout(function()
-			  {
-			  	$scope.$apply(function () {
-			    	$scope.declaration_saved = false; 
-				});
-
-				
-			  }, 3000)
-
 
 		});
     }

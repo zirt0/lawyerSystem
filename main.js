@@ -201,7 +201,7 @@
 		var timerID = setInterval(function() {
 		    // your code goes here...
 		    //console.log("check Notes every 10 seconds")
-		    $rootScope.getNotification();
+		    //$rootScope.getNotification();
 		}, 60 * 100); 
 
 		//$rootScope.getNotification();

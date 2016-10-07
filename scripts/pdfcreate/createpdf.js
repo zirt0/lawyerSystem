@@ -1,4 +1,4 @@
-function createPDFfunction ($scope, $rootScope, base64, $window, $http){
+function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter){
 
 ///creeer pdf
 	var tableex = {table: {
@@ -127,6 +127,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http){
 		
 		$scope.belaste_verschotten = $scope.office_charge + $scope.declaration_credits.total_tax;
 		$scope.subtotal = $scope.honorarium_discount + $scope.belaste_verschotten;
+
 		if($scope.caseDetails['btw'] == 1){
 			$scope.btw = $scope.subtotal * 0.21;
 			$scope.total = $scope.subtotal * 1.21;
@@ -157,7 +158,11 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http){
 		resume.table.body.push([{ text: 'Onbelaste verschotten', bold: true }, "", " van ", "" , "€ " + $scope.declaration_credits.total_no_tax.toFixed(2) + ""]);
 		resume.table.body.push([{ text: 'Totaal', bold: true }, " ", " ", " " , "€ " + $scope.total_onbelaste_verschotten.toFixed(2) + ""]);
 
-
+		$scope.invoiceInfo.honorarium_discount = $scope.honorarium_discount.toFixed(2);
+		$scope.invoiceInfo.office_charge = $scope.office_charge.toFixed(2);
+		$scope.invoiceInfo.btw = $scope.btw.toFixed(2); //btw
+		$scope.invoiceInfo.subtotal = $scope.subtotal.toFixed(2); //zonder btw
+		$scope.invoiceInfo.total = $scope.total.toFixed(2) //met btw
 		$scope.invoiceInfo.belaste_ver = $scope.declaration_credits.total_tax.toFixed(2);
 		$scope.invoiceInfo.onbelaste_ver = $scope.declaration_credits.total_no_tax.toFixed(2);
 		$scope.invoiceInfo.total_onbelaste_verschotten = $scope.total_onbelaste_verschotten.toFixed(2);
@@ -165,6 +170,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http){
 		console.log($scope.office_charge + " " + $scope.subtotal + " " + $scope.btw + " " + $scope.total + " ");
 
 		console.log($scope.honorarium);
+		$scope.createInvoicePDF();
 
 	}
 	
@@ -238,27 +244,110 @@ var docDefinition = {
  console.log(docDefinition.content);
 
 
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = dd+'-'+mm+'-'+yyyy;
+
+
+$scope.createInvoicePDF = function(){
+	var invoicePDF = {
+	content: [
+		{ 
+			text: '' + $scope.invoiceInfo.customerInfo.company + ' \n ' + $scope.invoiceInfo.customerInfo.address +' \n ' + $scope.invoiceInfo.customerInfo.zipcode + ' ' + $scope.invoiceInfo.customerInfo.city + '  ',
+			style: 'adres' 
+		},
+		'\n\n\n\n\n\n\n',
+		{
+			text: 'Datum: '+ today + ' \n\nDossiernr: '+ $scope.invoiceInfo.case_id + ' \n\n Factuurnr: ' + $scope.invoiceInfo.invoiceId + '\n\n ',
+			style: 'subheader'
+		},
+		{
+			text: 'Declaratie voor: ' + $scope.invoiceInfo.customerInfo.casename + '\n\n',
+			style: 'subheader'
+		},
+		{
+				style: 'tableExample',
+				table: {
+						headerRows: 1,
+						body: [
+								[ 'Honorarium',{ text: '', marginRight: 100 },'€', { text: '' + $scope.invoiceInfo.honorarium_discount + '', alignment: 'right' },' ' ],
+								[ 'Belaste verschotten',' ','€', '' + $scope.invoiceInfo.belaste_ver + '','+' ],
+								[ '',' ','€', '' + $scope.invoiceInfo.subtotal + '',' ' ],
+							    [ '','','', '',' '],
+								[ 'BTW21%',' ','€', '' + $scope.invoiceInfo.btw + '','+' ],
+								[ '',' ','€', '' + $scope.invoiceInfo.total + '',' ' ],
+								[ '',' ','', '',' ' ],
+								[ 'Onbelaste verschotten',' ','€', '' + $scope.invoiceInfo.onbelaste_ver + '','+' ],
+								[ 'Totaal van deze factuur',' ','€', '' + $scope.invoiceInfo.total_onbelaste_verschotten + '',' ' ],
+								[ '',' ','', '',' ' ],
+								[ 'Door u te voldoen',' ','€', '' + $scope.invoiceInfo.total_onbelaste_verschotten + '' ,' ' ],
+
+						]
+				},
+				layout: 'noBorders'
+		},
+		'\n',
+		'Het openstaande besdrag dient uiterlijk op de hierboven aangegeven uiterste betaaldag op op de onderstaande bankrekening bijgeschreven te zijn. Bij te laat betalingbent u in gebreken en in verzuim zonder dat hiertoe nog een ingebrekenstelling nodig is. Alsdan zal er wettelijke rente en zonodig buitengerechtelijke incassokosten in rekening worden gebracht.\n\n',
+		
+	
+		{
+				style: 'tableExample',
+				table: {
+						headerRows: 1,
+						body: [
+								[ 'BTW nummer', '1465.53.822.B.01' ],
+								[ 'KVK nummer', '34322784' ],
+								[ 'IBAN nummer', 'NL12ABNA0534507786' ],
+								[ 'BIC nummer', 'ABNANL2A' ],
+
+						]
+				},
+				layout: 'noBorders'
+		}
+	],
+	styles: {
+		adres: {
+			fontSize: 13,
+			bold: true,
+			alignment: 'right'
+		},
+		subheader: {
+			fontSize: 13,
+			bold: false
+		},
+		quote: {
+			italics: true
+		},
+		small: {
+			fontSize: 12
+		}
+	}
+}	
+pdfMake.createPdf(invoicePDF).open();
+}
+
+
+
 
  $scope.downloadPDF = function(data){
  	$scope.loopdeclaration();
  	console.log($scope.declaration_credits.case_id);
  	pdfMake.createPdf(docDefinition).open();
  	
-
-	// pdfMake.createPdf(docDefinition).getBuffer(function(dataURL) {
-	    
-
-	//     console.log(dataURL);
-
-	//     console.log("adem is king");
- //        var file = new Blob([dataURL], {type: 'application/pdf'});
- //        console.log(file);
- // 		$scope.fileURL = URL.createObjectURL(file);
- // 		console.log($scope.fileURL);
- // 		$window.open($scope.fileURL, 'test', file);
+ 	
 
 
-	// });
  if(data){
  	pdfMake.createPdf(docDefinition).getBase64(function(dataURL){
  		console.log(dataURL);
@@ -279,6 +368,7 @@ var docDefinition = {
  	docDefinition.content[3]['table']['body'] = [];
  	console.log(docDefinition.content[2]);
  	console.log(docDefinition.content);
+ 	console.log($scope.invoiceDetail)
 	
  } ;
 

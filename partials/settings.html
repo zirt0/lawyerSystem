@@ -87,7 +87,84 @@
                 </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Bedrijfsgegevens</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.company_info'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("company_info", settings.company_info)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>BTW nummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.company_btw'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("company_btw", settings.company_info)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>KvK nummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.company_kvk'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("company_kvk", settings.company_kvk)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>IBAN nummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.company_iban'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("company_iban", settings.company_iban)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>IBAN nummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.company_bic'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("company_bic", settings.company_bic)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <strong>Factuuropmerking</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.invoice_text'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("invoice_number", settings.invoice_text)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
  
  </div>
 
