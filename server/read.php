@@ -673,6 +673,46 @@ if($subject == "get_paymentinfo"){
 	$outp ='{"records":['.$outp.']}';
 	//$outp = $sql;
 }
+
+if($subject == "get_paymentinfo_payed"){
+
+	$sql = "select id, sum(amount) as total_amount from payments where invoice_id = '" . $args->payment_id ."'";
+
+
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"total_amount":"'. $rs["total_amount"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
+
+if($subject == "get_options"){
+
+	$sql = "SELECT * FROM options";
+
+
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"option_name":"'  . $rs["option_name"] . '",';
+	    $outp .= '"option_value":"'. $rs["option_value"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
  
 
 

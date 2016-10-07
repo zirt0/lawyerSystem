@@ -89,6 +89,7 @@ app.controller('paymentDetailCtrl',function($scope, $rootScope, $routeParams, $h
 
 	$scope.payment = {};
 	$scope.payment.payment_id = "" + $routeParams.id + "";
+	$scope.payment.payed = 0;
 	console.log($scope.payment);
 
 	$http.post("server/read.php",{'subject': "get_paymentinfo", 'args': $scope.payment})
@@ -97,6 +98,12 @@ app.controller('paymentDetailCtrl',function($scope, $rootScope, $routeParams, $h
 		$scope.payment.payemntinfo = response.records[0]
 		console.log($scope.payment.payemntinfo);
 		$scope.payment.amount = $scope.payment.payemntinfo.total;
+	});
+
+	$http.post("server/read.php",{'subject': "get_paymentinfo_payed", 'args': $scope.payment})
+	.success(function (response) {
+		console.log(response.records[0])
+		$scope.payment.payed = response.records[0]['total_amount'];
 	});
 
 

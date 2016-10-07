@@ -1,74 +1,5 @@
 <div class="row">
         <div class="large-6 columns">
-            <div class="box">
-                <div class="box-header bg-transparent">
-                    <!-- tools box -->
-                    <div class="pull-right box-tools">
-
-
-                    </div>
-                    <h3 class="box-title"><i class="fa fa-users"></i>
-                        <span>Account</span>
-                    </h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body " style="display: inline-block;" >
-                    <div class="large-12 columns">
-                    <div class="large-12 columns">
-
-                            <h6>Account</h6>
-                        </div>
-                        <div class="large-12 columns">
-                            <div class="large-6 columns">
-                                <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Zaaknaam:</strong></label> 
-                            </div>
-                             <div ng-show="!editCaseDetails" class="large-6 columns">
-                                 <input type="text" id="case_name" ng-model="case.casename" ng-minlength="1" required>
-                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
-                             </div>
-                             <div ng-show="editCaseDetails" class="large-6 columns">
-                                 {{case.casename}}
-                             </div>
-
-<!-- <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
-                        </div>
-                        
-                        <div class="large-12 columns">
-                            <div class="large-6 columns">
-
-                                <label for="comment"><strong>Beschrijving:</strong></label> </div>
-                             <div ng-show="!editCaseDetails" class="large-6 columns" id="comment"><textarea  ng-model="case.comment">
-                                 <div ng-show="caseCreate.case.comment.$error.$invalid">Tell us your name.</div>
-                             </textarea>
-                             </div>
-                             <div ng-show="editCaseDetails" class="large-6 columns">
-                                 {{case.comment}}
-                             </div>
-                        </div>
-                        
-                        <div class="large-12 columns">
-                            <br>
-                        </div>
-                    </div>
-                        <span class="box-btn" data-widget="collapse">
-                        <a ng-show="editCaseDetails"  ng-click="editCase()" class="tiny radius button bg-yellow right">Bewerk</a>
-                    </span>
-                    <span class="box-btn" data-widget="collapse">
-                        <a ng-show="!editCaseDetails"  ng-click="cancelCase()" class="tiny radius button bg-red right">Cancel</a>
-                    </span>
-                    <span class="box-btn" data-widget="collapse">
-                        <a ng-show="!editCaseDetails"  ng-click="saveCase()" class="tiny radius button bg-green right">Opslaan</a>
-                    </span>
-                </div>
-
-
-                <!-- end .timeline -->
-            </div>
-        </div>
-        <!-- zaak aanmaken -->
-
-        <div class="large-6 columns">
-
             <div class="box bg-black">
 
                 <div class="box-header bg-transparent">
@@ -98,12 +29,40 @@
                 </div>
                 <!-- end .timeline -->
             </div>
-            <!-- box -->
-        </div>
 
-         <!-- Zaken -->
-        <div class="large-6 columns">
-            <!-- box -->
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="icon-view-list"></i>
+                        <span>Laatste werkzaamheden <small>van {{userDetail.fname}} {{userDetail.lname}}</small></span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="display: block;">
+                    <div class="events-nest">
+                        <ul>
+
+                            <li ng-repeat="x in declaration_items | limitTo: 5">
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                </h4>
+                                <p>{{x.declaration_name}} <small>{{x.company}}</small>
+                                <span class="right text-right" style="font-size: 9px;">{{x.time}}min<br>&euro; {{x.amount}}</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->
+                                </p>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            
             <div class="box">
                 <div class="box-header bg-transparent">
                     <!-- tools box -->
@@ -116,7 +75,7 @@
                     </div>
                     <h3 class="box-title">
                         <i class="fontello-folder"></i>
-                        <span>Dossiers<small> van {{userDetail.fname}} {{userDetail.lname}}</small></span>
+                        <span>Dossiers<small> aangemaakt door {{userDetail.fname}} {{userDetail.lname}}</small></span>
                     </h3>
                 </div>
                 <!-- /.box-header -->
@@ -137,10 +96,10 @@
                                 </th>
                             </tr>
                             <tr ng-repeat="case in customerCases">
-                                <td><a href="/#/customers/{{case.id}}">{{case.fname}} {{case.lname}}</a></td>
+                                <td><a href="#/customers/{{case.id}}">{{case.fname}} {{case.lname}}</a></td>
                                 <td>{{case.casename}}</td>
                                 <td>{{case.create_date}}</td>
-                                <td><a href="/#/cases/{{case.case_id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
+                                <td><a href="#/cases/{{case.case_id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
                             </tr>
                             <tr ng-show="!customerCases.length"><td colspan="4" class="text-center">Geen zaken</td></tr>
                            
@@ -150,50 +109,10 @@
                 <!-- end .timeline -->
             </div>
         </div>
-        <!-- Zaken -->
+        <!-- zaak aanmaken -->
 
-        <!-- Laatste Werkzaamheden -->
         <div class="large-6 columns">
-            <!-- timeline item -->
-            <div class="box">
-                <div class="box-header bg-transparent">
-                    <!-- tools box -->
-                    <div class="pull-right box-tools">
-
-                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
-                        </span>
-                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
-                        </span>
-                    </div>
-                    <h3 class="box-title"><i class="icon-view-list"></i>
-                        <span>Laatste werkzaamheden <small>van {{userDetail.fname}} {{userDetail.lname}}</small></span>
-                    </h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body" style="display: block;">
-                    <div class="events-nest">
-                        <ul>
-
-                            <li ng-repeat="x in declaration_items">
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
-                                </h4>
-                                <p>{{x.declaration_name}} <small>{{x.company}}</small>
-                                <span class="right text-right" style="font-size: 9px;">{{x.time}}min<br>&euro; {{x.amount}}</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->
-                                </p>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-        <!-- Laatste Werkzaamheden -->
-
-         <!-- Notities -->
-        <div class="large-6 columns">
-            <!-- timeline item -->
-            <div class="box">
+          <div class="box">
                 <div class="box-header bg-brown ">
                     <!-- tools box -->
                     <div class="pull-right box-tools">
@@ -204,7 +123,7 @@
                         </span>
                     </div>
                     <h3 class="box-title text-white"><i class="icon-view-list"></i>
-                        <span class="text-white">Interne Notities<small></small></span>
+                        <span class="text-white">Interne Notities  - Niet gelezen<small></small></span>
                     </h3>
                 </div>
                 <!-- /.box-header -->
@@ -214,19 +133,42 @@
 
                             <li ng-repeat="x in notes">
                                 <a ng-click="markasRead(x.id)" alt="markeer als gelezen" class="text-blue fontello-record right"></a>
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>
                                 {{x.content}}
                                 <span class="clear"><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></span></p>
                             </li>
                         </ul>
-                        <button class="bg-brown expand small-text-center"><a href="/#/cases/2/notes/" class="text-white"> <small>Bekijk alle notities van dossier</small></a></button>
+                        <button class="bg-brown expand small-text-center"><a href="#/account/notifications" class="text-white"> <small>Bekijk all je notities</small></a></button>
 
                     </div>
                 </div>
                 <!-- /.box-body -->
             </div>
+
+           
+            <!-- box -->
+        </div>
+
+         <!-- Zaken -->
+        <div class="large-6 columns">
+            <!-- box -->
+            
+        </div>
+        <!-- Zaken -->
+
+        <!-- Laatste Werkzaamheden -->
+        <div class="large-6 columns">
+            <!-- timeline item -->
+            
+        </div>
+        <!-- Laatste Werkzaamheden -->
+
+         <!-- Notities -->
+        <div class="large-6 columns">
+            <!-- timeline item -->
+          
         </div>
         <!-- Notities -->
 <div>

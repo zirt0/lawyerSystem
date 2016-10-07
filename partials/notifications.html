@@ -1,9 +1,10 @@
 <!-- Notities -->
-        <div class="large-12 columns">
+<div class='row'>
+        <div class="large-12 columns notificationspage">
            
-                <div class="switch right">
+                <div class="switch left" style='border-radius: 20px; padding: 10px 30px; background-color: #03A9F4; color: white;'>
                     <span ng-if="!args.readed">Interne Notities (Alle notities)</span>
-                    <span ng-if="args.readed">Toon alle berichten</span>
+                    <span ng-if="args.readed">Toon Niet gelezen notities</span>
                   <input id="exampleCheckboxSwitch" type="checkbox" ng-model="args.readed">
                   <label for="exampleCheckboxSwitch"></label>
                 </div> 
@@ -65,7 +66,7 @@
             </div>
         </div>
 
-        <div class="large-6 columns left">
+        <div class="large-12 columns left">
             <!-- timeline item -->
 
             <div class="box" style="overflow: hidden;">
@@ -95,7 +96,7 @@
 
                             <li ng-repeat="x in notes" class="notitions slideInLeft animated">
                                 <a ng-if="x.read === '0'" ng-click="markasRead(x.id, $index)" alt="markeer als gelezen" class="text-blue fontello-record right"></a>
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>
                                 {{x.content}} 
@@ -111,3 +112,4 @@
             </div>
         </div>
         <!-- Notities -->
+    </div>

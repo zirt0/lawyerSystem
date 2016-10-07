@@ -79,8 +79,9 @@ if($subject == "createCustomer"){
 
 if($subject == "declaration_add"){
 
-	$sql = "INSERT INTO declarations (case_id, type_declaration, amount, time, comment)
+	$sql = "INSERT INTO declarations (case_id, user_id, type_declaration, amount, time, comment)
 			VALUES ( '" . $args->case_id . "', 
+					'" . $args->user_id . "',
 					'" . $args->choice . "', 
 					'" . $args->amount . "', 
 					'" . $args->time . "', 

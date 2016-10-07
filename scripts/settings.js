@@ -119,5 +119,11 @@ app.controller('settingsCtrl',function($scope, $rootScope, $http){
 			$scope.settings.invoice_number =  response;
 		});
 
+	// $http.post("server/read.php",{'subject': "get_options"})
+	// .success(function (response) {
+	// 	console.log(response);
+	// 	//$scope.settings.invoice_number =  response;
+	// });
+
 	
 })

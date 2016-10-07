@@ -428,14 +428,14 @@
                         <ul>
 
                             <li ng-repeat="x in notes_from | limitTo:5" ng-mouseenter="makelarger()" ng-mouseleave="makesmaller()" ng-class="large_height">
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="/#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>{{x.content}}</p>
                                 <p><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></p>
                             </li>
                             <li ng-show="!notes_from.length"><div>Geen notities</div></li>
                         </ul>
-                        <button class="bg-brown expand small-text-center"><a ng-href="/#/cases/{{caseDetail.caseId}}/notes/" class="text-white"> <small>Bekijk alle notities van dossier</small></a></button>
+                        <button class="bg-brown expand small-text-center"><a ng-href="#/cases/{{caseDetail.caseId}}/notes/" class="text-white"> <small>Bekijk alle notities van dossier</small></a></button>
 
                     </div>
                 </div>
@@ -532,6 +532,11 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body " style="display: inline-block;" >
+                        <div class="large-12 columns ">
+                            <div class="large-12 columns" style="padding: 40px; margin-bottom: 50px; background-color: #5f5f5f; color: white;">
+                            Let op: Uitgaves met BTW dient u de BTW aan te zetten. Indien u dit niet doet, zal de uitgave opgeslagen worden zonder btw.
+                            </div>  
+                        </div>  
                         <div class="large-12 columns">
                                 <div class="large-6 columns"><label for="declaratie"><strong>Beschrijving uitgave</strong></label> </div>
                                  <div class="large-6 columns">
@@ -621,7 +626,7 @@
 
                                 </tr>
                             </table>
-                            <a href="/#/declarations/{{caseDetail.caseId}}" class="button expand bg-green radius">Totale overzicht</a>
+                            <a href="#/declarations/{{caseDetail.caseId}}" class="button expand bg-green radius">Totale overzicht</a>
                             </div>
                         </div>
 

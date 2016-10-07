@@ -28,13 +28,13 @@
   <tbody>
     <tr>
       <td at-title="Name">
-        <a href="/#/customers/{{filteredList[$index].id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
+        <a href="#/customers/{{filteredList[$index].id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
       </td>
       <td at-title="Telefoon">
         {{filteredList[$index].tel}}<span ng-if='filteredList[$index].alt_tel'> - </span>{{filteredList[$index].alt_tel}}
       </td>
       <td at-title="Bekijk">
-       <a class='button tiny radius bg-green' href="/#/customers/{{filteredList[$index].id}}">Bekijk</a>
+       <a class='button tiny radius bg-green' href="#/customers/{{filteredList[$index].id}}">Bekijk</a>
         
       </td>
     </tr>

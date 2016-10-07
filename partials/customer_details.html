@@ -162,7 +162,7 @@
                         <ul>
 
                             <li ng-repeat="x in subscriptions" class="subscription_item">
-                                <h4><small><a href="/#/customers/{{x.customer_id}}">{{x.fname}} {{x.lname}} </span> - </a> 
+                                <h4><small><a href="#/customers/{{x.customer_id}}">{{x.fname}} {{x.lname}} </span> - </a> 
                                 <em>{{x.company}}</em></small> <span class="expired_subsciption" style="color: #F20556;" ng-if="x.diffDate <= 0">VERLOPEN</span>
                                 </h4>
                                 <p><small>{{x.minutes_used}}</small>/{{x.minutes}} <small>Minuten Verbruikt</small>
@@ -207,7 +207,7 @@
         <!-- widgets -->
         <div class="large-3 columns">
             <div class="bg-complete-profile">
-                <a href="/#/declaraties">
+                <a href="#/declarations">
                 <span class="bg-green fontello-stopwatch"></span>
                 <!--   <img src="img/bag.png"> -->
                 <h6 class="bg-black text-white"><strong>Urenregistratie</strong></h6>
@@ -216,7 +216,7 @@
         </div>
         <div class="large-3 columns">
             <div class="bg-complete-profile">
-                <a href="/#/invoices/{{customerId}}">
+                <a href="#/invoices/">
                 <span class="bg-green fontello-wallet"></span>
                 <!--   <img src="img/bag.png"> -->
                 <h6 class="bg-black text-white"><strong>Facturen</strong></h6>
@@ -264,12 +264,12 @@
                                 <td>{{case.lawyerfname}} {{case.lawyerlname}}</td>
                                 <td>{{case.casename}}</td>
                                 <td>{{case.create_date}}</td>
-                                <td><a href="/#/cases/{{case.id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
+                                <td><a href="#/cases/{{case.id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
                             </tr>
                             <tr ng-show="!customerCases.length"><td colspan="4" class="text-center">Geen zaken</td></tr>
                            
                         </table>
-                        <a href="/#/customers/{{customerId}}/create/" class="button expand bg-red">Nieuw zaak aanmaken</a>
+                        <a href="#/customers/{{customerId}}/create/" class="button expand bg-red">Nieuw zaak aanmaken</a>
                     </div>
                 </div>
                 <!-- end .timeline -->

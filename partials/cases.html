@@ -10,11 +10,11 @@
     <tr>
     <td at-title="Dossier">
     	<i ng-if="filteredList[$index].confidential === '1'" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
-      <a href="/#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}} </a> 
+      <a href="#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}} </a> 
 
     </td>
       <td at-title="Client">
-        <a href="/#/customers/{{filteredList[$index].customer_id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
+        <a href="#/customers/{{filteredList[$index].customer_id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
 
 
       </td>
@@ -27,7 +27,7 @@
       	{{filteredList[$index].create_date}}
       </td>
       <td at-title="">
-      	<a class="button tiny radius bg-green" href="/#/cases/{{filteredList[$index].case_id}}">Bekijk</a>
+      	<a class="button tiny radius bg-green" href="#/cases/{{filteredList[$index].case_id}}">Bekijk</a>
       </td>
 
     </tr>

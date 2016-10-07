@@ -7,10 +7,10 @@
   <tbody>
     <tr>
       <td at-title="Adv.Naam">
-        <a href="/#/declarations/{{filteredList[$index].case_id}}"><!-- {{filteredList[$index].case_id}} -->{{filteredList[$index].fname | limitTo:1}}. {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
+        <a href="#/declarations/{{filteredList[$index].case_id}}"><!-- {{filteredList[$index].case_id}} -->{{filteredList[$index].fname | limitTo:1}}. {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
       </td>
       <td at-title="Zaaknaam">
-        <a href="/#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}}</a>
+        <a href="#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}}</a>
       </td>
      <!--  <td at-title="Client">
         {{filteredList[$index].company}}
@@ -22,7 +22,7 @@
         <span>&euro; {{filteredList[$index].total_amount}}</span>
       </td>
       <td>
-        <a class="button radius tiny bg-green" href="/#/declarations/{{filteredList[$index].case_id}}">Bekijk</a>
+        <a class="button radius tiny bg-green" href="#/declarations/{{filteredList[$index].case_id}}">Bekijk</a>
       </td>
     </tr>
   </tbody>

@@ -101,6 +101,8 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	////// declaration 
 	$scope.declaration = {};
 	$scope.declaration.case_id = $scope.caseDetail.caseId;
+	$scope.declaration.user_id = $rootScope.userDetail.id;
+	console.log($scope.declaration);
 
 
 	//get caseType
