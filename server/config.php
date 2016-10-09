@@ -7,7 +7,7 @@
 //$conn = new mysqli("localhost", "root", "", "suleyok47_say");
 header('Content-Type: text/html; charset=utf-8');
 
-$conn = new mysqli("localhost", "root", "!onlinedev1812#", "customersystem");
+$conn = new mysqli("localhost", "root", "karlik", "customersystem");
  // $argHost = "localhost";
  // $argUsername = "root";
  // $argPassword = "karlik";

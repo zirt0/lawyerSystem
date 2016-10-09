@@ -195,7 +195,8 @@ if($subject == "casedetail"){
 	    $outp .= '"opp_address":"'   . $rs["opp_address"]        . '",';
 	    $outp .= '"opp_zipcode":"'   . $rs["opp_zipcode"]        . '",';
 	    $outp .= '"opp_city":"'   . $rs["opp_city"]        . '",';
-	    $outp .= '"opp_comment":"'. $rs["opp_comment"]    . '"}'; 
+	    $outp .= '"opp_comment":"'   . $rs["opp_comment"]        . '",';
+	    $outp .= '"case_id_alias":"'. $rs["case_id_alias"]    . '"}'; 
 	}
 
 	// SELECT container_content.id as id,container_content.place_name, container_content.container_department, contracts.kenteken, contracts.id as contracts_id, customers.company, customers.fname, customers.lname FROM container_content

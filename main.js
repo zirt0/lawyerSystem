@@ -264,6 +264,8 @@
 			.success(function (response) {
 				//$scope.declarations = response.records;
 				console.log(response);
+
+				$rootScope.succesModalBox(true, "Optie is succesvol opgeslagen");
 			});
 		}
 

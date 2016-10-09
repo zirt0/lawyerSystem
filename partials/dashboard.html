@@ -130,7 +130,7 @@
                     <ul>
 
                         <li ng-repeat="x in declaration_items | limitTo:5 | orderBy:'declaration_date':true">
-                            <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span> - </a> <em>{{x.fname | limitTo: 1}}. {{x.lname}}</em></small>
+                            <h4><img alt="" class="admin-pic img-circle" src="img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span> - </a> <em>{{x.fname | limitTo: 1}}. {{x.lname}}</em></small>
                             </h4>
                             <p>{{x.declaration_name}} <small>{{x.company}}</small>
                             <span class="right text-right" style="font-size: 9px;">{{x.time}}min<br>&euro; {{x.amount}}</span><!-- <i class="icon-download"></i><i class="  icon-document-new"></i><i class="icon-heart"></i> -->

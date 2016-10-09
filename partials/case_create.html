@@ -59,13 +59,21 @@
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns">
+                                <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Dossiernummer:</strong></label> 
+                            </div>
+                             <div class="large-6 columns">
+                                 <input type="text" id="case_name" ng-model="case.dossiernummer" ng-minlength="1" required>
+                                 <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
                                 <label ng-class="{'error': caseCreate.case.case_name.$error.$invalid}" for="case_name"><strong>Zaaknaam:</strong></label> 
                             </div>
                              <div class="large-6 columns">
                                  <input type="text" id="case_name" ng-model="case.case_name" ng-minlength="1" required>
                                  <div ng-show="caseCreate.case.case_name.$error.$pristine">Tell us your name.</div>
                              </div>
-<!-- <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns">

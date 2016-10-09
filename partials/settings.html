@@ -89,6 +89,19 @@
     </div>
     <div class="row">
         <div class="small-6 columns">
+            <strong>Dossier Volgnummer</strong> 
+        </div>
+        <div class="small-6 columns">
+                <div class="small-8 columns">
+                <input type="text" ng-model='settings.case_number'>
+                </div>
+                <div class="small-4 columns">
+                <button ng-click='update_option("case_number", settings.case_number)' class='tiny bg-green radius'>Opslaan</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
             <strong>Bedrijfsgegevens</strong> 
         </div>
         <div class="small-6 columns">

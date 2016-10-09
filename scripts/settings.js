@@ -118,6 +118,11 @@ app.controller('settingsCtrl',function($scope, $rootScope, $http){
 			console.log(response);
 			$scope.settings.invoice_number =  response;
 		});
+	$http.post("server/read.php",{'subject': "options", "args": 'case_number' })
+		.success(function (response) {
+			console.log(response);
+			$scope.settings.case_number =  response;
+		});
 
 	// $http.post("server/read.php",{'subject': "get_options"})
 	// .success(function (response) {

@@ -32,6 +32,22 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
 		$scope.case_type_all = response.records;
 	});
 
+	//getcaseid number
+	$http.post("server/read.php",{'subject': "options", "args": 'case_number' })
+	.success(function (response) {
+		console.log(response);
+		//$scope.settings.invoice_number =  response;
+		$scope.case.dossiernummercount = response;
+		var getDate = new Date();
+		var year = "" + getDate.getFullYear();
+		year = year.slice(-2)
+		var month = getDate.getMonth() + 1 ;
+		//month = "" + $scope.args.from_month + "" ;
+		$scope.case.dossiernummer  = $scope.case.dossiernummercount + year + month;
+	
+
+	});
+
 
 	$scope.case.confidential = false;
 	$scope.case.office_charge = true;
@@ -39,6 +55,14 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
 	$scope.case.btw = true;
 	$scope.case.eigenbijdrage = false;
 	$scope.case.process = true;
+
+
+	var getDate = new Date();
+	var year = "" + getDate.getFullYear();
+	year = year.slice(-2)
+	var month = getDate.getMonth() + 1 ;
+	//month = "" + $scope.args.from_month + "" ;
+	$scope.case.dossiernummer  = $scope.case.dossiernummercount + year + " " + month;
 
 	$scope.$watch('case.toevoeging', function() {
         
@@ -62,8 +86,13 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
     $scope.createCase = function(){
 		console.log("create case is pressed");
 
+		console.log($scope.case.dossiernummer)
+
 		$scope.submitted = true;
 		console.log($scope.case);
+
+		$scope.case.case_id_alias = parseInt($scope.case.dossiernummercount) + 1;
+		$rootScope.update_option('case_number', $scope.case.case_id_alias);
 
 		$http.post("server/insert.php",{
 			'subject': "createCase", 

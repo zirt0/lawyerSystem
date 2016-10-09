@@ -96,7 +96,7 @@
 
                             <li ng-repeat="x in notes" class="notitions slideInLeft animated">
                                 <a ng-if="x.read === '0'" ng-click="markasRead(x.id, $index)" alt="markeer als gelezen" class="text-blue fontello-record right"></a>
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                <h4><img alt="" class="admin-pic img-circle" src="img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>
                                 {{x.content}} 

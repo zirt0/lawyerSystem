@@ -16,7 +16,7 @@ $notes = $request->notes;
 
 if($subject == "createCase"){
 
-	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, belang, prognose, rolnaam, user_id)
+	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, belang, prognose, rolnaam, user_id, case_id_alias)
 			VALUES ( '" . $args->case_name . "', 
 					'" . $args->customer_id . "', 
 					'" . $args->opponent_id . "', 
@@ -31,7 +31,8 @@ if($subject == "createCase"){
 					'" . $args->belang . "', 
 					'" . $args->prognose . "', 
 					'" . $args->rolnaam . "',
-					'" . $args->user_id . "')";
+					'" . $args->user_id . "',
+					'" . $args->dossiernummer . "')";
 
 				if ($conn->query($sql) === TRUE) {
 				    $insertedId = $conn->insert_id;
@@ -41,7 +42,7 @@ if($subject == "createCase"){
 				    //$result = "false";
 				}
 				$outp = $result;
-				//$outp = $sql;
+				$outp = $sql;
 }
 
 if($subject == "createCustomer"){

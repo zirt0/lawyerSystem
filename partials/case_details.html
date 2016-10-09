@@ -21,7 +21,7 @@
                     <div class="large-12 columns">
                     <div class="large-12 columns">
 
-                            <h6>Zaaknaam:  {{case.casename}}</h6>
+                            <h6>Zaaknaam:  {{case.casename}} <small class="right">Dossierid: {{case.case_id_alias}}</small></h6>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns">
@@ -428,7 +428,7 @@
                         <ul>
 
                             <li ng-repeat="x in notes_from | limitTo:5" ng-mouseenter="makelarger()" ng-mouseleave="makesmaller()" ng-class="large_height">
-                                <h4><img alt="" class="admin-pic img-circle" src="/img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
+                                <h4><img alt="" class="admin-pic img-circle" src="img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>{{x.content}}</p>
                                 <p><small>{{x.from_fname}} {{x.from_lname}} >> {{x.to_fname}} {{x.to_lname}}</small></p>
