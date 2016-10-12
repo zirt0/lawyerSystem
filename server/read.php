@@ -141,6 +141,7 @@ if($subject == "cases"){
 	    $outp .= '"fname":"'   . $rs["fname"]        . '",';
 	    $outp .= '"lname":"'   . $rs["lname"]        . '",';
 	    $outp .= '"confidential":"'   . $rs["confidential"] . '",';
+	    $outp .= '"case_id_alias":"'   . $rs["case_id_alias"] . '",';
 	    $outp .= '"status":"'. $rs["status"]    . '"}'; 
 	}
 	$outp ='{"records":['.$outp.']}';
@@ -148,7 +149,7 @@ if($subject == "cases"){
 
 if($subject == "casedetail"){
 
-	$sql = "SELECT *, 
+	$sql = "SELECT *, cases.id as case_id, 
 	customers.company, customers.fname, customers.lname FROM cases
 	LEFT JOIN customers ON customers.id = cases.customer_id 
 	LEFT JOIN opponents ON opponents.id = cases.opponent_id 
@@ -158,7 +159,7 @@ if($subject == "casedetail"){
 	$outp = "";
 	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	    if ($outp != "") {$outp .= ",";}
-	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '{"case_id":"'  . $rs["case_id"] . '",';
 	    $outp .= '"casename":"'  . $rs["casename"] . '",';
 	    $outp .= '"customer_id":"'   . $rs["customer_id"]        . '",';
 	    $outp .= '"opponent_id":"'   . $rs["opponent_id"]        . '",';

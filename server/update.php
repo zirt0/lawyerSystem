@@ -128,6 +128,28 @@ if($subject == "test"){
 				//$outp = $sql;
 }
 
+if($subject == "update_case"){
+
+	$sql = "UPDATE cases 
+			SET cases.casename = '" . $args->casename . "',
+				cases.comment = '" . $args->comment . "',
+				cases.case_type = '" . $args->case_type . "',
+				cases.process = '" . $args->process . "',
+				cases.confidential = '" . $args->confidential . "',
+				cases.toevoeging = '" . $args->toevoeging . "',
+				cases.office_charge = '" . $args->office_charge . "',
+				cases.btw = '" . $args->btw . "'
+			WHERE id='" . $args->case_id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				$outp = $sql;
+}
+
 
 $conn->close();
 

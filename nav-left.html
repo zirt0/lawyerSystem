@@ -29,7 +29,7 @@
                                  <li>
                                     <a class="tooltip-tip" href="#/declarations" title="zaken">
                                         <i class="fontello-wallet"></i>
-                                        <span>Declaration</span>
+                                        <span>Declaraties</span>
                                     </a>
                                 </li>
 
@@ -47,10 +47,10 @@
                                     </a>
                                 </li>
 
-                                <li>
+                                <li ng-if='userDetail.userRole === "admin"'>
                                     <a class="tooltip-tip" href="#/users" title="zaken">
                                         <i class="fa fa-users"></i>
-                                        <span>Users</span>
+                                        <span>Gebruikers</span>
                                     </a>
                                 </li>
 
@@ -59,7 +59,7 @@
                                 <li>
                                     <a class="tooltip-tip" href="#/settings" title="Extra">
                                         <i class="fontello-params"></i>
-                                        <span>Settings</span>
+                                        <span>Instellingen</span>
                                     </a>
                                     <!-- <ul>
                                         <li>

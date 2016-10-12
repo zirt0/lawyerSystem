@@ -8,11 +8,14 @@
   <thead></thead>
   <tbody>
     <tr>
-    <td at-title="Dossier">
-    	<i ng-if="filteredList[$index].confidential === '1'" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
-      <a href="#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}} </a> 
+      <td at-title="Dossier">
+      	<i ng-if="filteredList[$index].confidential === '1'" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
+        <a href="#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}} </a> 
 
-    </td>
+      </td>
+      <td at-title="Dossiernummer">
+        <a href="#/customers/{{filteredList[$index].customer_id}}"> {{filteredList[$index].case_id_alias}}</a>  
+      </td>
       <td at-title="Client">
         <a href="#/customers/{{filteredList[$index].customer_id}}">{{filteredList[$index].fname}} {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
 

@@ -1,4 +1,4 @@
-app.controller('caseCtrl',function($scope, $rootScope, $http, $base64){
+app.controller('caseCtrl',function($scope, $rootScope, $filter, $http, $base64){
 	$rootScope.pageData.header = "Dossiers";
 	$rootScope.pageData.subtitle = "Overzicht";
 	$rootScope.pageData.breadcrumps = ["dossiers"];
@@ -19,6 +19,7 @@ app.controller('caseCtrl',function($scope, $rootScope, $http, $base64){
 		console.log($scope.filteredList);
 
 		$scope.updateFilteredList = function() {
+			console.log("changes");
 		    $scope.filteredList = $filter("filter")($scope.people, $scope.query);
 		  };
 		$scope.config = {

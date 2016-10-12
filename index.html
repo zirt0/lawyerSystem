@@ -137,7 +137,7 @@
                                  <li>
                                     <a class="tooltip-tip" href="#/declarations" title="zaken">
                                         <i class="fontello-wallet"></i>
-                                        <span>Declaration</span>
+                                        <span>Declaraties</span>
                                     </a>
                                 </li>
 
@@ -151,7 +151,7 @@
                                 <li>
                                     <a class="tooltip-tip" href="#/users" title="zaken">
                                         <i class="fa fa-users"></i>
-                                        <span>Users</span>
+                                        <span>Gebruikers</span>
                                     </a>
                                 </li>
 
@@ -160,7 +160,7 @@
                                 <li>
                                     <a class="tooltip-tip" href="#/settings" title="Extra">
                                         <i class="fontello-params"></i>
-                                        <span>Settings</span>
+                                        <span>Instellingen</span>
                                     </a>
                                 </li>
                             </ul>
@@ -227,7 +227,7 @@
 
                                         <div class="large-12 columns">
                                             <div class="dark"> <!-- <button ng-click="getNotification()">Test</button> --></div>
-                                            <input class="input-top" type="text" placeholder="search" ng-model="searchboxTop">
+                                            <input class="input-top" type="text" placeholder="Klanten zoeken" ng-model="searchboxTop">
                                             
                                             <!-- Announcement -->   
 
@@ -242,7 +242,7 @@
 
                                                             <div ng-repeat="x in searchPeople | filter:searchboxTop ">
                                                                 <i class="icon-user"></i>
-                                                                <a href="/#/customers/{{x.id}}" ng-click="searchboxTop = ''">
+                                                                <a href="#/customers/{{x.id}}" ng-click="searchboxTop = ''">
                                                                     <h3>{{x.fname}} {{x.lname}} <span class="text-green fontello-record"></span></h3>
                                                                     <p>{{x.company}}</p>
                                                                 </a>
@@ -251,7 +251,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="active right">
-                                                    <a href="/#/customers">
+                                                    <a href="#/customers">
                                                         <div class="label bg-white">Alle Clienten</div>
                                                     </a>
                                                 </li>
@@ -270,14 +270,14 @@
                             <ul id="drop" class="tiny f-dropdown dropdown-nest" data-dropdown-content tabindex="-1" style="z-index: -1;">
                          
                             <li>
-                                            <a href="/#/profile">
+                                            <a href="#/profile">
                                                 <i class="icon-user"></i>
                                                 <h4>Profiel<span class="text-aqua fontello-record" ></span></h4>
                                             </a>
                                         </li>
                                         <li>
                                             
-                                            <a href="/#/account">
+                                            <a href="#/account">
                                             <i class="icon-folder-open"></i>
                                                 <h4>Account<span class="text-blue fontello-record" ></span></h4>
                                             </a>

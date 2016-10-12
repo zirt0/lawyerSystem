@@ -10,6 +10,9 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	$scope.caseDetail = {};
 	$scope.caseDetail.caseId = $routeParams.id;
 
+	$scope.case = {};
+
+
 	console.log("case id " + $scope.caseDetail.caseId);
 
 	//get customerinfo
@@ -47,6 +50,12 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 
 	$scope.saveCase = function(){
 		//save case
+		$http.post("server/update.php",{'subject': "update_case", 'args': $scope.case
+		}).success(function (response) {
+			//$scope.case = response;
+			console.log(response);
+			console.log("ademmm");
+		});	
 		console.log("savecaseee");
 	};
 
