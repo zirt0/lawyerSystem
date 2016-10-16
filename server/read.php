@@ -125,6 +125,10 @@ if($subject == "cases"){
 				$sql .= " WHERE cases.user_id = " . $args->user_id;
 			}
 
+			if (!$args->user_id){
+				$sql .= " ORDER BY cases.case_id_alias DESC";
+			}
+
 
 	$result = $conn->query($sql);
 
