@@ -152,7 +152,8 @@ if($subject == "casedetail"){
 	$sql = "SELECT *, cases.id as case_id, 
 	customers.company, customers.fname, customers.lname FROM cases
 	LEFT JOIN customers ON customers.id = cases.customer_id 
-	LEFT JOIN opponents ON opponents.id = cases.opponent_id 
+	LEFT JOIN opponents ON opponents.id = cases.opponent_id
+	LEFT JOIN opponent_lawyer ON opponents.opp_lawyer_id = opponent_lawyer.id 
 	WHERE cases.id = " . $id;
 	$result = $conn->query($sql);
 
@@ -179,7 +180,9 @@ if($subject == "casedetail"){
 	    $outp .= '"fname":"'   . $rs["fname"]        . '",';
 	    $outp .= '"lname":"'   . $rs["lname"]        . '",';
 	    $outp .= '"tel":"'   . $rs["tel"]        . '",';
+	    $outp .= '"alt_tel":"'   . $rs["alt_tel"]        . '",';
 	    $outp .= '"email":"'   . $rs["email"]        . '",';
+	    $outp .= '"alt_email":"'   . $rs["alt_email"]        . '",';
 	    $outp .= '"address":"'   . $rs["address"]        . '",';
 	    $outp .= '"zipcode":"'   . $rs["zipcode"]        . '",';
 	    $outp .= '"city":"'   . $rs["city"]        . '",';
@@ -187,7 +190,17 @@ if($subject == "casedetail"){
 	    $outp .= '"banknr":"'   . $rs["banknr"]        . '",';
 	    $outp .= '"btwnr":"'. $rs["btwnr"]    . '",'; 
 
-	    $outp .= '"opp_lawyer":"'   . $rs["opp_lawyer"]        . '",';
+	    $outp .= '"opp_lawyer_id":"'   . $rs["opp_lawyer_id"]. '",';
+	    $outp .= '"lawyer_company":"'   . $rs["lawyer_company"]. '",';
+	    $outp .= '"lawyer_fname":"'   . $rs["lawyer_fname"]. '",';
+	    $outp .= '"lawyer_lname":"'   . $rs["lawyer_lname"]. '",';
+	    $outp .= '"lawyer_tel":"'   . $rs["lawyer_tel"]. '",';
+	    $outp .= '"lawyer_email":"'   . $rs["lawyer_email"]. '",';
+	    $outp .= '"lawyer_addres":"'   . $rs["lawyer_addres"]. '",';
+	    $outp .= '"lawyer_zipcode":"'   . $rs["lawyer_zipcode"]. '",';
+	    $outp .= '"lawyer_city":"'   . $rs["lawyer_city"] . '",';
+
+	    
 	    $outp .= '"opp_company":"'   . $rs["opp_company"]        . '",';
 	    $outp .= '"opp_fname":"'   . $rs["opp_fname"]        . '",';
 	    $outp .= '"opp_lname":"'   . $rs["opp_lname"]        . '",';
@@ -549,16 +562,16 @@ if($subject == "notes"){
 			INNER JOIN users t2 ON notes.to_user_id = t2.id
 			INNER JOIN cases ON notes.case_id = cases.id";
 
-	if ($args->user_id){
-		$sql .= " WHERE notes.to_user_id ='" . $args->user_id ."'";
+	if ($args->user_id && !$args->readed){
+		$sql .= " WHERE notes.to_user_id ='" . $args->user_id ."'  ORDER BY notes.id DESC";
 	}
 
 	if ($args->case_id){
 		$sql .= " WHERE notes.case_id ='" . $args->case_id ."'   ORDER BY notes.id DESC";
 	}
 
-	if ($args->readed){
-		$sql .= " AND notes.read = 0";
+	if ($args->user_id && $args->readed){
+		$sql .= " WHERE notes.to_user_id ='" . $args->user_id ."' AND notes.read = 0 ORDER BY notes.id DESC";
 	}
 
 

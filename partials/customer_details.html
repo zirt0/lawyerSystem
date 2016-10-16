@@ -25,49 +25,66 @@
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Bedrijf:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.company}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.company}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="customerDetails.company"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Voornaam:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.fname}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.fname}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.fname"></div>
                         </div>
                         <div class="large-12 columns">
-                            <div class="large-6 columns"><strong>Bedrijf:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.lname}}</div>
+                            <div class="large-6 columns"><strong>Achternaam:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.lname}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.lname"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Tel:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.tel}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.tel}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.tel"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Tel </strong>(alternatief): </div>
-                             <div class="large-6 columns">{{customerDetails.alt_tel}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.alt_tel}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.alt_tel"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Email:</strong> </div>
-                             <div class="large-6 columns"><a href="mailto:{{customerDetails.email}}">{{customerDetails.email}}</a></div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails"><a href="mailto:{{customerDetails.email}}">{{customerDetails.email}}</a></div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.email"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Email(optioneel):</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails"><a href="mailto:{{customerDetails.alt_email}}">{{customerDetails.alt_email}}</a></div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.alt_email"></div>
                         </div>
                         <div class="large-12 columns">
                             <br>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Branche:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.branche}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.branche}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.branche"></div>
                         </div>
                         <div class="large-12 columns">
                             <br>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>BTW:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.btwnr}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.btwnr}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.btwnr"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>KvK:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.kvk}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.kvk}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="customerDetails.kvk"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Banknr:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.banknr}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.banknr}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.banknr"></div>
                         </div>
                          <div class="large-12 columns">
                             <br>
@@ -75,11 +92,15 @@
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Straat + huisnr:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.address}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.address}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.address"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Postcode:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.zipcode}} {{customerDetails.city}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.zipcode}} {{customerDetails.city}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="customerDetails.zipcode">
+                             <input type="text" ng-model="customerDetails.city"></div>
                         </div>
                         <div class="large-12 columns">
                             <br>
@@ -87,11 +108,15 @@
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Straat + huisnr:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.cor_address}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.cor_address}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.cor_address"></div>
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Postcode:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.cor_zipcode}} {{customerDetails.cor_city}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.cor_zipcode}} {{customerDetails.cor_city}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="customerDetails.cor_zipcode">
+                             <input type="text" ng-model="customerDetails.cor_city"></div>
                         </div>
                         <div class="large-12 columns">
                             <br>
@@ -99,7 +124,22 @@
                         </div>
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Opmerking:</strong> </div>
-                             <div class="large-6 columns">{{customerDetails.comment}}</div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.comment}}
+                             </div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                                <textarea ng-model='customerDetails.comment'></textarea>
+                             </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="editCustomerDetails"  ng-click="editCustomer()" class="tiny radius button bg-yellow right">Bewerk</a>
+                            </span>
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="!editCustomerDetails"  ng-click="cancelCustomer()" class="tiny radius button bg-red right">Cancel</a>
+                            </span>
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="!editCustomerDetails"  ng-click="saveCustomer()" class="tiny radius button bg-green right">Opslaan</a>
+                            </span>
                         </div>
                     </div>
                 </div>

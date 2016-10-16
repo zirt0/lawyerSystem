@@ -16,10 +16,34 @@ $notes = $request->notes;
 
 if($subject == "createCase"){
 
+	$opp_id = "";
+
+	if($args->opponentcheck){
+		
+		$opponent = "INSERT INTO opponents (opp_company, opp_fname, opp_lname, opp_tel, opp_email, opp_address, opp_zipcode, opp_city, opp_comment)
+		VALUES ('".$args->opp_company."',
+				'".$args->opp_fname."',
+				'".$args->opp_lname."',
+				'".$args->opp_tel."',
+				'".$args->opp_email."',
+				'".$args->opp_address."',
+				'".$args->opp_zipcode."',
+				'".$args->opp_city."',
+				'".$args->opp_comment."')
+				";
+		if ($conn->query($opponent) === TRUE) {
+		    $opp_id = $conn->insert_id;
+
+		} else {
+		    $result = "Error: " . $sql . "<br>" . $conn->error;
+		    //$result = "false";
+		}
+	}
+
 	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, belang, prognose, rolnaam, user_id, case_id_alias)
 			VALUES ( '" . $args->case_name . "', 
 					'" . $args->customer_id . "', 
-					'" . $args->opponent_id . "', 
+					'" . $opp_id . "', 
 					'" . $args->case_type . "', 
 					'" . $args->comment . "', 
 					'" . $args->status . "', 
@@ -42,7 +66,8 @@ if($subject == "createCase"){
 				    //$result = "false";
 				}
 				$outp = $result;
-				$outp = $sql;
+				//$outp = $sql;
+				//$outp =$opponent;
 }
 
 if($subject == "createCustomer"){

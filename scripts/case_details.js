@@ -55,17 +55,24 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 			//$scope.case = response;
 			console.log(response);
 			console.log("ademmm");
+			$rootScope.succesModalBox(true,'Uw mutaties zijn succesvol opgeslagen')
+			$scope.editCaseDetails = true;
 		});	
 		console.log("savecaseee");
 	};
 
 	$scope.closeCase = function(){
 		console.log("closecase");
-		$http.post("server/update.php",{'subject': "close_case", 'id': $scope.caseDetail.caseId
-		}).success(function (response) {
-			$scope.case = response;
-			console.log($scope.case);
-		});	
+
+		var r = confirm("Weet u zeker dat u wilt verwijderen?");
+	    if (r == true) {
+	    	$http.post("server/update.php",{'subject': "close_case", 'id': $scope.caseDetail.caseId
+			}).success(function (response) {
+				$scope.case = response;
+				console.log($scope.case);
+			});	
+	    }
+		
 
 		$rootScope.succesModalBox(true,'Dossier is succesvol gesloten', '/cases')
 

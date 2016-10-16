@@ -106,6 +106,31 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 		});
 		
 	}
+
+	$scope.editCustomerDetails = true;
+
+	$scope.editCustomer = function(){
+
+		$scope.editCustomerDetails = false;
+	}
+
+	$scope.cancelCustomer = function(){
+
+		$scope.editCustomerDetails = true;
+	}
+	$scope.saveCustomer = function(){
+
+		$http.post("server/update.php",{'subject': "update_customer", 'args': $scope.customerDetails
+		}).success(function (response) {
+			//$scope.case = response;
+			console.log(response);
+			console.log("Case is saved");
+			$rootScope.succesModalBox(true,'Uw mutaties zijn succesvol opgeslagen')
+		});	
+		console.log("savecaseee");
+
+		$scope.editCustomerDetails = true;
+	}
 	
 	///case
 }]);

@@ -81,12 +81,12 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
         
     });
 
-    $scope.case.opponentId = 1;
+    //$scope.case.opponentId = 1;
 
     $scope.createCase = function(){
 		console.log("create case is pressed");
-
 		console.log($scope.case.dossiernummer)
+		console.log($scope.case);
 
 		$scope.submitted = true;
 		console.log($scope.case);

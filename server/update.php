@@ -130,16 +130,61 @@ if($subject == "test"){
 
 if($subject == "update_case"){
 
-	$sql = "UPDATE cases 
-			SET cases.casename = '" . $args->casename . "',
-				cases.comment = '" . $args->comment . "',
-				cases.case_type = '" . $args->case_type . "',
-				cases.process = '" . $args->process . "',
-				cases.confidential = '" . $args->confidential . "',
-				cases.toevoeging = '" . $args->toevoeging . "',
-				cases.office_charge = '" . $args->office_charge . "',
-				cases.btw = '" . $args->btw . "'
-			WHERE id='" . $args->case_id . "'";
+	$sql = "UPDATE cases a 
+			INNER JOIN opponents b ON (a.opponent_id = b.id)
+			SET a.casename = '" . $args->casename . "',
+				a.case_id_alias = '" . $args->case_id_alias . "',
+				a.comment = '" . $args->comment . "',
+				a.case_type = '" . $args->case_type . "',
+				a.process = '" . $args->process . "',
+				a.confidential = '" . $args->confidential . "',
+				a.toevoeging = '" . $args->toevoeging . "',
+				a.office_charge = '" . $args->office_charge . "',
+				a.btw = '" . $args->btw . "',
+
+				b.opp_company = '" . $args->opp_company . "',
+				b.opp_fname = '" . $args->opp_fname . "',
+				b.opp_lname = '" . $args->opp_lname . "',
+				b.opp_tel = '" . $args->opp_tel . "',
+				b.opp_email = '" . $args->opp_email . "',
+				b.opp_address = '" . $args->opp_address . "',
+				b.opp_zipcode = '" . $args->opp_zipcode . "',
+				b.opp_city = '" . $args->opp_city . "',
+				b.opp_comment = '" . $args->opp_comment . "'
+
+			WHERE a.id='" . $args->case_id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				//$outp = $sql;
+}
+
+if($subject == "update_customer"){
+
+	$sql = "UPDATE customers 
+			SET customers.company = '" . $args->company . "',
+				customers.fname = '" . $args->fname . "',
+				customers.lname = '" . $args->lname . "',
+				customers.tel = '" . $args->tel . "',
+				customers.alt_tel = '" . $args->alt_tel . "',
+				customers.email = '" . $args->email . "',
+				customers.alt_email = '" . $args->alt_email . "',
+				customers.branche = '" . $args->branche . "',
+				customers.btwnr = '" . $args->btwnr . "',
+				customers.kvk = '" . $args->kvk . "',
+				customers.banknr = '" . $args->banknr . "',
+				customers.address = '" . $args->address . "',
+				customers.zipcode = '" . $args->zipcode . "',
+				customers.city = '" . $args->city . "',
+				customers.cor_address = '" . $args->cor_address . "',
+				customers.cor_zipcode = '" . $args->cor_zipcode . "',
+				customers.cor_city = '" . $args->cor_city . "',
+				customers.comment = '" . $args->comment . "'
+				WHERE id='" . $args->id . "'";
 
 				if ($conn->query($sql) === TRUE) {
 				    $result = "New record created successfully";
