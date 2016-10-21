@@ -160,7 +160,7 @@ if($subject == "update_case"){
 				    $result = "Error: " . $sql . "<br>" . $conn->error;
 				}
 				$outp = $result;
-				//$outp = $sql;
+				$outp = $sql;
 }
 
 if($subject == "update_customer"){
