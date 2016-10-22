@@ -131,7 +131,7 @@ if($subject == "test"){
 if($subject == "update_case"){
 
 	$sql = "UPDATE cases a 
-			INNER JOIN opponents b ON (a.opponent_id = b.id)
+			LEFT JOIN opponents b ON (a.opponent_id = b.id)
 			SET a.casename = '" . $args->casename . "',
 				a.case_id_alias = '" . $args->case_id_alias . "',
 				a.comment = '" . $args->comment . "',
@@ -160,7 +160,7 @@ if($subject == "update_case"){
 				    $result = "Error: " . $sql . "<br>" . $conn->error;
 				}
 				$outp = $result;
-				$outp = $sql;
+				//$outp = $sql;
 }
 
 if($subject == "update_customer"){
