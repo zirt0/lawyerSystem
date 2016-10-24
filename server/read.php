@@ -173,6 +173,7 @@ if($subject == "casedetail"){
 	    $outp .= '"toevoeging":"'   . $rs["toevoeging"]        . '",';
 	    $outp .= '"office_charge":"'   . $rs["office_charge"]        . '",';
 	    $outp .= '"btw":"'   . $rs["btw"]        . '",';
+	    $outp .= '"adviesdossier":"'   . $rs["adviesdossier"]        . '",';
 	    $outp .= '"process":"'   . $rs["process"]        . '",';
 	    $outp .= '"confidential":"'   . $rs["confidential"]        . '",';
 	    $outp .= '"belang":"'   . $rs["belang"]        . '",';
@@ -295,8 +296,8 @@ if($subject == "declarations"){
 		$sql .= " WHERE case_id ='" . $decl->case_id ."' AND declarations.invoiced = 0 ORDER BY declarations.`id` DESC";
 	}
 
-	if ($decl->get_from_date){
-		$sql .= " WHERE declarations.case_id ='". $decl->case_id ."' AND MONTH(declarations.declaration_date) = '" . $decl->from_month . "' AND YEAR(declarations.declaration_date) = '" . $decl->from_year . "' AND declarations.invoiced = 0 ORDER BY declarations.id DESC";
+	if ($decl->start_date){
+		$sql .= " WHERE declarations.case_id ='". $decl->case_id ."' AND declarations.declaration_date BETWEEN '". $decl->start_date ."' AND '". $decl->end_date ." 23:59:00' AND declarations.invoiced = 0 ORDER BY declarations.id DESC";
 	}
 
 	if ($decl->invoiced){
@@ -336,7 +337,7 @@ if($subject == "declarations"){
 	   	$outp .= '"paid":"'  . $rs["paid"] . '",';
 	   	$outp .= '"invoiced":"'  . $rs["invoiced"] . '",';
 	   	$outp .= '"total_amount":"'  . $rs["total_amount"] . '",';
-	   	$outp .= '"declaration_date":"'  . $rs["declaration_date"] . '",';
+	   	$outp .= '"declaration_date":"'  . date("Y-m-d", strtotime($rs["declaration_date"])) . '",';
 	   	$outp .= '"comment":"'  . $rs["comment"] . '",';
 
 		$outp .= '"fname":"'  . $rs["fname"] . '",';	   	

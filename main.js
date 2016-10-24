@@ -1,4 +1,4 @@
-	var app = angular.module('APP',['ngRoute', 'ngCookies', 'ngSanitize', 'angular-table','ngAnimate', 'angular-md5', 'ab-base64', 'base64','ngFileSaver']);
+	var app = angular.module('APP',['ngRoute', 'ngCookies', 'ngSanitize', 'angular-table','ngAnimate', 'angular-md5', 'ab-base64', 'base64','ngFileSaver', 'datePicker', 'angularMoment']);
 	console.log("sadasdadssa");
 	app.filter("sanitize", ['$sce', function($sce) {
 		return function(htmlCode){
@@ -166,11 +166,11 @@
 			args.user_id = $rootScope.userDetail.id;
 			args.readed = true;
 
-			console.log(args);		
+			//console.log(args);		
 			$http.post("server/read.php",{'subject': "notes", "args": args })
 			.success(function (response) {
-				console.log("notification return");
-				console.log(response);
+				//console.log("notification return");
+				//console.log(response);
 				$rootScope.notification = response.records;
 				//console.log($rootScope.notification);
 			});

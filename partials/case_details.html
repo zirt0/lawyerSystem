@@ -176,19 +176,36 @@
                             <div class="large-6 columns">
                             <label for="btw"><strong>BTW:</strong></label> </div>
                              
-                             <div ng-show="!editCaseDetails" class="large-6 columns">
+                            <div ng-show="!editCaseDetails" class="large-6 columns">
 
-                               <div class="switch round">
-                                  <input id="btw" type="checkbox" ng-model="case.btw">
-                                  <label for="btw">
+                                <div class="switch round">
+                                    <input id="btw" type="checkbox" ng-model="case.btw">
+                                    <label for="btw">
                                       <span class="switch-on">Ja</span>
                                       <span class="switch-off">Nee</span>
-                                  </label>
+                                    </label>
                                 </div>
-                             </div>
-                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.btw)">
-                             </div>
                             </div>
+                            <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.btw)">
+                            </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="adviesdossier"><strong>Adviesdossier:</strong></label> </div>
+                             
+                            <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                                <div class="switch round">
+                                    <input id="adviesdossier" type="checkbox" ng-model="case.adviesdossier">
+                                    <label for="adviesdossier">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.adviesdossier)">
+                            </div>
+                        </div>
                         
                        
                         </div>
@@ -658,6 +675,7 @@
                                     <td>{{x.declaration_date}}</td>
 
                                 </tr>
+                                <tr ng-if='declaration_summary.length === 0'><td colspan='4' class='text-center'>Geen declaraties </td></tr>
                             </table>
                             <a href="#/declarations/{{caseDetail.caseId}}" class="button expand bg-green radius">Totale overzicht</a>
                             </div>

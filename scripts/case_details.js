@@ -29,7 +29,8 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 		$scope.case.office_charge = boleonType($scope.case.office_charge);
 		$scope.case.btw = boleonType($scope.case.btw);
 		$scope.case.opponentcheck = checkOpponent($scope.case.opponent_id);
-
+		$scope.case.adviesdossier = checkOpponent($scope.case.adviesdossier);
+		//adviesdossier
 		$rootScope.pageData.breadcrumps.push($scope.case.casename);
 	});
 

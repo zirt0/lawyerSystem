@@ -124,6 +124,10 @@ app.controller('settingsCtrl',function($scope, $rootScope, $http){
 			$scope.settings.case_number =  response;
 		});
 
+		// $scope.momentnu = moment();
+		 $scope.momentnu = moment();
+		 console.log($scope.momentnu);
+
 	// $http.post("server/read.php",{'subject': "get_options"})
 	// .success(function (response) {
 	// 	console.log(response);

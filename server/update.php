@@ -141,6 +141,7 @@ if($subject == "update_case"){
 				a.toevoeging = '" . $args->toevoeging . "',
 				a.office_charge = '" . $args->office_charge . "',
 				a.btw = '" . $args->btw . "',
+				a.adviesdossier = '" . $args->adviesdossier . "',
 
 				b.opp_company = '" . $args->opp_company . "',
 				b.opp_fname = '" . $args->opp_fname . "',

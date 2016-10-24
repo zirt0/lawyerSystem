@@ -13,39 +13,23 @@
    
     <div class="content" ng-class="{'active' : webTabs[0]}" id="panel1">
     <h2>Niet gedeclareerde uren</h2>
-    <div class="clearfix" style="display: none;">
+    <div class="clearfix">
       <div class="large-6 columns panel">
 
         <div class="small-text"><strong>Selecteer Periode</strong></div>
       
         <div class="large-4 columns">
-         
-          <select ng-model="args.from_month">
-            <option value="1">Januari</option>
-            <option value="2">Februari</option>
-            <option value="3">Maart</option>
-            <option value="4">April</option>
-            <option value="5">Mei</option>
-            <option value="6">Juni</option>
-            <option value="7">Juli</option>
-            <option value="8">Augustus</option>
-            <option value="9">September</option>
-            <option value="10">Oktober</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-
+        <label>Van</label>
+        <input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.start_date'>
+<!--         <pre>Selected date is: <em>{{start_date | date:'fullDate' }}</em></pre>
+        <pre>Selected date is: <em>{{end_date | date:'fullDate' }}</em></pre> -->
         </div>
 
         <div class="large-4 columns">
-
-          <select ng-model="args.from_year">
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-          </select>
+        <label>Tot</label>
+        <input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.end_date'>
 
         </div>
 

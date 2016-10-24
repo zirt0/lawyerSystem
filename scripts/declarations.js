@@ -48,6 +48,10 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	$scope.args.from_month = "" + $scope.args.from_month + "" ;
 	$scope.args.fileURLs = "lala";
 
+	$scope.start_date = moment().subtract(30, 'day');
+	$scope.end_date = moment();
+	//console.log($scope.args.start_date);
+	///$scope.parent = {start_date:'', end_date:'' };
 
 
 	$scope.invoiceInfo = {}
@@ -65,6 +69,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			console.log($scope.caseDetails)
 			$scope.invoiceInfo.customerInfo = $scope.caseDetails;
 			console.log($scope.invoiceInfo);
+			console.log($scope.caseDetails.adviesdossier);
 
 	});
 
@@ -75,6 +80,14 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 		$scope.args.get_from_date = 'true';
 		$scope.args.case_id = "" + $routeParams.id + "";;
+
+		$scope.args.start_date = $scope.start_date.format('YYYY-MM-DD');
+		$scope.args.end_date = $scope.end_date.format("YYYY-MM-DD");
+		//console.log($scope.end_date_decl.format('YYYY-MM-DD'));
+		console.log($scope.args.start_date);
+		console.log($scope.args.end_date);
+
+		//return false;
 
 		console.log($scope.args.get_from_date);
 		console.log($scope.args.from_year);
@@ -87,6 +100,8 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			
 			if(!$scope.declarationDetail.records[0]){
 				console.log("is leeg")
+				alert("Er is geen data beschikbaar");
+				//$scope.declarationDetail = {}
 				return false
 			}
 			//check aantal abonnementminuten
@@ -233,6 +248,16 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		$http.post("server/read.php",{'subject': "subscription_time", 'id': customer_id})
 		.success(function (response) {
 			console.log(response.records);
+
+			if(response.records.length === 0){
+				console.log("Geen abbonnement");
+				console.log(response.records);
+				$scope.userSubscription = false;
+			}else{
+				console.log("WEL abbonnement");
+				console.log(response.records);
+				$scope.userSubscription = true;
+			}
 			$scope.subscription_time = response.records;
 
 			$scope.subscription_minutes_left = 0;

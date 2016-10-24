@@ -83,26 +83,57 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 				
 			}
 
-			//subscription reduced amount
+			var amount = declarationDetail[x]['amount'];
+			var	hourrate = declarationDetail[x]['hourrate'];
+			var time = declarationDetail[x]['time']
 
-			//subscription time
-			// $scope.subscription_minutes_left_before = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+			//check if there is an abbo
+			if($scope.userSubscription === true){
 
-			// if($scope.subscription_minutes_left_before > 0){
-					
-			// 	$scope.subscription_minutes_left = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
-			// } 
+				console.log("Loop door declaraties met ABBO");
+				//subscription reduced amount
+				//subscription time
+				
+				///is het geen adviesdossier?
+				if ($scope.caseDetails.adviesdossier == '0') {
 
-			//count all amounts
-			$scope.honorarium += parseFloat($scope.declarationDetail[x]['amount']);
+					console.log("adviesdossier === 0")
+					//var amount = 
+					var	hourrate = 130;
+					var amount = parseFloat((hourrate / 60) * time);
+					console.log(amount)
+
+				
+				}else{
+
+					console.log("adviesdossier === 1");
+
+				}
+
+				$scope.subscription_minutes_left_before = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+				if($scope.subscription_minutes_left_before > 0){
+						
+					$scope.subscription_minutes_left = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+				} 
+
+
+			}else{ //als er geen abbo is normaal tarief
+
+				//count all amounts
+				
+
+			}
+
+			$scope.honorarium += parseFloat(amount);
 			$scope.minutes += parseFloat($scope.declarationDetail[x]['time']);
+
 
 			var declartion_row = 	[declarationDetail[x]['declaration_date'], 
 									declarationDetail[x]['declaration_name'], 
 									declarationDetail[x]['comment'], 
 									declarationDetail[x]['time'],
-									declarationDetail[x]['hourrate'], 
-									declarationDetail[x]['amount']]
+									hourrate + "", 
+									amount + ""]
 			console.log("it is looping END")
 			tableex.table.body.push(declartion_row);
 		}

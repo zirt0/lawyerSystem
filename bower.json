@@ -37,6 +37,8 @@
     "angular-file-saver": "^1.1.2",
     "angular-utf8-base64": "^0.0.5",
     "angular-datepicker": "^2.0.3",
-    "angular-cookie": "^4.1.0"
+    "angular-cookie": "^4.1.0",
+    "moment": "^2.15.1",
+    "angular-moment": "^1.0.0"
   }
 }

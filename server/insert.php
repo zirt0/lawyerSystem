@@ -40,7 +40,7 @@ if($subject == "createCase"){
 		}
 	}
 
-	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, belang, prognose, rolnaam, user_id, case_id_alias)
+	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, adviesdossier, belang, prognose, rolnaam, user_id, case_id_alias)
 			VALUES ( '" . $args->case_name . "', 
 					'" . $args->customer_id . "', 
 					'" . $opp_id . "', 
@@ -51,7 +51,8 @@ if($subject == "createCase"){
 					'" . $args->toevoeging . "', 
 					'" . $args->confidential . "', 
 					'" . $args->office_charge . "', 
-					'" . $args->btw . "', 
+					'" . $args->btw . "',
+					'" . $args->adviesdossier . "',  
 					'" . $args->belang . "', 
 					'" . $args->prognose . "', 
 					'" . $args->rolnaam . "',
