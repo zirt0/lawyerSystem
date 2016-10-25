@@ -49,12 +49,12 @@ app.controller('accountCtrl',function($scope, $rootScope, $http){
 
 		$scope.notes.splice(x,1)
 
-		// $http.post("server/update.php",{'subject': "mark_as_read", 'id': id})
-		// .success(function (response) {
-		// 	console.log(response);
-		// 	$rootScope.getNotification();
+		$http.post("server/update.php",{'subject': "mark_as_read", 'id': id})
+		.success(function (response) {
+			console.log(response);
+			$rootScope.getNotification();
 
-		// });
+		});
 
 	}
 

@@ -554,6 +554,16 @@
                                 </div>
                             </div>
                             <div class="large-12 columns">
+                                <div class="large-6 columns"><label for="prognose"><strong>Datum</strong></label> </div>
+                                 <div class="large-6 columns">
+                                    <input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.declaration_date'>
+                                </div>
+                            </div>
+
+                             
+
+                            <div class="large-12 columns">
                                 <div class="large-6 columns"><label for="betaald"><strong>Info</strong></label> </div>
                                  <div class="large-6 columns">
                                     <textarea ng-model="declaration.info" placeholder="Omschrijving werkzaamheden"></textarea>

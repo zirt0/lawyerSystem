@@ -106,13 +106,14 @@ if($subject == "createCustomer"){
 
 if($subject == "declaration_add"){
 
-	$sql = "INSERT INTO declarations (case_id, user_id, type_declaration, amount, time, comment)
+	$sql = "INSERT INTO declarations (case_id, user_id, type_declaration, amount, time, comment, declaration_date)
 			VALUES ( '" . $args->case_id . "', 
 					'" . $args->user_id . "',
 					'" . $args->choice . "', 
 					'" . $args->amount . "', 
-					'" . $args->time . "', 
-					'" . $args->info . "')";
+					'" . $args->time . "',
+					'" . $args->info . "', 
+					'" . $args->declaration_date . "')";
 
 				if ($conn->query($sql) === TRUE) {
 				    $result = "New record created successfully";

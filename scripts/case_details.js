@@ -143,7 +143,13 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 
     });
 
+	$scope.declaration_date = moment();
+
     $scope.declaration_save = function(){
+
+    	$scope.declaration.declaration_date = $scope.declaration_date.format('YYYY-MM-DD HH:mm:ss');
+		console.log($scope.args);
+		//return false;
 
     	console.log($scope.declaration.choice)
     	if(!$scope.declaration.choice || !$scope.declaration.time){
@@ -163,6 +169,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 		'subject': "declaration_add", 'args': $scope.declaration
 		}).success(function (response) {
 			//$scope.case = response;
+			console.log(response);
 
 			$rootScope.succesModalBox(true, "Declaratie is succesvol opgeslagen");
 
@@ -282,7 +289,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 
 	$scope.saveNote = function(){
 
-		$scope.notes.from_user_id = "1";	
+		//$scope.notes.from_user_id = "1";	
 
 		console.log($scope.notes);
 		if(!$scope.notes.to_user_id){
