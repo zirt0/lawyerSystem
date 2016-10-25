@@ -100,21 +100,33 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 					console.log("adviesdossier === 0")
 					//var amount = 
 					var	hourrate = 130;
-					var amount = parseFloat((hourrate / 60) * time);
+					var amount = parseFloat((hourrate / 60) * time).toFixed(2);
 					console.log(amount)
 
 				
 				}else{
-
+					//geen adviesdossier
 					console.log("adviesdossier === 1");
-
-				}
-
-				$scope.subscription_minutes_left_before = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
-				if($scope.subscription_minutes_left_before > 0){
+					
+					$scope.subscription_minutes_left_before = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+					console.log($scope.subscription_minutes_left);
+					if($scope.subscription_minutes_left_before >= 0){
+						///when you have enough minutes to use
+						$scope.subscription_minutes_left = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+						var	hourrate = "ABO";
+						var amount = 0;
+						console.log($scope.subscription_minutes_left);
 						
-					$scope.subscription_minutes_left = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
-				} 
+					
+					}else{
+						//when you dont have enough minutes to use
+						var	hourrate = 130;
+						var amount = ((hourrate / 60) * time).toFixed(2);
+						console.log(amount)
+
+					}
+				
+				}
 
 
 			}else{ //als er geen abbo is normaal tarief
@@ -149,10 +161,12 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 		$scope.honorarium_totaal = $scope.honorarium;
 		$scope.honorarium_discount = $scope.honorarium - $scope.invoiceInfo.discountAmount;
 		//$scope.honorarium = $scope.honorarium - subscription_minutes_check($scope.minutes);
-		console.log($scope.caseDetails['btw']);
+		
 		if($scope.caseDetails['office_charge'] == "1"){
+
 			$scope.office_charge = $scope.honorarium_discount * 0.06;
 		}else{
+			
 			$scope.office_charge = 0;
 		}
 		
