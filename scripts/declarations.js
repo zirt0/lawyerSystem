@@ -22,7 +22,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	$scope.declarationDetail = {};
 	$scope.declarationDetail.case_id = "" + $routeParams.id + "";
 	$scope.declarationChange = {};
-	$scope.declarationChange.modal = true;
+	//$scope.declarationChange.modal = true;
 	$scope.caseDetails = {};
 	console.log($scope.declarationDetail);
 	
