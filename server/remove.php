@@ -46,6 +46,23 @@ if($subject == "remove_user"){
 				//$outp = $sql;
 }
 
+if($subject == "remove_subscription"){
+
+	$sql = "DELETE FROM subscription
+			WHERE id='" . $id . "';";
+
+				if ($conn->query($sql) === TRUE) {
+				    
+				    $result = "Removed";
+				    
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				    //$result = "false";
+				}
+				$outp = $result;
+				//$outp = $sql;
+}
+
 
 
 $conn->close();

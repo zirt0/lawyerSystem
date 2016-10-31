@@ -22,17 +22,17 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 		// totaltime that is used to invoice
 
 		//precheck if there are minutes are left
-	 	var calculateTime = $scope.subscription_minutes_left - $scope.totaltime;
+	 	var calculateTime = $scope.usersubscription.minutes_left - $scope.totaltime;
 
 		
-	 	if($scope.subscription_minutes_left == 0){
+	 	if($scope.usersubscription.minutes_left == 0){
 
 	 		return "Geen reductie";
 
 	 	}else{
 
 	 		
-	 		if($scope.subscription_minutes_left >= time){ //if there are more subscription minutes that total amount on the invoice
+	 		if($scope.usersubscription.minutes_left >= time){ //if there are more subscription minutes that total amount on the invoice
 
 	 			var reduction_amount = (time / 60) * 190;
 
@@ -41,7 +41,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 	 		
 	 		}else{ //if there are less minutes on subscription minutes than total amount on the invoice
 	 			
-	 			var reduction_amount = ($scope.subscription_minutes_left / 60) * 190;
+	 			var reduction_amount = ($scope.usersubscription.minutes_left / 60) * 190;
 
 	 			return reduction_amount.toFixed(2);
 
@@ -88,7 +88,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 			var time = declarationDetail[x]['time']
 
 			//check if there is an abbo
-			if($scope.userSubscription === true){
+			if($scope.usersubscription.abo === true){
 
 				console.log("Loop door declaraties met ABBO");
 				//subscription reduced amount
@@ -105,19 +105,35 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 
 				
 				}else{
-					//geen adviesdossier
+					// adviesdossier
 					console.log("adviesdossier === 1");
 					
-					$scope.subscription_minutes_left_before = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
-					console.log($scope.subscription_minutes_left);
-					if($scope.subscription_minutes_left_before >= 0){
-						///when you have enough minutes to use
-						$scope.subscription_minutes_left = $scope.subscription_minutes_left - parseFloat($scope.declarationDetail[x]['time']);
-						var	hourrate = "ABO";
-						var amount = 0;
-						console.log($scope.subscription_minutes_left);
+					$scope.usersubscription.minutes_left_before = $scope.usersubscription.minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+					console.log($scope.usersubscription.minutes_left);
+					if($scope.usersubscription.minutes_left_before >= 0){
 						
-					
+						console.log($scope.declarationDetail[x]['declaration_date']);
+						console.log($scope.usersubscription.start_date);
+						console.log($scope.usersubscription.end_date);
+
+						var check_date = new Date($scope.declarationDetail[x]['declaration_date'])
+						var from_date = new Date($scope.usersubscription.start_date);
+						var	to_date = new Date($scope.usersubscription.end_date);
+
+						//valt de declaratie binnen abonnementtijd
+						if(check_date >= from_date && check_date <= to_date){
+
+							console.log("VALT BINNEN ABONEMENT TIJD");
+							///when you have enough minutes to use
+							$scope.usersubscription.minutes_left = $scope.usersubscription.minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+							var	hourrate = "ABO";
+							var amount = 0;
+							console.log($scope.usersubscription.minutes_left);
+
+						}else{
+
+							console.log("VALT BUITEN ADVIESDOSSIER")
+						}
 					}else{
 						//when you dont have enough minutes to use
 						var	hourrate = 130;
@@ -132,6 +148,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 			}else{ //als er geen abbo is normaal tarief
 
 				//count all amounts
+				console.log("Geen abo")
 				
 
 			}

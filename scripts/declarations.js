@@ -3,30 +3,14 @@ app.controller('declarationsCtrl',function($scope, $rootScope, $http){
 	$rootScope.pageData.subtitle = "Overzicht";
 	$rootScope.pageData.breadcrumps = ["Declaraties"];
 	
-	$scope.declarations = {};
-	$scope.declarations.groupBy = 1;
-	$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.declarations})
+	$scope.args = {};
+	$scope.args.groupBy = 1;
+	$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.args})
 	.success(function (response) {
-		$scope.declarations = response;
+		$scope.declarations = response.records;
 
-		//make an array from object
-		$scope.declarations = $.map($scope.declarations, function(value, index) {
-		    return [value];
-		});
+		console.log($scope.declarations);
 
-		$scope.declarations = $scope.declarations[0]
-
-		$scope.filteredList = $scope.declarations;
-		console.log($scope.filteredList);
-
-		$scope.updateFilteredList = function() {
-		    $scope.filteredList = $filter("filter")($scope.declarations, $scope.query);
-		  };
-		$scope.config = {
-		    itemsPerPlname: 1,
-		    maxPlnames: 2,
-		    fillLastPlname: "yes"
-		};
 	});
 
 })
@@ -37,6 +21,8 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	createPDFfunction($scope,$rootScope, base64, $window, $http, $filter);
 	$scope.declarationDetail = {};
 	$scope.declarationDetail.case_id = "" + $routeParams.id + "";
+	$scope.declarationChange = {};
+	$scope.declarationChange.modal = true;
 	$scope.caseDetails = {};
 	console.log($scope.declarationDetail);
 	
@@ -96,40 +82,40 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.args})
 		.success(function (response) {
 			console.log(response);
-			$scope.declarationDetail = response;
+			$scope.declarationDetail = response.records;
 			
-			if(!$scope.declarationDetail.records[0]){
+			if(!$scope.declarationDetail[0]){
 				console.log("is leeg")
 				alert("Er is geen data beschikbaar");
 				//$scope.declarationDetail = {}
 				return false
 			}
 			//check aantal abonnementminuten
-			console.log($scope.declarationDetail.records[0]);
-			subscription_minutes($scope.declarationDetail.records[0]['customer_id']);
+			console.log($scope.declarationDetail[0]);
+			subscription_minutes($scope.declarationDetail[0]['customer_id']);
 
-			//make an array from object
-			$scope.declarationDetail = $.map($scope.declarationDetail, function(value, index) {
-			    return [value];
-			});
+			// //make an array from object
+			// $scope.declarationDetail = $.map($scope.declarationDetail, function(value, index) {
+			//     return [value];
+			// });
 
-			$scope.declarationDetail = $scope.declarationDetail[0]
+			// $scope.declarationDetail = $scope.declarationDetail[0]
 
-			$scope.filteredList = $scope.declarationDetail;
-			console.log($scope.filteredList);
+			// $scope.filteredList = $scope.declarationDetail;
+			// console.log($scope.filteredList);
 
-			$scope.updateFilteredList = function() {
-			    $scope.filteredList = $filter("filter")($scope.declarationDetail, $scope.query);
-			  };
+			// $scope.updateFilteredList = function() {
+			//     $scope.filteredList = $filter("filter")($scope.declarationDetail, $scope.query);
+			// };
 
-			//check totalamount
-			$scope.totalAmount($scope.filteredList);
+			// //check totalamount
+			// $scope.totalAmount($scope.filteredList);
 
-			$scope.config = {
-			    itemsPerPlname: 1,
-			    maxPlnames: 2,
-			    fillLastPlname: "yes"
-			};
+			// $scope.config = {
+			//     itemsPerPlname: 1,
+			//     maxPlnames: 2,
+			//     fillLastPlname: "yes"
+			// };
 
 		});
 
@@ -208,36 +194,41 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.getDeclarationfromcase})
 		.success(function (response) {
-			$scope.declarationDetail = response;
+			$scope.declarationDetail = response.records;
+
+			$scope.editingData = {};
+    
+		    for (var i = 0, length = $scope.declarationDetail.length; i < length; i++) {
+		      $scope.editingData[$scope.declarationDetail[i].id] = false;
+		    }
+		    console.log($scope.editingData);
 			
 			//check aantal abonnementminuten
 			console.log($scope.declarationDetail);
-			subscription_minutes($scope.declarationDetail.records[0]['customer_id']);
+			subscription_minutes($scope.declarationDetail[0]['customer_id']);
 
-			//make an array from object
-			$scope.declarationDetail = $.map($scope.declarationDetail, function(value, index) {
-			    return [value];
-			});
+			// //make an array from object
+			// $scope.declarationDetail = $.map($scope.declarationDetail, function(value, index) {
+			//     return [value];
+			// });
 
-			$scope.declarationDetail = $scope.declarationDetail[0]
+			// $scope.declarationDetail = $scope.declarationDetail[0]
 
-			$scope.filteredList = $scope.declarationDetail;
-			console.log($scope.filteredList);
+			// $scope.filteredList = $scope.declarationDetail;
+			// console.log($scope.filteredList);
 
-			$scope.updateFilteredList = function() {
-			    
-			    $scope.filteredList = $filter("filter")($scope.declarationDetail, $scope.query);
-			  
-			};
+			// $scope.updateFilteredList = function() {
+			//     $scope.filteredList = $filter("filter")($scope.declarationDetail, $scope.query);
+			// };
 
-			//check totalamount
-			$scope.totalAmount($scope.filteredList);
+			// //check totalamount
+			 $scope.totalAmount($scope.filteredList);
 
-			$scope.config = {
-			    itemsPerPlname: 1,
-			    maxPlnames: 2,
-			    fillLastPlname: "yes"
-			};
+			// $scope.config = {
+			//     itemsPerPlname: 1,
+			//     maxPlnames: 2,
+			//     fillLastPlname: "yes"
+			// };
 		});
 
 	}
@@ -248,24 +239,29 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		$http.post("server/read.php",{'subject': "subscription_time", 'id': customer_id})
 		.success(function (response) {
 			console.log(response.records);
+			$scope.usersubscription = {};
 
 			if(response.records.length === 0){
 				console.log("Geen abbonnement");
 				console.log(response.records);
-				$scope.userSubscription = false;
+				$scope.usersubscription.abo = false;
 			}else{
 				console.log("WEL abbonnement");
 				console.log(response.records);
-				$scope.userSubscription = true;
+				$scope.usersubscription.abo = true;
 			}
-			$scope.subscription_time = response.records;
+			$scope.usersubscription.time = response.records;
+			$scope.usersubscription.start_date = response.records[0]['start_date'];
+			$scope.usersubscription.end_date = response.records[0]['end_date'];
+			console.log($scope.usersubscription);
 
-			$scope.subscription_minutes_left = 0;
-			for(x in $scope.subscription_time){
-				$scope.subscription_minutes_leftover = parseInt($scope.subscription_time[x]['minutes']) - parseInt($scope.subscription_time[x]['minutes_used']);
-				$scope.subscription_minutes_left += $scope.subscription_minutes_leftover
+			$scope.usersubscription.minutes_left = 0;
+			for(x in $scope.usersubscription.time){
+				console.log()
+				$scope.usersubscription.minutes_leftover = parseInt($scope.usersubscription.time[x]['minutes']) - parseInt($scope.usersubscription.time[x]['minutes_used']);
+				$scope.usersubscription.minutes_left += $scope.usersubscription.minutes_leftover;
 			}
-			console.log($scope.subscription_minutes_left);
+			console.log($scope.usersubscription.minutes_left);
 		});
 	}
 	$scope.totalAmount = function(object){
@@ -283,8 +279,6 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		console.log($scope.totalAmountDec);
 
 	}
-
-
 	////selection 
 
 
@@ -312,27 +306,86 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		}
 
 		console.log($scope.selection);
-		console.log($scope.filteredList);
-     };
+		console.log($scope.declarationDetail);
+    }
 
 
 	$scope.selectAll = function(){
 
-		for(x in $scope.filteredList){
+		for(x in $scope.declarationDetail){
 			
+			console.log(x);
   			
-  			$scope.filteredList[x].selected = true;
-			$scope.toggleSelection($scope.filteredList[x].id);
-			console.log($scope.filteredList);
+  			$scope.declarationDetail[x].selected = true;
+			$scope.toggleSelection($scope.declarationDetail[x].id);
+			console.log($scope.declarationDetail);
 			console.log($scope.selection);
 
 		}
 		
 	}
 
+	$scope.deselectAll = function(){
+
+		for(x in $scope.declarationDetail){
+			
+  			
+  			$scope.declarationDetail[x].selected = false;
+			$scope.toggleSelection($scope.declarationDetail[x].id);
+			console.log($scope.declarationDetail);
+			console.log($scope.selection);
+
+		}
+		
+	}
+
+	$scope.editDeclaration = function(id){
+		console.log(id);
+
+		$scope.declarationChange.modal = true;
+
+		$scope.declarationChange.array = $scope.declarationDetail[id];
+
+		console.log($scope.declarationDetail[id]);
+
+	}
+
+	$scope.saveEditDeclaration = function(id){
+		
+		///save to database
+		$http.post("server/update.php",{'subject': "update_declarations", 'args': $scope.declarationChange.array})
+		.success(function (response) {
+			console.log(response);
+			
+			$scope.closeDeclarationModal();
+			$rootScope.succesModalBox(true, "Declaratie is succesvol gewijzigd")
+		});
+
+	}
+
+
+	$scope.closeDeclarationModal = function(){
+		$scope.declarationChange.modal = false;
+	}
+
     ////selection 
 
+    $scope.getInvoicedDeclarations = function(){
+
+    	$scope.InvoicedDeclarations = {};
+		$scope.InvoicedDeclarations.case_id = "" + $routeParams.id + "";
+		$scope.InvoicedDeclarations.all_invoiced = "1";
+
+		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.InvoicedDeclarations})
+		.success(function (response) {
+			$scope.InvoicedDeclarations.rows = response.records;
+			
+			console.log($scope.InvoicedDeclarations);
 	
+		});
+
+    }
+    $scope.getInvoicedDeclarations();
 
 
  //filteredListInvoices
@@ -404,10 +457,9 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		
 		});
 
+	}
 
-	 } ;
-
-	 $scope.openInvoiceModal = function(){
+	$scope.openInvoiceModal = function(){
 	 	$scope.invoiceModal = true;
 	 	$scope.invoiceInfo.invoiceId;
 	 	$http.post("server/read.php",{'subject': "options", "args": 'invoice_number' })
@@ -417,17 +469,16 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			$scope.invoiceInfo.invoiceId = new Date().getFullYear() + "" + invoice_number;
 		});;
 
-		
+	}
 
-	 }
+	$scope.closeInvoiceModal = function(){
 
-	 $scope.closeInvoiceModal = function(){
 	 	$scope.invoiceModal = false;
 	 	//$scope.invoiceInfo.invoiceId = "";
 	 	$scope.invoiceInfo.discountAmount = ""
 	 	$scope.invoiceInfo.discountType = "none";
 
-	 }
+	}
 
 })
 

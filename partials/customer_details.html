@@ -198,12 +198,13 @@
                 <!-- /.box-header -->
                 <div class="box-body" style="display: block;">
                 <h6><small>Bekijk <strong>abonnement</strong> van Cliënt</small></h6>
-                    <div class="events-nest">
+                    <div class="events-nest" style='overflow: hidden;'>
                         <ul>
 
                             <li ng-repeat="x in subscriptions" class="subscription_item">
                                 <h4><small><a href="#/customers/{{x.customer_id}}">{{x.fname}} {{x.lname}} </span> - </a> 
                                 <em>{{x.company}}</em></small> <span class="expired_subsciption" style="color: #F20556;" ng-if="x.diffDate <= 0">VERLOPEN</span>
+                                <a class='radius tiny bg-red removeSubscription right' ng-click='remove_subscription(x.sub_id, $index)'><i class='fontello-cancel'></i> Verwijder</a>
                                 </h4>
                                 <p><small>{{x.minutes_used}}</small>/{{x.minutes}} <small>Minuten Verbruikt</small>
                                 <span class="right text-right">&euro; {{x.amount}}<br>
@@ -216,23 +217,51 @@
 
                             </li>
                         </ul>
-                        <button ng-show="!add_subscription_panel" class="button expand bg-green" ng-click="add_subscription($event)">Abonnement toevoegen <i class="fa fa-refresh" aria-hidden="true"></i></button>
-                        <div ng-show="add_subscription_panel" class="bg-white if-animate">
-                            <label>Minuten
-                            <input type="text" ng-model="subscription.minutes">
-                            </label>
-                            <label>Bedrag
-                            <input type="text" ng-model="subscription.amount">
-                            </label>
-                            <label>Start Datum
-                            <input type="text" id="datetimepicker" ng-model="subscription.start_date" placeholder="jjjj-mm-dd">
-                            </label>
-                            <label>Eind Datum
-                            <input type="text" ng-model="subscription.end_date" placeholder="jjjj-mm-dd">
-                            </label>
-                            <div class="right bg-white">
-                                <button class="bg-green tiny radius" ng-click="save_subscription()">Opslaan</button>
-                                <button class="bg-red tiny radius" ng-click="cancel_subscription()  ">Annuleer</button>
+                        <div style='overflow: hidden;'>
+                            <button ng-show="!add_subscription_panel" ng-class='add_subscription_panel == true ? "slideOutUp" : "slideInDown" ' class="button expand bg-green slideInDown animated" ng-click="add_subscription($event)">Abonnement toevoegen <i class="fa fa-refresh" aria-hidden="true"></i></button>
+                        </div>
+                        <div style='overflow: hidden'>
+                            <div ng-show="add_subscription_panel" ng-class='add_subscription_panel == true ? "slideInDown" : "slideOutUp" ' class=" animated panel row " style="background-color: #f7f7f7;">
+                                <h3 class='text-center'>Abonnement Toevoegen</h3>
+                                <div class='row'>
+                                <div class="large-6 columns">
+                                    <label>Uren <small class="right">{{subscription.minutes}} minutes</small></label>
+                                    <input type="number" ng-model="subscription.hours"> 
+                                    
+                                    <ul>
+                                        <li class="label round bg-green"><a ng-click="addHours(1)"><i class="text-white fontello-clock">+1uur</i></a>
+                                        </li>
+                                        <li class="label round bg-green"><a ng-click="addHours(5)"><i class="text-white fontello-clock">+5uur</i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="large-6 columns">
+                                    <label>Bedrag
+                                    <input type="text" ng-model="subscription.amount">
+                                    </label>
+                                </div>
+                                </div>
+                                <div class='row'>
+                                <div class="large-6 columns">
+                                    <label>Start Datum
+                                    <input type="datetime" date-time min-view="date" auto-close="true"
+            view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.start_date'>
+
+                                <!-- <input type="text" id="datetimepicker" ng-model="subscription.start_date" placeholder="jjjj-mm-dd"> -->
+                                    </label>
+                                </div>
+                                <div class="large-6 columns">
+                                    <label>Eind Datum
+                                    <!-- <input type="text" ng-model="subscription.end_date" placeholder="jjjj-mm-dd"> -->
+                                    <input type="datetime" date-time min-view="date" auto-close="true"
+                view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.end_date'>
+                                    </label>
+                                </div>
+                                </div>
+                                <div class="right">
+                                    <button class="bg-green tiny radius" ng-click="save_subscription()">Opslaan</button>
+                                    <button class="bg-red tiny radius" ng-click="cancel_subscription()  ">Annuleer</button>
+                                </div>
                             </div>
                         </div>
 

@@ -1,8 +1,8 @@
 //creditsCtrl
 app.controller('creditsCtrl',function($scope, $rootScope, $http){
-	$rootScope.pageData.header = "Uitgaves";
+	$rootScope.pageData.header = "Uitgaven";
 	$rootScope.pageData.subtitle = "Overzicht";
-	$rootScope.pageData.breadcrumps = ["uitgaves"];
+	$rootScope.pageData.breadcrumps = ["uitgaven"];
 	console.log("creditsCtrl");
 	
 	$scope.declaration_credits = {};

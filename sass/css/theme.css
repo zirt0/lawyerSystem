@@ -2206,4 +2206,12 @@ span.label.edumix-noft {
   background-color: #299a94;
   padding: 20px 0; }
 
+.tabs-content > .content.active {
+  display: inline-block; }
+
+a.removeSubscription {
+  padding: 3px 3px;
+  text-align: right;
+  font-size: 8px; }
+
 /*# sourceMappingURL=theme.css.map */

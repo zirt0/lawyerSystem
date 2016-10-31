@@ -1,30 +1,24 @@
   <div class="large-12 columns no-padding">
-    <input type="text" class="form-control" ng-model="query" ng-change="updateFilteredList()" placeholder="Zoeken">
+    <input type="text" ng-model="akmedia">
   </div>
-  <table class="table table-striped table-bordered"
-  at-table at-paginate at-list="filteredList">
-  <thead></thead>
-  <tbody>
-    <tr>
-      <td at-title="Adv.Naam">
-        <a href="#/declarations/{{filteredList[$index].case_id}}"><!-- {{filteredList[$index].case_id}} -->{{filteredList[$index].fname | limitTo:1}}. {{filteredList[$index].lname}} <span ng-if="filteredList[$index].company">- {{filteredList[$index].company}}</span></a>
-      </td>
-      <td at-title="Zaaknaam">
-        <a href="#/cases/{{filteredList[$index].case_id}}">{{filteredList[$index].casename}}</a>
-      </td>
-     <!--  <td at-title="Client">
-        {{filteredList[$index].company}}
-      </td> -->
-      <!-- <td at-title="status">
-        {{filteredList[$index].tel}}
-      </td> -->
-      <td at-title="Tot. Bedrag">
-        <span>&euro; {{filteredList[$index].total_amount}}</span>
-      </td>
-      <td>
-        <a class="button radius tiny bg-green" href="#/declarations/{{filteredList[$index].case_id}}">Bekijk</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<at-pagination at-list="filteredList" at-config="config"></at-pagination>
+  
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Advocaat</th>
+        <th>Dossiernaam</th>
+        <th>Tot.bedrag</th>
+        <th>Bekijk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(k,x) in declarations | filter: akmedia">
+        <td><a href="#/declarations/{{x.case_id}}">{{x.fname | limitTo:1}}. {{x.lname}} <span ng-if="x.company">- {{x.company}}</span></a></td>
+        <td><a href="#/cases/{{x.case_id}}">{{x.casename}}</a></td>
+        <td><span>&euro; {{x.total_amount}}</span></td>
+        <td><a class="button radius tiny bg-green" href="#/declarations/{{x.case_id}}">Bekijk</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+

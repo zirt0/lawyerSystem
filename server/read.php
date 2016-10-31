@@ -292,7 +292,7 @@ if($subject == "declarations"){
 			LEFT JOIN cases ON declarations.case_id = cases.id
 			LEFT JOIN users ON cases.user_id = users.id";
 	
-	if ($decl->case_id && !$decl->get_from_date){
+	if ($decl->case_id && !$decl->get_from_date && !$decl->all_invoiced){
 		$sql .= " WHERE case_id ='" . $decl->case_id ."' AND declarations.invoiced = 0 ORDER BY declarations.`id` DESC";
 	}
 
@@ -302,6 +302,10 @@ if($subject == "declarations"){
 
 	if ($decl->invoiced){
 		$sql .= " WHERE invoiced ='" . $decl->invoiced ."' ORDER BY declarations.`id` DESC";
+	}
+
+	if ($decl->case_id && $decl->all_invoiced){
+		$sql .= "  WHERE case_id ='" . $decl->case_id ."' AND invoiced !='' ORDER BY declarations.`id` DESC";
 	}
 
 	if ($decl->user_id){
@@ -502,7 +506,7 @@ if($subject == "count_customers"){
 
 if($subject == "subscription"){
 
-	$sql = "SELECT * ,DATEDIFF(subscription.end_date, NOW()) AS diffDate, customers.id as customer_id
+	$sql = "SELECT * ,DATEDIFF(subscription.end_date, NOW()) AS diffDate, subscription.id as sub_id, customers.id as customer_id
 			FROM subscription
 			LEFT JOIN customers ON customers.id = subscription.customer_id";
 	
@@ -522,6 +526,7 @@ if($subject == "subscription"){
 	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	    if ($outp != "") {$outp .= ",";}
 	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"sub_id":"'  . $rs["sub_id"] . '",';
 	    $outp .= '"start_date":"'  . $rs["start_date"] . '",';
 	    $outp .= '"end_date":"'  . $rs["end_date"] . '",';
 	    $outp .= '"minutes":"'  . $rs["minutes"] . '",';

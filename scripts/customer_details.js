@@ -6,6 +6,8 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 
 	$args = {};
 	$scope.subscription = {};
+	
+	console.log($scope.subscription.minutes);
 	$scope.customerId = "" + $routeParams.id + "";
 	$args.customer_id = $scope.customerId;
 	console.log($args);
@@ -28,11 +30,15 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 		console.log(response);
 	});
 
-	$http.post("server/read.php",{'subject': "subscription", "id": $scope.customerId  })
-	.success(function (response) {
-		console.log(response)
-		$scope.subscriptions = response.records
-	});
+	$scope.getSubscriptionList = function(){
+		$http.post("server/read.php",{'subject': "subscription", "id": $scope.customerId  })
+		.success(function (response) {
+			console.log(response)
+			$scope.subscriptions = response.records
+		});	
+	}
+	$scope.getSubscriptionList();
+	
 
 	//get information of customers
 	$http.post("server/read.php",{'subject': "subscription_time", 'id': $scope.customerId})
@@ -78,13 +84,19 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 	}
 	
 	$scope.subscription.customer_id = $scope.customerId;
-	$scope.subscription.minutes = "";
+	$scope.subscription.hours = 5; 
+	$scope.subscription.minutes = $scope.subscription.hours * 60;
 	$scope.subscription.amount = "";
-	$scope.subscription.start_date = "";
-	$scope.subscription.end_date = "";
+	$scope.subscription.start_date = moment();
+	$scope.subscription.end_date = moment().subtract(30, 'day');
+
+	$scope.start_date = moment();
+	$scope.end_date = moment().add(1, 'year');
 
 	$scope.save_subscription = function(event){
 		console.log("Save");
+		$scope.subscription.start_date = $scope.start_date;
+		$scope.subscription.end_date = $scope.end_date;
 		
 
 		for(x in $scope.subscription){
@@ -102,9 +114,33 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 		$http.post("server/insert.php",{'subject': "insert_subscription", "args": $scope.subscription })
 		.success(function (response) {
 			console.log(response)
-			$scope.subscriptions = response.records
+			//$scope.subscriptions = response.records
+		
+			$scope.add_subscription_panel = false;
+			$scope.getSubscriptionList();
+			$rootScope.succesModalBox(true,'Abonnement is succesvol opgelsagen in onze database')
 		});
 		
+	}
+
+	$scope.remove_subscription = function(id, index){
+		var r = confirm(id + "Weet u zeker dat u deze abonnement wilt verwijderen? Deze kunt u niet meer ongedaan maken.");
+		if (r == true) {
+
+		   	$http.post("server/remove.php",{'subject': "remove_subscription", 'id': id
+			}).success(function (response) {
+				
+				
+				$scope.subscriptions.splice(index,1)
+
+				$rootScope.succesModalBox(true,'Abonnement is succesvol verwijderd');
+
+			});	
+
+
+		} else {
+
+		}
 	}
 
 	$scope.editCustomerDetails = true;
@@ -130,6 +166,19 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 		console.log("savecaseee");
 
 		$scope.editCustomerDetails = true;
+	}
+
+	$scope.addHours = function(hours){
+
+		$scope.subscription.hours =  $scope.subscription.hours + hours ;
+		$scope.subscription.minutes = $scope.subscription.hours * 60;
+
+	}
+	$scope.changeHours = function(){
+
+		$scope.subscription.hours =  $scope.subscription.hours ;
+		$scope.subscription.minutes = $scope.subscription.hours * 60;
+
 	}
 	
 	///case

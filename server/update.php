@@ -197,6 +197,27 @@ if($subject == "update_customer"){
 }
 
 
+//edit_declarations
+
+if($subject == "update_declarations"){
+
+	$sql = "UPDATE declarations 
+			SET declarations.declaration_date = '" . $args->declaration_date . "',
+				declarations.amount = '" . $args->amount . "',
+				declarations.time = '" . $args->time . "',
+				declarations.comment = '" . $args->comment . "'
+				WHERE id='" . $args->id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				$outp = $sql;
+}
+
+
 $conn->close();
 
 echo $outp;

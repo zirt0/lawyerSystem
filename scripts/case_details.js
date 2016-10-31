@@ -97,7 +97,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	}
 
 	$rootScope.boleonTypeCircle = function(value){
-		console.log("test" +  value);
+		//console.log("test" +  value);
 		if(value == "true" || value == 1){
 			return '<div class="text-green fontello-record"></div>';
 		}else{
@@ -150,7 +150,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
     	$scope.declaration.declaration_date = $scope.declaration_date.format('YYYY-MM-DD HH:mm:ss');
 		console.log($scope.args);
 		//return false;
-
+		$scope.declaration.choice = $scope.declaration.selectedDeclaration.id;
     	console.log($scope.declaration.choice)
     	if(!$scope.declaration.choice || !$scope.declaration.time){
     		console.log("error")
@@ -164,6 +164,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
     	//$scope.declaration_summary.push($scope.declaration)
     	console.log($scope.declaration_summary);
     	
+    	//return false;
 
     	$http.post("server/insert.php",{
 		'subject': "declaration_add", 'args': $scope.declaration

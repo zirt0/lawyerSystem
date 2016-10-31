@@ -4,9 +4,9 @@
     </li>
     <li class="tab-title" ng-class="{'active' : webTabs[1]}"><a ng-click="tabs(1)">Facturen huidige zaak</a>
     </li>
-    <!-- <li class="tab-title" ng-class="{'active' : webTabs[2]}"><a ng-click="tabs(2)">Alle Facturen</a>
-    </li> -->
-    <li class="tab-title" ng-class="{'active' : webTabs[3]}"><a ng-click="tabs(3)">Uitgaves</a>
+    <li class="tab-title" ng-class="{'active' : webTabs[2]}"><a ng-click="tabs(2)">Gedeclareerde uren</a>
+    </li>
+    <li class="tab-title" ng-class="{'active' : webTabs[3]}"><a ng-click="tabs(3)">Uitgaven</a>
     </li>
 </ul> 
 <div class="tabs-content edumix-tab-horz">
@@ -22,11 +22,10 @@
         <label>Van</label>
         <input type="datetime" date-time min-view="date" auto-close="true"
         view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.start_date'>
-<!--         <pre>Selected date is: <em>{{start_date | date:'fullDate' }}</em></pre>
-        <pre>Selected date is: <em>{{end_date | date:'fullDate' }}</em></pre> -->
         </div>
 
         <div class="large-4 columns">
+        
         <label>Tot</label>
         <input type="datetime" date-time min-view="date" auto-close="true"
         view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.end_date'>
@@ -40,10 +39,20 @@
         </div>
       
       </div>
+      <div class="large-6 columns">
+        <!-- <div class="large-12 columns panel">
+        <div class="small-text"><strong>Zoeken</strong></div>
+        <div class="large-12 columns">
+          Zoeken door alle velden
+          <input type="text" class="form-control ng-valid ng-dirty" ng-model="query" ng-change="updateFilteredList()" placeholder='Advocaat, Declaratietype, bedrag, minuten enz'>
+        </div>
+        </div> -->
+      </div>
 
     </div>
         <div class="left">
             <button class="tiny radius" ng-click="selectAll()">Selecteerd alles</button> 
+            <button class="tiny radius" ng-click="deselectAll()">Deselecteerd alles</button> 
             <button class="tiny button bg-light-green radius" ng-click="downloadPDF()">Tussentijdse PDF</button>
             <button class="tiny button bg-light-green radius" ng-click="openInvoiceModal()">Maak Factuur PDF</button>
           
@@ -56,46 +65,58 @@
         <div ng-repeat="x in subscription_time">Abonnement verbr.: {{x.minutes_used}}/{{x.minutes}} minuten<br>
         </div>
         </div>
-  <table class="table table-striped table-bordered"
-  at-table at-paginate at-list="filteredList">
+  <table class="table table-striped table-bordered">
   
-  <thead></thead>
+  <thead>
+    <td>Select</td>
+    <td>id</td>
+    <td>datum</td>
+    <td>Dossiernaam</td>
+    <td>Advocaat</td>
+    <td>Declaratienaam</td>
+    <td>Info</td>
+    <td><i class="fontello-clock"></i> Tijd</td>
+    <td>Bedrag</td>
+    <!-- <td>Actie</td> -->
+    <td>Bewerk</td>
+  </thead>
 
   <tbody>
 
-    <tr>
+    <tr ng-repeat="(k,x) in declarationDetail">
 
-      <td at-title="Select">
-        <label id="{{filteredList[$index].id}}"></label>
-        <input name="{{filteredList[$index].id}}" value="{{filteredList[$index].id}}" type="checkbox" ng-checked="filteredList[$index].selected" ng-click="toggleSelection(filteredList[$index].id)">
+      <td>
+        <label id="{{x.id}}"></label>
+        <input name="{{x.id}}" value="{{x.id}}" type="checkbox" ng-checked="x.selected" ng-click="toggleSelection(x.id)">
       </td>
-        <td at-title="id">
-        {{filteredList[$index].id}}
+        <td>
+        {{x.id}}
       </td>
-      <td at-title="Datum">
-        {{filteredList[$index].declaration_date}}
+      <td>
+        {{x.declaration_date}}
       </td>
-      <td at-title="Zaaknaam">
-        {{filteredList[$index].casename}}
+      <td>
+        {{x.casename}}
       </td>
-      <td at-title="Avocaat">
-        {{filteredList[$index].fname}} {{filteredList[$index].lname}}
+      <td>
+        {{x.fname}} {{x.lname}}
       </td>
-      <td at-title="Artikel">
-        {{filteredList[$index].declaration_name}} 
+      <td>
+        {{x.declaration_name}} 
       </td>
-      <td at-title="Info">
-        {{filteredList[$index].comment}} 
+      <td>
+        {{x.comment}} 
       </td>
-      <td at-title="<i class='fontello-clock'></i>Minuten">
-        <span><i class="fontello-clock"></i> {{filteredList[$index].time}}</span>
+      <td>
+        <span><i class="fontello-clock"></i> {{x.time}}</span>
       </td>
-      <td at-title="Tot. Bedrag">
-        <span>&euro; {{filteredList[$index].amount}}</span>
+      <td>
+        <span>&euro; {{x.amount}}</span>
       </td>
-      <td at-title="status" ng-bind-html='statusCheck(filteredList[$index].invoiced)'></td>
+      <!-- <td ng-bind-html='statusCheck(x.invoiced)'></td> -->
         
       </td>
+      <td><button class='tiny radius bg-green' ng-click='editDeclaration($index)'><i class="fontello-edit"></i></button></td>
     </tr>
 
   </tbody>
@@ -111,34 +132,65 @@
         <h2>Facturen Huidige zaak</h2>
         <div ng-include src="'/partials/invoices.html'"></div>
     </div>
-    <!-- <div class="content" ng-class="{'active' : webTabs[2]}" id="panel2">
+    <div class="content" ng-class="{'active' : webTabs[2]}" id="panel2">
       
-      <h2>Facturen van Client</h2>
+      <h2>Gedeclareerde Uren</h2>
 
-       <div class="large-12 columns">
-         <input type="text">
-         <table class='table table-striped table-bordered ng-scope'>
-         <tr>
-           <th>id</th>
-           <th>Factuur No.</th>
-           <th>Dossier</th>
-           <th>Gebruiker</th>
-           <th>Datum</th>
-           <th>Download</th>
-         </tr>
-           <tr ng-repeat='x in getInvoiceofUser | filter : search | orderBy:"id":false'>
-             <td>{{x.id}}</td>
-             <td><strong>{{x.invoice_alias}}</strong></td>
-             <td><strong>{{x.casename}}</strong></td>
-             <td>{{x.fname}} {{x.lname}}</td>
-             <td>{{x.date}}</td>
-             <td><a href='/downloadpdf.php?id={{x.id}}' class='button tiny radius bg-green' target="_blank">Download</a></td>
-           </tr>
-         </table>
-         </div>
+      <div class="large-12 columns">
+      <table class="table table-striped table-bordered">
+  
+        <thead>
+          <td>id</td>
+          <td>datum</td>
+          <td>Dossiernaam</td>
+          <td>Advocaat</td>
+          <td>Declaratienaam</td>
+          <td>Info</td>
+          <td><i class="fontello-clock"></i> Tijd</td>
+          <td>Bedrag</td>
+          <td>FactuurId</td>
+        </thead>
+
+        <tbody>
+
+          <tr ng-repeat="(k,x) in InvoicedDeclarations.rows">
+            <td>
+              {{x.id}}
+            </td>
+            <td>
+              {{x.declaration_date}}
+            </td>
+            <td>
+              {{x.casename}}
+            </td>
+            <td>
+              {{x.fname}} {{x.lname}}
+            </td>
+            <td>
+              {{x.declaration_name}} 
+            </td>
+            <td>
+              {{x.comment}} 
+            </td>
+            <td>
+              <span><i class="fontello-clock"></i> {{x.time}}</span>
+            </td>
+            <td>
+              <span>&euro; {{x.amount}}</span>
+            </td>
+            <td>{{x.invoiced}}</td>
+              
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+         
+      </div>
 
         
-    </div> -->
+    </div>
     <div class="content" ng-class="{'active' : webTabs[3]}" id="panel4">
           <div ng-include src="'/partials/declarations/declaration_credits_details.html'"></div>
     </div>
@@ -176,6 +228,32 @@
     <a ng-click="closeInvoiceModal()" class="close-reveal-modal">&#215;</a>
 </div>
 
+<div ng-if="declarationChange.modal" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position: fixed;">
+    <h2>Wijzig Declaratie met ID {{declarationChange.array.id}}</h2>
+
+    <p ng-repeat='x in declarationChange.array'></p>
+    <div class="small-6 columns">
+        <label>Datum</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.declaration_date"/>
+    </div>
+    <div class="small-6 columns">
+        <label>Info</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.comment"/>
+    </div>
+    <div class="small-6 columns">
+        <label>Tijd</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.time"/>
+    </div>
+    <div class="small-6 columns">
+        <label>Bedrag</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.amount"/>
+    </div>
+    
+    
+    <p><a ng-click="saveEditDeclaration()" class="secondary button bg-green">Declaratie Opslaan</a>
+    </p>
+    <a ng-click="closeDeclarationModal()" class="close-reveal-modal">&#215;</a>
+</div>
 
 
 

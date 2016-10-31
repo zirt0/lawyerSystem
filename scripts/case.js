@@ -6,28 +6,13 @@ app.controller('caseCtrl',function($scope, $rootScope, $filter, $http, $base64){
 	$scope.people = [];
 	$http.post("server/read.php",{'subject': "cases"})
 	.success(function (response) {
-		$scope.people = response;
+		$scope.people = response.records;
 
-		//make an array from object
-		$scope.people = $.map($scope.people, function(value, index) {
-		    return [value];
-		});
-
-		$scope.people = $scope.people[0]
-
-		$scope.filteredList = $scope.people;
-		console.log($scope.filteredList);
-
-		$scope.updateFilteredList = function() {
-			console.log("changes");
-		    $scope.filteredList = $filter("filter")($scope.people, $scope.query);
-		  };
-		$scope.config = {
-		    itemsPerPlname: 1,
-		    maxPlnames: 2,
-		    fillLastPlname: "yes"
-		};
 	});
+
+	$scope.filterBy = "";
+
+	console.log($scope.filterBy);
 	
 })
 
