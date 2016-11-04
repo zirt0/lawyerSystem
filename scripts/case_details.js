@@ -408,4 +408,27 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 
 	}
 
+	$scope.add_lawyer = {};
+	$scope.add_lawyer.save = function(){
+
+		console.log($scope.add_lawyer);
+		// $http.post("server/insert.php",{'subject': "add_lawyer", 'args': $scope.add_lawyer})
+		// .success(function (response) {
+		// 	console.log(response)
+		// 	$scope.notes_from = response.records
+
+		// });
+
+		angular.forEach($scope.add_lawyer, function(value, key) {
+		  
+			if(key != 'save'){
+				console.log(key + ': ' + value);
+				$scope.key = "";
+			}
+		  
+		
+		});
+
+	}
+
 })

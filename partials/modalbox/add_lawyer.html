@@ -1,0 +1,45 @@
+<h2 class='text-white'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Advocaat toevoegen</h2>
+
+
+<div class="row text-white">
+	<div class="small-12 columns">
+		<label class='text-white'>Kantoornaam</label>
+		<input type="text" ng-model="add_lawyer.lawyer_company" placeholder='Kantoornaam'>
+	</div>
+</div>
+<div class="row text-white">
+	<div class="small-6 columns">
+		<label class='text-white'>Voornaam Advocaat</label>
+		<input type="text" ng-model="add_lawyer.lawyer_fname"  placeholder='Voornaam'>
+	</div>
+	<div class="small-6 columns">
+		<label class='text-white'>Achternaam Advocaat</label>
+		<input type="text" ng-model="add_lawyer.lawyer_lname"  placeholder='Achternaam'>
+	</div>
+	<div class="small-6 columns">
+		<label class='text-white'>Straat + nr</label>
+		<input type="text" ng-model="add_lawyer.lawyer_address"  placeholder='Testraat 123'>
+	</div>
+	<div class="small-2 columns">
+		<label class='text-white'>Postcode</label>
+		<input type="text" ng-model="add_lawyer.lawyer_zipcode" placeholder='1122 AZ'>
+	</div>
+	<div class="small-4 columns">
+		<label class='text-white'>City</label>
+		<input type="text" ng-model="add_lawyer.lawyer_city" placeholder='Amsterdam'>
+	</div>
+	<div class="small-6 columns">
+		<label class='text-white'>Email</label>
+		<input type="text" ng-model="add_lawyer.lawyer_email" placeholder='info@voorbeeld.nl'>
+	</div>
+	<div class="small-6 columns">
+		<label class='text-white'>Telefoon</label>
+		<input type="text" ng-model="add_lawyer.lawyer_tel" placeholder='020 - 123 546 78'>
+	</div>
+</div>
+<div class="row text-white">
+	<div class="small-12 columns">
+		<p><a ng-click="add_lawyer.save()" class="secondary button bg-green right">Opslaan</a>
+	</p>
+	</div>
+</div>

@@ -246,6 +246,21 @@ if($subject == "add_payment"){
 				$outp = $result;
 }
 
+//add_payment
+if($subject == "add_lawyer"){
+
+	$sql = "INSERT INTO opponent_lawyer (lawyer_company, lawyer_fname, lawyer_lname, lawyer_tel, lawyer_email, lawyer_address, lawyer_zipcode, lawyer_city)
+			VALUES ( '" . $args->lawyer_company . "', '" . $args->lawyer_fname . "', '" . $args->lawyer_lname . "', '" . $args->lawyer_tel . "', '" . $args->lawyer_email . "', '" . $args->lawyer_address . "', '" . $args->lawyer_zipcode . "', '" . $args->lawyer_city . "')";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				
+				$outp = $result;
+}
+
 $conn->close();
 
 echo $outp;

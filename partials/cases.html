@@ -1,22 +1,24 @@
 <!-- <div ng-repeat="case in cases">{{case.case_name}} {{case.id}}</div> -->
 <div class="large-6 columns no-padding">
-  <input type="text" class="form-control" ng-model="query" ng-change="updateFilteredList()" placeholder="Zoeken">
+  <input type="text" class="form-control" ng-model="query" placeholder="Zoeken">
 </div>
 <div class="large-6 columns no-padding">
   <div class="large-6 columns">
 
   </div>
   <div class="large-6 columns">
-    <strong>Weergave: </strong>
+      <strong>Weergave: </strong>
       <div class='clear'></div>
+      <form>
       <input type="radio" ng-model="filterBy" value="" id='all'>
       <label for='all'>All</label>
 
-      <input type="radio" ng-model="filterBy" value="0" name='inbehandeling' id='inbehandeling'  ng-checked='1=1'>
+      <input type="radio" ng-model="filterBy" value="0" name='inbehandeling' id='inbehandeling'>
       <label for="inbehandeling">In Behandeling</label>
       
       <input type="radio" ng-model="filterBy" value="1" id="gesloten">
       <label for="gesloten">Gesloten</label>
+      </form>
   </div>
 </div>
    <!-- <div class="large-2 columns ">
@@ -32,7 +34,7 @@
     <th>Aangemaakt</th>
   </tr>
   
-  <tr ng-repeat='x in people | filter: filterBy' ng-show='x.status == filterBy || filterBy == ""'>
+  <tr ng-repeat='x in people | filter: query' ng-show='x.status == filterBy || filterBy == ""'>
     <td><i ng-if="x.confidential === '1'" class="fa fa-lock has-tip" aria-hidden="true" data-tooltip aria-haspopup="true" title="LET OP: VERTROUWELIJK DOSSIER"></i>
         <a href="#/cases/{{x.case_id}}">{{x.casename}} </a></td>
     <td><a href="#/customers/{{x.customer_id}}"> {{x.case_id_alias}}</a></td>

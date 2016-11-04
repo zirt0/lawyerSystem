@@ -433,7 +433,7 @@
                              
                         </div>
                          <div class=" columns" ng-show="!case.lawyer_company"><br>
-                            <button class='button bg-green tiny right'> + Advocaat Toevoegen</button>
+                            <button ng-click='add_lawyer.modal = true' class='button bg-green tiny right'> + Advocaat Toevoegen</button>
                         </div>
 
                 </div>
@@ -475,9 +475,9 @@
                 <!-- /.box-header -->
                 <div class="internnotes" style="display: block;">
                     <div class="events-nest">
-                        <ul>
+                        <ul style='overflow: hidden;'>
 
-                            <li ng-repeat="x in notes_from | limitTo:5" ng-mouseenter="makelarger()" ng-mouseleave="makesmaller()" ng-class="large_height">
+                            <li ng-repeat="x in notes_from | limitTo:5" ng-mouseleave="makesmaller()">
                                 <h4><img alt="" class="admin-pic img-circle" src="img/denizkoker.png" style="margin: 20px 0px 0px 20px;"><small><span class=""><a href="#/cases/{{x.case_id}}">{{x.casename}} </span></a></small>
                                 </h4>
                                 <p>{{x.content}}</p>
@@ -711,24 +711,31 @@
     </div>
     
     <div ng-if="notes.modal" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position:fixed; background-color: #fdf59a;">
-            <h2><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Maak Notitie</h2>
-            <p>
-              <label>Aan gebruiker<small> Niet verplicht!</small></label>
-            <select ng-model="notes.to_user_id" ng-class="notes.to_user_idError">
-             <!--  <option ng-value="0">Algemeen</option>  --> 
-              <option ng-repeat="x in notes.users" value="{{x.id}}">{{x.fname}} {{x.lname}}</option>
-              
-            </select>
-            </p>
-            <p>
-              <label>Content</label>
-              <textarea name="content" rows="8" ng-class="notes.contentError" class="small-12 columns" ng-model="notes.content"/></textarea>
-            </p>
-            <!-- <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p> -->
-            <p><a ng-click="saveNote()" class="secondary button bg-green">Opslaan</a>
-            </p>
-            <a ng-click="closeModal()" class="close-reveal-modal">&#215;</a>
-        </div>
+        <h2><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Maak Notitie</h2>
+        <p>
+          <label>Aan gebruiker<small> Niet verplicht!</small></label>
+        <select ng-model="notes.to_user_id" ng-class="notes.to_user_idError">
+         <!--  <option ng-value="0">Algemeen</option>  --> 
+          <option ng-repeat="x in notes.users" value="{{x.id}}">{{x.fname}} {{x.lname}}</option>
+          
+        </select>
+        </p>
+        <p>
+          <label>Content</label>
+          <textarea name="content" rows="8" ng-class="notes.contentError" class="small-12 columns" ng-model="notes.content"/></textarea>
+        </p>
+        <!-- <p>Let op! <small>Geef uw wachtwoord nooit aan anderen.</small></p> -->
+        <p><a ng-click="saveNote()" class="secondary button bg-green">Opslaan</a>
+        </p>
+        <a ng-click="closeModal()" class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div ng-if='add_lawyer.modal' id="firstModal" class="addlawyer reveal-modal open animate-if bg-black" style="display: block; visibility: visible; position:fixed; ">
+        <div ng-include="'partials/modalbox/add_lawyer.html'"></div>
+
+        <a ng-click="add_lawyer.modal = false" class="close-reveal-modal">&#215;</a>
+
+    </div>
     <!-- End of Container Begin -->
 
     <div ng-if="appointment.modal" id="firstModal" class="reveal-modal open bg-red animate-if" style="display: block; visibility: visible; position:fixed;">
