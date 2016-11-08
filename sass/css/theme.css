@@ -2214,4 +2214,19 @@ a.removeSubscription {
   text-align: right;
   font-size: 8px; }
 
+.userbox .large-12 .large-12 {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.invoicePayed {
+  text-align: center;
+  font-size: 48px;
+  position: absolute;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(7deg);
+  background-color: rgba(128, 128, 128, 0.82) !important;
+  margin-left: 57px;
+  padding: 9px 32px; }
+
 /*# sourceMappingURL=theme.css.map */

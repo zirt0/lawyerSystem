@@ -1,4 +1,4 @@
-	var app = angular.module('APP',['ngRoute', 'ngCookies', 'ngSanitize', 'angular-table','ngAnimate', 'angular-md5', 'ab-base64', 'base64','ngFileSaver', 'datePicker', 'angularMoment']);
+	var app = angular.module('APP',['ngRoute', 'ngCookies', 'ngSanitize', 'angular-table','ngAnimate', 'angular-md5', 'ab-base64', 'base64','ngFileSaver', 'datePicker', 'angularMoment', 'chart.js']);
 	console.log("sadasdadssa");
 	app.filter("sanitize", ['$sce', function($sce) {
 		return function(htmlCode){
@@ -29,6 +29,10 @@
 		.when('/dashboard', {
 		    controller: 'dashboardCtrl',
 		    templateUrl: 'partials/dashboard.html'
+		})
+		.when('/stats', {
+		    controller: 'statsCtrl',
+		    templateUrl: 'partials/stats.html'
 		})
 		.when('/customers', {
 		    controller: 'customersCtrl',
@@ -123,6 +127,14 @@
 		.when('/email', {
 		    controller: 'accountCtrl',
 		    templateUrl: 'partials/email/quickstart.html'
+		 })
+		.when('/opponents', {
+		    controller: 'opponentsCtrl',
+		    templateUrl: 'partials/opponents.html'
+		 })
+		.when('/opponents/lawyers', {
+		    controller: 'opponent_lawyersCtrl',
+		    templateUrl: 'partials/opponent_lawyers.html'
 		 })
 		.otherwise({
 			redirectTo:'/dashboard'

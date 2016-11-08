@@ -415,10 +415,12 @@ if($subject == "get_invoices"){
 	    $outp .= '"date":"'  . $rs["date"] . '",';
 	    $outp .= '"invoice_alias":"'  . $rs["invoice_alias"] . '",';
 	    $outp .= '"discount_amount":"'  . $rs["discount_amount"] . '",';
+	    $outp .= '"total":"'  . $rs["total"] . '",';
 	    $outp .= '"casename":"'  . $rs["casename"] . '",';
 	    $outp .= '"lname":"'  . $rs["lname"] . '",';
 	    $outp .= '"fname":"'  . $rs["fname"] . '",';
-	    $outp .= '"content":"'  . $rs["content"] . '"}';
+	    $outp .= '"content":"'  . $rs["content"] . '",';
+	    $outp .= '"content_invoice":"'  . $rs["content_invoice"] . '"}';
 	}
 
 	$outp ='{"records":['.$outp.']}';
@@ -699,11 +701,28 @@ if($subject == "get_paymentinfo"){
 	//$outp = $sql;
 }
 
+if($subject == "get_paymentinfo_payed_rows"){
+
+	$sql = "SELECT * FROM payments WHERE invoice_id = '" . $args->payment_id ."'";
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"amount":"'  . $rs["amount"] . '",';
+	    $outp .= '"type":"'  . $rs["type"] . '",';
+	    $outp .= '"date":"'. $rs["date"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
 if($subject == "get_paymentinfo_payed"){
 
-	$sql = "select id, sum(amount) as total_amount from payments where invoice_id = '" . $args->payment_id ."'";
-
-
+	$sql = "SELECT id, SUM(amount) AS total_amount FROM payments WHERE invoice_id = '" . $args->payment_id ."'";
 
 	$result = $conn->query($sql);
 
@@ -723,8 +742,6 @@ if($subject == "get_options"){
 
 	$sql = "SELECT * FROM options";
 
-
-
 	$result = $conn->query($sql);
 
 	$outp = "";
@@ -738,9 +755,154 @@ if($subject == "get_options"){
 	$outp ='{"records":['.$outp.']}';
 	//$outp = $sql;
 }
- 
+
+if($subject == "get_customer_financial_details"){
+
+	$sql = "SELECT SUM(amount) as total_declarations, SUM(time) as total_time FROM declarations
+			LEFT JOIN cases ON declarations.case_id = cases.id
+			LEFT JOIN customers ON cases.customer_id = customers.id
+			WHERE customers.id = " . $request->id;
+	
+	$result = $conn->query($sql);
+	
+	$outp = "";
+	
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"total_declarations":"'  . $rs["total_declarations"] . '",';
+	    $outp .= '"total_time":"'  . $rs["total_time"] . '"}';
+	}
+
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
 
 
+if($subject == "opponents"){
+
+	$sql = "SELECT * FROM opponents";
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"opp_lawyer_id":"'  . $rs["opp_lawyer_id"] . '",';
+	    $outp .= '"opp_company":"'  . $rs["opp_company"] . '",';
+	    $outp .= '"opp_fname":"'   . $rs["opp_fname"]        . '",';
+	    $outp .= '"opp_lname":"'   . $rs["opp_lname"]        . '",';
+	    $outp .= '"opp_tel":"'  . $rs["opp_tel"] . '",';
+	    $outp .= '"opp_email":"'  . $rs["opp_email"] . '",';
+	    $outp .= '"opp_address":"'  . $rs["opp_address"] . '",';
+	    $outp .= '"opp_zipcode":"'  . $rs["opp_zipcode"] . '",';
+	    $outp .= '"opp_city":"'  . $rs["opp_city"] . '",';
+	    $outp .= '"opp_comment":"'. $rs["opp_comment"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "lawyers"){
+
+	$sql = "SELECT * FROM opponent_lawyer";
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"lawyer_company":"'  . $rs["lawyer_company"] . '",';
+	    $outp .= '"lawyer_fname":"'   . $rs["lawyer_fname"]        . '",';
+	    $outp .= '"lawyer_lname":"'   . $rs["lawyer_lname"]        . '",';
+	    $outp .= '"lawyer_tel":"'  . $rs["lawyer_tel"] . '",';
+	    $outp .= '"lawyer_email":"'  . $rs["lawyer_email"] . '",';
+	    $outp .= '"lawyer_address":"'  . $rs["lawyer_address"] . '",';
+	    $outp .= '"lawyer_zipcode":"'  . $rs["lawyer_zipcode"] . '",';
+	    $outp .= '"lawyer_city":"'  . $rs["lawyer_city"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "users_stats"){
+
+	$sql = "SELECT user_id, SUM(amount) as amount, SUM(time) as time, COUNT(amount) as count, users.lname, users.fname, users.hourrate 
+			FROM declarations
+			LEFT JOIN users ON declarations.user_id = users.id
+			GROUP BY user_id";
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"user_id":"'  . $rs["user_id"] . '",';
+	    $outp .= '"amount":"'  . $rs["amount"] . '",';
+	    $outp .= '"time":"'   . $rs["time"]        . '",';
+	    $outp .= '"count":"'   . $rs["count"]        . '",';
+	    $outp .= '"lname":"'   . $rs["lname"]        . '",';
+	    $outp .= '"fname":"'  . $rs["fname"] . '",';
+	    $outp .= '"hourrate":"'  . $rs["hourrate"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "total_invoice"){
+
+	$sql = "SELECT SUM(invoice.total) as total_invoice FROM cases 
+			LEFT JOIN declarations ON cases.id = declarations.case_id
+			LEFT JOIN invoice ON declarations.invoiced = invoice.invoice_alias";
+			
+
+	if ($request->id){
+		$sql .= " WHERE cases.customer_id = " . $request->id ;
+	}
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"total_invoice":"'  . $rs["total_invoice"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "total_invoice_payed"){
+
+	$sql = "SELECT SUM(payments.amount) as total_payed FROM cases 
+			LEFT JOIN declarations ON cases.id = declarations.case_id
+			LEFT JOIN invoice ON declarations.invoiced = invoice.invoice_alias
+			LEFT JOIN payments ON invoice.id = payments.invoice_id";
+			
+
+	if ($request->id){
+		$sql .= " WHERE cases.customer_id = " . $request->id ;
+	}
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"total_payed":"'  . $rs["total_payed"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "total_invoice_payed"){
+
+	$sql = "SELECT payments.*, SUM(payments.amount) as payed_amount FROM invoice
+			LEFT JOIN payments ON invoice.id = payments.invoice_id";
+			
+
+	if ($request->id){
+		$sql .= " WHERE invoice.id = " . $request->id ;
+	}
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"payed_amount":"'  . $rs["payed_amount"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
 
 $conn->close();
 

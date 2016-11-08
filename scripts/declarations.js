@@ -15,10 +15,10 @@ app.controller('declarationsCtrl',function($scope, $rootScope, $http){
 
 })
 
-app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParams, $http, base64, $window, $http, $filter){
+app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParams, $http, base64, $window, $http, $filter, $location){
 
 	///for creating pdf
-	createPDFfunction($scope,$rootScope, base64, $window, $http, $filter);
+	createPDFfunction($scope,$rootScope, base64, $window, $http, $filter, $location);
 	$scope.declarationDetail = {};
 	$scope.declarationDetail.case_id = "" + $routeParams.id + "";
 	$scope.declarationChange = {};
@@ -253,6 +253,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			$scope.usersubscription.time = response.records;
 			$scope.usersubscription.start_date = response.records[0]['start_date'];
 			$scope.usersubscription.end_date = response.records[0]['end_date'];
+			$scope.usersubscription.id = response.records[0]['id'];
 			console.log($scope.usersubscription);
 
 			$scope.usersubscription.minutes_left = 0;
@@ -363,9 +364,19 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 	}
 
+	$scope.removeDeclaration = function(id){
+		console.log($scope.declarationDetail[id].id)
 
-	$scope.closeDeclarationModal = function(){
-		$scope.declarationChange.modal = false;
+		var r = confirm("Weet u zeker dat u deze declaratie wilt verwijderen?");
+	    if (r == true) {
+	    	$http.post("server/remove.php",{'subject': "declaration_remove", 'id': $scope.declarationDetail[id].id
+			}).success(function (response) {
+				$scope.case = response;
+				console.log($scope.case);
+				$scope.declarationDetail.splice(id, 1);
+				$rootScope.succesModalBox(true, "Declaratie is succesvol verwijderd")
+			});	
+	    }
 	}
 
     ////selection 

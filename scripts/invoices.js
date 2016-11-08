@@ -32,7 +32,32 @@ app.controller('invoicesCtrl',function($scope, $rootScope, $http, $base64, $wind
 	.success(function (response) {
 		$scope.getinvoice = response.records;
 		console.log(response);
+	
+		angular.forEach($scope.getinvoice, function(value, key) {
+		  
+		  //console.log(value['id']);
+		  $scope.addinvoicestatus(key, value)
+
+		})
 	});
+
+	$scope.addinvoicestatus = function(key, value){
+
+
+		console.log($scope.getinvoice[key]['id']);
+
+		//$scope.getinvoice.payed_amount
+
+		$http.post("server/read.php",{'subject': "total_invoice_payed", 'id': $scope.getinvoice[key]['id']})
+		.success(function (response) {
+			console.log(response.records);
+			
+			$scope.getinvoice[key].payed_amount = response.records[0]['payed_amount'];
+			console.log($scope.getinvoice);
+		});
+
+	}
+
 
 	$scope.download_invoice = function(content){
 		console.log(content);
@@ -90,28 +115,61 @@ app.controller('paymentDetailCtrl',function($scope, $rootScope, $routeParams, $h
 	$scope.payment = {};
 	$scope.payment.payment_id = "" + $routeParams.id + "";
 	$scope.payment.payed = 0;
-	console.log($scope.payment);
+
+	var data = 0; 
+	function checkDataisloaded(){
+		data++
+		console.log(data);
+		if(data === 2){
+			console.log($scope.payment.payed);
+			$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
+			$scope.payment.amount = $scope.payment.amount.toFixed(2);
+			$scope.payment.amount_show = $scope.payment.amount;
+			console.log($scope.payment.amount);
+		}
+	}
 
 	$http.post("server/read.php",{'subject': "get_paymentinfo", 'args': $scope.payment})
 	.success(function (response) {
-		console.log(response)
 		$scope.payment.payemntinfo = response.records[0]
 		console.log($scope.payment.payemntinfo);
 		$scope.payment.amount = $scope.payment.payemntinfo.total;
+		checkDataisloaded();
 	});
 
 	$http.post("server/read.php",{'subject': "get_paymentinfo_payed", 'args': $scope.payment})
 	.success(function (response) {
 		console.log(response.records[0])
-		$scope.payment.payed = response.records[0]['total_amount'];
+		
+		if(response.records[0]['total_amount']){
+			$scope.payment.payed = response.records[0]['total_amount'];	
+		}
+		//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
+		checkDataisloaded();
+	});
+
+	$http.post("server/read.php",{'subject': "get_paymentinfo_payed_rows", 'args': $scope.payment})
+	.success(function (response) {
+		console.log(response.records)
+		$scope.payment.rows = response.records
+		//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
+		//checkDataisloaded();
 	});
 
 
+
+
+	
+	console.log($scope.payment);
 	$scope.payment.pay_invoice = function(){
 		console.log($scope.payment.amount);
 		console.log($scope.payment);
 		if(!$scope.payment.amount){
 			alert("Vul het totale bedrag in")
+			return false;
+		}
+		if(!$scope.payment.paymenttype){
+			alert("Kies een betaalmethode")
 			return false;
 		}
 		$http.post("server/insert.php",{'subject': "add_payment", 'args': $scope.payment})

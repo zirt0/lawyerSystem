@@ -71,11 +71,12 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 			}).success(function (response) {
 				$scope.case = response;
 				console.log($scope.case);
+				$rootScope.succesModalBox(true,'Dossier is succesvol gesloten', '/cases');
 			});	
 	    }
 		
 
-		$rootScope.succesModalBox(true,'Dossier is succesvol gesloten', '/cases')
+		
 
 	}
 

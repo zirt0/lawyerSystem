@@ -1,4 +1,4 @@
-function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter){
+function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter, $location){
 
 ///creeer pdf
 	var tableex = {table: {
@@ -68,6 +68,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 		$scope.honorarium = 0;
 		$scope.minutes = 0;
 		$scope.office_charge = 0;
+		$scope.usersubscription.minutes_used_total = 0; 
 		
 		for(x in declarationDetail){
 			console.log("it is looping")
@@ -125,10 +126,15 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter)
 
 							console.log("VALT BINNEN ABONEMENT TIJD");
 							///when you have enough minutes to use
-							$scope.usersubscription.minutes_left = $scope.usersubscription.minutes_left - parseFloat($scope.declarationDetail[x]['time']);
+							$scope.usersubscription.minutes_used = parseFloat($scope.declarationDetail[x]['time']);
+							$scope.usersubscription.minutes_used_total += $scope.usersubscription.minutes_used; 
+							$scope.usersubscription.minutes_left = $scope.usersubscription.minutes_left - $scope.usersubscription.minutes_used;
+							
 							var	hourrate = "ABO";
 							var amount = 0;
 							console.log($scope.usersubscription.minutes_left);
+							console.log($scope.usersubscription.minutes_used);
+							console.log($scope.usersubscription);
 
 						}else{
 
@@ -299,7 +305,7 @@ var docDefinition = {
 	       ], margin: [0 ,30 ]
 	    }
    ]
- };
+};
 
  docDefinition.content.push(tableex);
  docDefinition.content.push(resume);
@@ -323,7 +329,7 @@ today = dd+'-'+mm+'-'+yyyy;
 
 
 $scope.createInvoicePDF = function(){
-	var invoicePDF = {
+	$scope.invoicePDF = {
 	content: [
 		{ 
 			text: '' + $scope.invoiceInfo.customerInfo.company + ' \n ' + $scope.invoiceInfo.customerInfo.address +' \n ' + $scope.invoiceInfo.customerInfo.zipcode + ' ' + $scope.invoiceInfo.customerInfo.city + '  ',
@@ -376,54 +382,101 @@ $scope.createInvoicePDF = function(){
 						]
 				},
 				layout: 'noBorders'
+		}],
+		styles: {
+			adres: {
+				fontSize: 13,
+				bold: true,
+				alignment: 'right'
+			},
+			subheader: {
+				fontSize: 13,
+				bold: false
+			},
+			quote: {
+				italics: true
+			},
+			small: {
+				fontSize: 12
+			}
 		}
-	],
-	styles: {
-		adres: {
-			fontSize: 13,
-			bold: true,
-			alignment: 'right'
-		},
-		subheader: {
-			fontSize: 13,
-			bold: false
-		},
-		quote: {
-			italics: true
-		},
-		small: {
-			fontSize: 12
-		}
-	}
-}	
-pdfMake.createPdf(invoicePDF).open();
-}
+	}	
+	pdfMake.createPdf($scope.invoicePDF).open();
+	
 
-
-
-
- $scope.downloadPDF = function(data){
- 	$scope.loopdeclaration();
- 	console.log($scope.declaration_credits.case_id);
- 	pdfMake.createPdf(docDefinition).open();
- 	
- 	
-
-
- if(data){
- 	pdfMake.createPdf(docDefinition).getBase64(function(dataURL){
- 		console.log(dataURL);
- 		$scope.invoiceInfo.pdf_one = dataURL;
+	pdfMake.createPdf($scope.invoicePDF).getBase64(function(dataURL){
+ 		//console.log(dataURL);
+ 		$scope.invoiceInfo.pdf_two = dataURL;
  		console.log($scope.invoiceInfo);
+		$scope.checkdataisloaded();
+
+ 	});
+	
+}
+$scope.counter = 0;
+$scope.checkdataisloaded = function(){
+
+	$scope.counter++;
+	console.log($scope.counter);
+	if($scope.counter === 2){
+		console.log($scope.invoiceInfo.pdf_one);
+		console.log($scope.invoiceInfo.pdf_two);
 
 		$http.post("server/insert.php",{'subject': "insert_invoice", 'args': $scope.invoiceInfo})
 		.success(function (response) {
 			console.log(response)
 		});
 
+		if($scope.usersubscription.abo === true){
+
+			$http.post("server/update.php",{'subject': "update_subscription_used", 'args': $scope.usersubscription})
+		.success(function (response) {
+			console.log(response)
+		});
+
+		}
+
 		$rootScope.update_option('invoice_number', $scope.invoiceInfo.invoiceId.substring(4));
+		$location.path( "/declarations" );
+	
+	}
+
+}
+
+
+
+//bekijk voorproefje
+$scope.downloadPDF = function(data){
+ 	$scope.loopdeclaration();
+ 	console.log($scope.declaration_credits.case_id);
+ 	pdfMake.createPdf(docDefinition).open();
+
+ 	
+ 	
+
+ if(data){
+
+ 	pdfMake.createPdf(docDefinition).getBase64(function(dataURL){
+ 		console.log(dataURL);
+ 		$scope.invoiceInfo.pdf_one = dataURL;
+ 		$scope.checkdataisloaded();
 
  	});
+
+
+ 	// pdfMake.createPdf(docDefinition).getBase64(function(dataURL){
+ 	// 	console.log(dataURL);
+ 	// 	$scope.invoiceInfo.pdf_one = dataURL;
+ 	// 	console.log($scope.invoiceInfo);
+
+		// $http.post("server/insert.php",{'subject': "insert_invoice", 'args': $scope.invoiceInfo})
+		// .success(function (response) {
+		// 	console.log(response)
+		// });
+
+		// $rootScope.update_option('invoice_number', $scope.invoiceInfo.invoiceId.substring(4));
+
+ 	// });
  }
 
  	docDefinition.content[2]['table']['body'] = [];
@@ -434,6 +487,8 @@ pdfMake.createPdf(invoicePDF).open();
 	
  } ;
 
+
+//maak factuur
 $scope.createInvoice = function(){
 
  	//check selected rows

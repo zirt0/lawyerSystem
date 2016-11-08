@@ -30,6 +30,44 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 		console.log(response);
 	});
 
+	//get_customer_financial_details
+
+	$http.post("server/read.php",{'subject': "get_customer_financial_details", 'id': $scope.customerId})
+	.success(function (response) {
+
+		$scope.customerDetails.financial_info = response.records[0];
+
+		console.log($scope.customerDetails);
+
+	});
+	//check totaal facturen uitgedraaid
+	$http.post("server/read.php",{'subject': "total_invoice", 'id': $scope.customerId})
+	.success(function (response) {
+		console.log(response);
+		$scope.customerDetails.financial_info.total_invoice = response.records[0].total_invoice;
+		
+
+	});
+
+	//total_invoice_payed
+	//check hoeveel facturen er zijn betaald
+	$http.post("server/read.php",{'subject': "total_invoice_payed", 'id': $scope.customerId})
+	.success(function (response) {
+		console.log(response);
+		if(response.records[0].total_payed){
+		$scope.customerDetails.financial_info.total_payed = response.records[0].total_payed;
+		}else{
+			$scope.customerDetails.financial_info.total_payed = 0;
+
+		}
+
+		$scope.percentage = parseInt(($scope.customerDetails.financial_info.total_payed / $scope.customerDetails.financial_info.total_invoice) * 100);
+		console.log($scope.percentage);
+		$( ".circlestat" ).data( "text", $scope.percentage +"%" );
+		$( ".circlestat" ).data( "percent", $scope.percentage );
+		$('.circlestat').circliful();
+	});
+
 	$scope.getSubscriptionList = function(){
 		$http.post("server/read.php",{'subject': "subscription", "id": $scope.customerId  })
 		.success(function (response) {
@@ -60,9 +98,11 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 			console.log( parseInt($scope.subscription_minutes_percentage));
 	});
 
-	$('.circlestat').circliful();
+	//$('.circlestat').circliful();
 
-	$( ".circlestat" ).data( "percent", $scope.subscription_minutes_percentage );
+	
+	
+	//$( ".circlestat" ).data( "percent", $scope.subscription_minutes_percentage );
 
 	$scope.add_subscription_panel = false;
 	$scope.add_subscription = function(event){

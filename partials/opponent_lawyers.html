@@ -1,0 +1,19 @@
+<div class="large-12 columns no-padding"><input type="text" class="form-control" ng-model="query" ng-change="updateFilteredList()" placeholder="Zoeken"></div>
+
+     <table class="table table-striped table-bordered">
+     	<tr>
+               <th>Kantoor</th>
+     		<th>Advocaat</th>
+     		<th>Tel.</th>
+     		<th>Email</th>
+     		<th>Adres</th>
+
+     	</tr>
+     	<tr ng-repeat='x in lawyers| filter: query'>
+               <td>{{x.lawyer_company}}</td>
+     		<td>{{x.lawyer_fname}} {{x.lawyer_fname}} </td>
+     		<td>{{x.lawyer_tel}}</td>
+     		<td><a href='mailto:{{x.lawyer_email}}'>{{x.lawyer_email}}</a></td>
+     		<td>{{x.lawyer_address}}<br>{{x.lawyer_zipcode}} {{x.lawyer_city}}</td>
+     	</tr>
+     </table>

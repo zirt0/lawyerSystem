@@ -203,8 +203,8 @@ if($subject == "notes_add"){
 
 if($subject == "insert_invoice"){
 
-	$sql = "INSERT INTO invoice (invoice_alias, user_id, discount_amount, content, total, belaste_ver, onbelaste_ver)
-			VALUES ( '" . $args->invoiceId . "', '" . $args->user_id . "', '" . $args->discountAmount . "', '" . $args->pdf_one . "', '" . $args->total_onbelaste_verschotten . "', '" . $args->belaste_ver . "', '" . $args->onbelaste_ver . "')";
+	$sql = "INSERT INTO invoice (invoice_alias, user_id, discount_amount, content, content_invoice, total, belaste_ver, onbelaste_ver)
+			VALUES ( '" . $args->invoiceId . "', '" . $args->user_id . "', '" . $args->discountAmount . "', '" . $args->pdf_one . "', '" . $args->pdf_two . "', '" . $args->total_onbelaste_verschotten . "', '" . $args->belaste_ver . "', '" . $args->onbelaste_ver . "')";
 
 				if ($conn->query($sql) === TRUE) {
 				    $result = "New record created successfully";

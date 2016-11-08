@@ -217,6 +217,23 @@ if($subject == "update_declarations"){
 				$outp = $sql;
 }
 
+if($subject == "update_subscription_used"){
+
+	$sql = "UPDATE subscription
+			SET minutes_used = minutes_used + " .$args->minutes_used_total . "
+			WHERE subscription.id = '" . $args->id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				$outp = $sql;
+}
+
+
+
 
 $conn->close();
 

@@ -1,0 +1,21 @@
+<div class="large-12 columns no-padding"><input type="text" class="form-control" ng-model="query" ng-change="updateFilteredList()" placeholder="Zoeken"></div>
+
+     <table class="table table-striped table-bordered">
+     	<tr>
+     		<th>Klant</th>
+     		<th>Tel.</th>
+     		<th>Email</th>
+     		<th>Adres</th>
+     		<th>Comment</th>
+     		<th>Advocaat Wederpartij</th>
+
+     	</tr>
+     	<tr ng-repeat='x in opponents| filter: query'>
+     		<td>{{x.opp_fname}} {{x.opp_fname}} <span ng-if='x.opp_company'>- {{x.opp_company}}</span> </td>
+     		<td>{{x.opp_tel}}</td>
+     		<td><a href='mailto:{{x.opp_email}}'>{{x.opp_email}}</a></td>
+     		<td>{{x.opp_address}}<br>{{x.opp_zipcode}} {{x.opp_city}}</td>
+     		<td>{{x.opp_comment}}</td>
+     		<td><a ng-if='x.opp_lawyer_id' class='button radius tiny bg-dark-blue' href='opponent/lawyer/{{x.opp_lawyer_id}}'>Advocaat</a><span ng-if='!x.opp_lawyer_id'>Geen Advocaat</span></td>
+     	</tr>
+     </table>

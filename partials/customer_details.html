@@ -158,20 +158,33 @@
                         <div class="medium-3 columns">
                             <!-- <div class="circle-progress"></div> -->
                             <small class="text-centre"><strong>Betaalde facturen</strong></small>
-                            <div class="circlestat circliful" data-dimension="90" data-text="55%" data-width="8" data-fontsize="16" data-percent="55" data-fgcolor="#222" data-border="5" data-bgcolor="#D5DAE6" data-fill="#FFF" style="width: 90px;"><span class="circle-text" style="line-height: 90px; font-size: 16px;">55%</span></div>
+                            <div class="circlestat circliful" data-dimension="90" data-width="8" data-fontsize="16" data-fgcolor="#222" data-border="5" data-bgcolor="#D5DAE6" data-fill="#FFF" style="width: 90px;"></div>
                         </div>
                         <div class="medium-9 columns ">
                             <div style="margin:0 10px;padding:0 0 0 20px" class="summary-border-left">
                                 <h4>Financieel</h4>
-                                <h6>Bekijk <strong>declaraties</strong> van Cli&euml;nt</h6>
-                                <ul>
+                               <!--  <ul>
                                     <li class="label round bg-green"><a href="#"><i class="text-white fontello-location"></i></a>
                                     </li>
                                     <li class="label round bg-green"><a href="#"><i class="text-white fontello-user-add"></i></a>
                                     </li>
                                     <li class="label round bg-green"><a href="#"><i class="text-white fontello-loop"></i></a>
                                     </li>
-                                </ul>
+                                </ul> -->
+                                <table class='large-12'>
+                                    <tr>
+                                        <th>Totaal Facturen</th>
+                                        <th>Betaald</th>
+                                        <th>Totaal Declaraties</th>
+                                        <th>Totaal Uren</th>
+                                    </tr>
+                                    <tr>
+                                        <td>&euro; {{customerDetails.financial_info.total_invoice}}</td>
+                                        <td>&euro; {{customerDetails.financial_info.total_payed}}</td>
+                                        <td>&euro; {{customerDetails.financial_info.total_declarations}}</td>
+                                        <td>{{customerDetails.financial_info.total_time / 60 | number:1}}uur <small>({{customerDetails.financial_info.total_time}}min)</small></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>

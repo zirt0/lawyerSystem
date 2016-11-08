@@ -1,3 +1,4 @@
+ <div class='row'>
  <div class="large-12 columns">
  <input type="text" ng-model='search.$'>
  <table class='table table-striped table-bordered ng-scope'>
@@ -9,6 +10,7 @@
    <th>Datum</th>
    <th>Download</th>
    <th>Betalen</th>
+   <th>Status</th>
  </tr>
    <tr ng-repeat='x in getinvoice | filter : search | orderBy:"id":false'>
      <td>{{x.id}}</td>
@@ -16,8 +18,19 @@
      <td><strong>{{x.casename}}</strong></td>
      <td>{{x.fname}} {{x.lname}}</td>
      <td>{{x.date}}</td>
-     <td><a href='/downloadpdf.php?id={{x.id}}' class='button tiny radius bg-green' target="_blank">Download</a></td>
-     <td><a href='/#/invoices/{{x.id}}/payment' class='button tiny radius bg-orange'>Betalen</a></td>
+     <td>
+        <a href='downloadpdf.php?id={{x.id}}' class='button tiny radius bg-green' target="_blank"><i class="fa fa-clock-o" aria-hidden="true"></i> Download Uren</a>
+        <a href='downloadpdf.php?id={{x.id}}&brief=true' class='button tiny radius bg-green' target="_blank"><i class="fa fa-file-text-o" aria-hidden="true"></i> Download Brief</a></td>
+     <td><a href='/#/invoices/{{x.id}}/payment' class='button tiny radius bg-black'><i class="fa fa-eur" aria-hidden="true"></i> Betalen</a></td>
+     <td class='text-center'>
+       <div ng-if='x.payed_amount >= x.total && x.payed_amount'><div class="text-green fontello-record"></div></div>
+       
+       <div ng-if='x.payed_amount < x.total && x.payed_amount'><div class="text-orange fontello-record"></div> </div>
+       
+       <div ng-if='!x.payed_amount'><div class="text-red fontello-record"></div></div>
+       <!-- <small>{{x.payed_amount}} / {{x.total}}</small> -->
+     </td>
    </tr>
  </table>
+ </div>
  </div>

@@ -12,9 +12,26 @@ $args = $request->args;
 //print $subject;
 
 
-if($subject == "declaration_remove"){
+if($subject == "declaration_remove_type"){
 
 	$sql = "DELETE FROM declarations_type
+			WHERE id='" . $id . "';";
+
+				if ($conn->query($sql) === TRUE) {
+				    
+				    $result = "Removed";
+				    
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				    //$result = "false";
+				}
+				$outp = $result;
+				//$outp = $sql;
+}
+
+if($subject == "declaration_remove"){
+
+	$sql = "DELETE FROM declarations
 			WHERE id='" . $id . "';";
 
 				if ($conn->query($sql) === TRUE) {

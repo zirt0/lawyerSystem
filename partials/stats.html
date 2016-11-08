@@ -1,0 +1,39 @@
+
+<div class='row'>
+    <div class="large-10 columns ">
+    <h2 class='text-center'>Cirkeldiagram Declaratie overzicht gebruikers</h2>
+    <canvas id="pie" class="chart chart-pie"
+      chart-data="data" chart-labels="labels" chart-options="options">
+    </canvas> 
+    </div>
+</div>
+<div class='row'>
+    <div ng-repeat='x in stats.users' class="large-3 columns left userbox">
+        
+        <div class="large-12 columns box bg-white">
+            <div class="box-header bg-transparent">
+                <!-- tools box -->
+                <h3 class="box-title"><i class="fontello-chart"></i>
+                    <span>Gebruiker stats</span>
+                </h3>
+            </div>
+            <div class='large-12 columns'>
+                <strong>Aantal Declaraties</strong>
+                 <div class='right'>{{x.count}}</div>
+            </div>
+            <div class='large-12 columns'>
+                <strong>Declaraties</strong>
+                <div class='right'>&euro; {{x.amount}}</div>
+            </div>
+            <div class='large-12 columns'>
+                <strong>Gewerkte uren</strong>
+                <div class='right text-right'><i class='fontello-clock'></i>{{x.time / 60 | number:1}}uur<br><small>({{x.time}}min)</small></div>
+            </div>
+            <!--   <img src="img/bag.png"> -->
+            <h6 class="large-12 columns bg-black text-white text-center"><strong>{{x.fname}} {{x.lname}}</strong></h6>
+        </div>
+    </div>
+
+    
+</div>
+

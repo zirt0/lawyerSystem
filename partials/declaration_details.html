@@ -116,7 +116,10 @@
       <!-- <td ng-bind-html='statusCheck(x.invoiced)'></td> -->
         
       </td>
-      <td><button class='tiny radius bg-green' ng-click='editDeclaration($index)'><i class="fontello-edit"></i></button></td>
+      <td>
+        <button class='tiny radius bg-green' ng-click='editDeclaration($index)'><i class="fontello-edit"></i></button>
+        <button class='tiny radius bg-red' ng-click='removeDeclaration($index)'><i class="fontello-cancel"></i></button>
+      </td>
     </tr>
 
   </tbody>
@@ -252,7 +255,7 @@
     
     <p><a ng-click="saveEditDeclaration()" class="secondary button bg-green">Declaratie Opslaan</a>
     </p>
-    <a ng-click="closeDeclarationModal()" class="close-reveal-modal">&#215;</a>
+    <a ng-click="declarationChange.modal = false" class="close-reveal-modal">&#215;</a>
 </div>
 
 

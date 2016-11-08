@@ -38,7 +38,7 @@ app.controller('settingsCtrl',function($scope, $rootScope, $http){
 	
 
 
-	$scope.remove_declartion = function(id){
+	$scope.remove_declarationType = function(id){
 		console.log(id)
 		$http.post("server/remove.php",{'subject': "declaration_remove", "id": id})
 		.success(function (response) {
