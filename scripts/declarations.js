@@ -60,6 +60,10 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	});
 
 
+	$scope.changeDateFormat = function(date){
+
+		return moment(date).format('DD-MM-YYYY');  
+	}
 
 	console.log($scope.args);
 	$scope.submitDate = function(){
@@ -194,6 +198,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.getDeclarationfromcase})
 		.success(function (response) {
+			//console.log(response);
 			$scope.declarationDetail = response.records;
 
 			$scope.editingData = {};

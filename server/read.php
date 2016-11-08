@@ -293,19 +293,19 @@ if($subject == "declarations"){
 			LEFT JOIN users ON cases.user_id = users.id";
 	
 	if ($decl->case_id && !$decl->get_from_date && !$decl->all_invoiced){
-		$sql .= " WHERE case_id ='" . $decl->case_id ."' AND declarations.invoiced = 0 ORDER BY declarations.`id` DESC";
+		$sql .= " WHERE case_id ='" . $decl->case_id ."' AND declarations.invoiced = 0 ORDER BY declarations.`declaration_date` DESC";
 	}
 
 	if ($decl->start_date){
-		$sql .= " WHERE declarations.case_id ='". $decl->case_id ."' AND declarations.declaration_date BETWEEN '". $decl->start_date ."' AND '". $decl->end_date ." 23:59:00' AND declarations.invoiced = 0 ORDER BY declarations.id DESC";
+		$sql .= " WHERE declarations.case_id ='". $decl->case_id ."' AND declarations.declaration_date BETWEEN '". $decl->start_date ."' AND '". $decl->end_date ." 23:59:00' AND declarations.invoiced = 0 ORDER BY declarations.declaration_date DESC";
 	}
 
 	if ($decl->invoiced){
-		$sql .= " WHERE invoiced ='" . $decl->invoiced ."' ORDER BY declarations.`id` DESC";
+		$sql .= " WHERE invoiced ='" . $decl->invoiced ."' ORDER BY declarations.`declaration_date` DESC";
 	}
 
 	if ($decl->case_id && $decl->all_invoiced){
-		$sql .= "  WHERE case_id ='" . $decl->case_id ."' AND invoiced !='' ORDER BY declarations.`id` DESC";
+		$sql .= "  WHERE case_id ='" . $decl->case_id ."' AND invoiced !='' ORDER BY declarations.`declaration_date` DESC";
 	}
 
 	if ($decl->user_id){
@@ -313,7 +313,7 @@ if($subject == "declarations"){
 	}
 
 	if ($decl->orderBy){
-		$sql .= " ORDER BY declarations.`id` " . $decl->orderBy;
+		$sql .= " ORDER BY declarations.`declaration_date` " . $decl->orderBy;
 	}
 
 	if ($decl->limit){
@@ -351,6 +351,7 @@ if($subject == "declarations"){
 
 	    $outp .= '"declaration_name":"'. $rs["declaration_name"]    . '"}'; 
 	}
+		
 	$outp ='{"records":['.$outp.']}';
 	//$outp = $sql;
 }

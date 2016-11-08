@@ -163,7 +163,8 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 			$scope.minutes += parseFloat($scope.declarationDetail[x]['time']);
 
 
-			var declartion_row = 	[declarationDetail[x]['declaration_date'], 
+			var declartion_row = 	[
+									$scope.changeDateFormat(declarationDetail[x]['declaration_date']), 
 									declarationDetail[x]['declaration_name'], 
 									declarationDetail[x]['comment'], 
 									declarationDetail[x]['time'],

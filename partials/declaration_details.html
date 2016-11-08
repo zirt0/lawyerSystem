@@ -82,8 +82,7 @@
   </thead>
 
   <tbody>
-
-    <tr ng-repeat="(k,x) in declarationDetail">
+      <tr ng-repeat="(k,x) in declarationDetail | orderObjectBy:x.time track by $index ">
 
       <td>
         <label id="{{x.id}}"></label>
@@ -93,7 +92,7 @@
         {{x.id}}
       </td>
       <td>
-        {{x.declaration_date}}
+        {{changeDateFormat(x.declaration_date)}}
       </td>
       <td>
         {{x.casename}}

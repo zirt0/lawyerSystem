@@ -395,6 +395,8 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 			return false;
 		}
 
+		$scope.declaration_credits.price_ex_btw = $scope.declaration_credits.price_ex_btw.replace(/,/g, '.')
+
 
 		$http.post("server/insert.php",{'subject': "insert_declaration_credits", 'args': $scope.declaration_credits})
 		.success(function (response) {
