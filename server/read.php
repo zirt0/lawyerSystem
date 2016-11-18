@@ -78,6 +78,7 @@ if($subject == "customer"){
 	    $outp .= '"tel":"'  . $rs["tel"] . '",';
 	    $outp .= '"alt_tel":"'  . $rs["alt_tel"] . '",';
 	    $outp .= '"email":"'  . $rs["email"] . '",';
+	    $outp .= '"alt_email":"'  . $rs["alt_email"] . '",';
 	    $outp .= '"reference":"'  . $rs["reference"] . '",';
 	    $outp .= '"address":"'  . $rs["address"] . '",';
 	    $outp .= '"zipcode":"'  . $rs["zipcode"] . '",';
