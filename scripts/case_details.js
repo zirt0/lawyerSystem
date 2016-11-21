@@ -30,6 +30,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 		$scope.case.btw = boleonType($scope.case.btw);
 		$scope.case.opponentcheck = checkOpponent($scope.case.opponent_id);
 		$scope.case.adviesdossier = checkOpponent($scope.case.adviesdossier);
+		$scope.case.incassodossier = checkOpponent($scope.case.incassodossier);
 		//adviesdossier
 		$rootScope.pageData.breadcrumps.push($scope.case.casename);
 	});
@@ -243,6 +244,51 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 		});
 	}
 	$scope.loadDeclaration();
+
+	//total minutes declarations used
+	$scope.totalMinutesUsed = function(){
+		$scope.declarationMinutes = {};
+		$scope.declarationMinutes.case_id = $scope.declaration.case_id;
+		$http.post("server/read.php",{
+		'subject': "declarations_minutes", 'args': $scope.declarationMinutes
+		}).success(function (response) {
+			console.log(response);
+			$scope.case.total_minute = response.records[0].total_minutes;
+			///$scope.declaration_summary = response.records;
+		});
+	}
+	$scope.totalMinutesUsed();
+
+	$scope.totalMinutesUsedInvoiced = function(){
+		$scope.declarationMinutes = {};
+		$scope.declarationMinutes.case_id = $scope.declaration.case_id;
+		$scope.declarationMinutes.check_invoiced = true;
+
+		$http.post("server/read.php",{
+		'subject': "declarations_minutes", 'args': $scope.declarationMinutes
+		}).success(function (response) {
+			console.log(response);
+			$scope.case.total_minute_invoiced = response.records[0].total_minutes;
+			///$scope.declaration_summary = response.records;
+		});
+	}
+	$scope.totalMinutesUsedInvoiced();
+
+	$scope.totalMinutesUsedNotInvoiced = function(){
+		$scope.declarationMinutes = {};
+		$scope.declarationMinutes.case_id = $scope.declaration.case_id;
+		$scope.declarationMinutes.check_not_invoiced = true;
+
+		$http.post("server/read.php",{
+		'subject': "declarations_minutes", 'args': $scope.declarationMinutes
+		}).success(function (response) {
+			console.log(response);
+			$scope.case.total_minute_not_invoiced = response.records[0].total_minutes;
+			///$scope.declaration_summary = response.records;
+		});
+	}
+	$scope.totalMinutesUsedNotInvoiced();
+
 
 
 	$scope.notes = {};

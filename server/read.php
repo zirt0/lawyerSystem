@@ -175,6 +175,7 @@ if($subject == "casedetail"){
 	    $outp .= '"office_charge":"'   . $rs["office_charge"]        . '",';
 	    $outp .= '"btw":"'   . $rs["btw"]        . '",';
 	    $outp .= '"adviesdossier":"'   . $rs["adviesdossier"]        . '",';
+	    $outp .= '"incassodossier":"'   . $rs["incassodossier"]        . '",';
 	    $outp .= '"process":"'   . $rs["process"]        . '",';
 	    $outp .= '"confidential":"'   . $rs["confidential"]        . '",';
 	    $outp .= '"belang":"'   . $rs["belang"]        . '",';
@@ -828,8 +829,13 @@ if($subject == "users_stats"){
 
 	$sql = "SELECT user_id, SUM(amount) as amount, SUM(time) as time, COUNT(amount) as count, users.lname, users.fname, users.hourrate 
 			FROM declarations
-			LEFT JOIN users ON declarations.user_id = users.id
-			GROUP BY user_id";
+			LEFT JOIN users ON declarations.user_id = users.id";
+			
+	if ($args->start_date && $args->end_date){
+		$sql .= " WHERE declarations.declaration_date BETWEEN '". $args->start_date ."' AND '". $args->end_date ." 23:59:00'";
+	}			 	
+	
+	$sql .=  " GROUP BY user_id";
 	$result = $conn->query($sql);
 
 	$outp = "";
@@ -844,6 +850,7 @@ if($subject == "users_stats"){
 	    $outp .= '"hourrate":"'  . $rs["hourrate"] . '"}';
 	}
 	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
 }
 
 if($subject == "total_invoice"){
@@ -905,6 +912,65 @@ if($subject == "total_invoice_payed"){
 	}
 	$outp ='{"records":['.$outp.']}';
 }
+
+if($subject == "declarations_minutes"){
+
+	$sql = "SELECT SUM(time) as total_minutes FROM declarations
+			WHERE case_id =" . $args->case_id ;
+			
+
+	if ($args->check_invoiced){
+		$sql .= " AND invoiced != '0'" ;
+	}
+
+	if ($args->check_not_invoiced){
+		$sql .= " AND invoiced = '0'" ;
+	}
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"total_minutes":"'  . $rs["total_minutes"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
+//user_declarations_details
+if($subject == "user_declarations_details"){
+
+	$sql = "SELECT declarations.amount, declarations.time, declarations.comment, declarations.declaration_date,
+cases.casename,
+declarations_type.declaration_name  FROM declarations 
+LEFT JOIN cases ON declarations.case_id = cases.id 
+LEFT JOIN declarations_type ON declarations.type_declaration = declarations_type.id 
+WHERE declarations.user_id = " . $args->user_id ;
+			
+
+	if ($args->check_invoiced){
+		$sql .= " AND invoiced != '0'" ;
+	}
+
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"amount":"'  . $rs["amount"] . '",';
+	    $outp .= '"time":"'  . $rs["time"] . '",';
+	    $outp .= '"comment":"'  . $rs["comment"] . '",';
+	   	$outp .= '"declaration_date":"'  . $rs["declaration_date"] . '",';
+	   	$outp .= '"casename":"'  . $rs["casename"] . '",';
+	    $outp .= '"declaration_name":"'. $rs["declaration_name"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
 
 $conn->close();
 

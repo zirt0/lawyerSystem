@@ -1,4 +1,24 @@
   <!-- Container Begin -->
+ <!--  <span class="right bg-green radius" style='position: absolute; right: 33px; margin-top: -30px; padding: 10px 30px;'><i class="fa fa-clock-o" aria-hidden="true"></i> {{case.total_minute}}{{case.total_minute_invoiced}}/{{case.total_minute_not_invoiced}} minutes</span>  -->
+  <table style='position: absolute; right: 30px; margin-top: -60px;'>
+    <tr class=>
+        <th class='text-white1'>Totaal Minuten</th>
+        <th class='text-white1'>Gedecl. Minuten</th>
+        <th class='text-white1'>Niet Gedecl. Minuten</th>
+    </tr>
+    <tr class='bg-green1'>
+        <td class='text-white1'><i class="fa fa-clock-o" aria-hidden="true"></i> {{case.total_minute}}</td>
+        <td class='text-white1'><i class="fa fa-clock-o" aria-hidden="true"></i>
+            <span ng-if='!case.total_minute_invoiced'>0</span> {{case.total_minute_invoiced}}
+            <span ng-if='!case.total_minute_invoiced'>{{case.total_minute_invoiced}}</span>
+        </td>
+        <td class='text-white1'>
+            <i class="fa fa-clock-o" aria-hidden="true"></i> 
+             <span ng-if='!case.total_minute_not_invoiced'>0</span> {{case.total_minute_not_invoiced}}
+            <span ng-if='!case.total_minute_not_invoiced'>{{case.total_minute_not_invoiced}}</span>
+        </td>
+    </tr>
+  </table>
     <div class="row" style="margin-top:-20px">
         <!-- zaak aanmaken -->
         <div class="large-5 columns">
@@ -204,6 +224,23 @@
                                 </div>
                             </div>
                             <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.adviesdossier)">
+                            </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns">
+                            <label for="adviesdossier"><strong>Incassodossier:</strong></label> </div>
+                             
+                            <div ng-show="!editCaseDetails" class="large-6 columns">
+
+                                <div class="switch round">
+                                    <input id="incassodossier" type="checkbox" ng-model="case.incassodossier">
+                                    <label for="incassodossier">
+                                      <span class="switch-on">Ja</span>
+                                      <span class="switch-off">Nee</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div ng-show="editCaseDetails" class="large-6 columns" ng-bind-html="boleonTypeCircle(case.incassodossier)">
                             </div>
                         </div>
                         

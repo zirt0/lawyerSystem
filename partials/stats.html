@@ -6,10 +6,33 @@
       chart-data="data" chart-labels="labels" chart-options="options">
     </canvas> 
     </div>
+    <div class="large-2 columns panel">
+
+        <div class="small-text"><strong>Selecteer Periode</strong></div>
+      
+        <div class="large-12 columns">
+            <label>Van</label>
+            <input type="datetime" date-time min-view="date" auto-close="true" view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.start_date'>
+        </div>
+
+        <div class="large-12 columns">
+        
+            <label>Tot</label>
+            <input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.end_date'>
+
+        </div>
+
+        <div class="large-12 columns">
+
+          <button class="tiny" ng-click="submitDate()">Verstuur</button>
+
+        </div>
+      
+    </div>
 </div>
 <div class='row'>
     <div ng-repeat='x in stats.users' class="large-3 columns left userbox">
-        
         <div class="large-12 columns box bg-white">
             <div class="box-header bg-transparent">
                 <!-- tools box -->

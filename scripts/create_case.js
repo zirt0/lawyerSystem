@@ -55,6 +55,7 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
 	$scope.case.btw = true;
 	$scope.case.eigenbijdrage = false;
 	$scope.case.process = true;
+	$scope.case.incassodossier = false;
 
 
 	var getDate = new Date();

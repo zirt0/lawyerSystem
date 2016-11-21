@@ -9,14 +9,53 @@ Totaal onbelaste verschotten: &euro; {{declaration_credits.total_no_tax}}
 		<th>Beschrijving</th>
 		<th>Bedrag <small>Ex btw</small></th>
 		<th>BTW</th>
+		<th>Actie</th>
 
 	</tr>
 	<tr ng-repeat='x in declaration_credits.credits'>
 		<td>{{x.id}}</td>
 		<td>{{x.credit_name}}</td>
 		<td>&euro; {{x.price_ex_btw}}</td>
-		<td ng-if="x.btw === '1'">Wel</td>
-		<td ng-if="x.btw === '0'">Geen</td>
+		<td ng-if="x.btw === '1' || x.btw === true">Wel</td>
+		<td ng-if="x.btw === '0' || x.btw === false">Geen</td>
+		<td>
+        	<button class='tiny radius bg-green right' ng-click='editCredit($index)'><i class="fontello-edit"></i></button>
+        	<button class='tiny radius bg-red right' ng-click='removeCredit(x.id)'><i class="fontello-cancel"></i></button>
+      	</td>
 	</tr>
 </table>
 </row>
+
+<div ng-if="creditChange.modal" id="firstModal" class="reveal-modal open animate-if" style="display: block; visibility: visible; position: fixed;">
+    <h2>Wijzig Credit met ID {{creditChange.array.id}}</h2>
+
+    <p ng-repeat='x in creditChange.array'></p>
+<!--     <div class="small-6 columns">
+        <label>Datum</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="creditChange.array.declaration_date"/>
+    </div> -->
+    <div class="small-12 columns">
+        <label>Naam</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="creditChange.array.credit_name"/>
+    </div>
+    <div class="small-10 columns">
+        <label>Prijs<small>ex BTW</small>	</label>
+        <input name="firstPassword" class="small-6 columns" type="text" ng-model="creditChange.array.price_ex_btw"/>
+    </div>
+    <div class="small-2 columns">
+        <label>BTW</label>
+        <div class="switch round">
+            <input id="btw" type="checkbox" ng-model="creditChange.array.btw">
+            <label for="btw">
+              <span class="switch-on">Ja</span>
+              <span class="switch-off">Nee</span>
+            </label>
+        </div>
+    </div>
+    
+    <div class="small-12 columns">
+    	<p><a ng-click="saveEditCredits()" class="secondary button bg-green">Opslaan</a></p>
+    	
+    </div>
+    <a ng-click="creditChange.modal = false" class="close-reveal-modal">&#215;</a>
+</div>

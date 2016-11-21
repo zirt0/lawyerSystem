@@ -40,7 +40,7 @@ if($subject == "createCase"){
 		}
 	}
 
-	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, adviesdossier, belang, prognose, rolnaam, user_id, case_id_alias)
+	$sql = "INSERT INTO cases (casename, customer_id, opponent_id, case_type, comment, status, process, toevoeging, confidential, office_charge, btw, adviesdossier, incassodossier, belang, prognose, rolnaam, user_id, case_id_alias)
 			VALUES ( '" . $args->case_name . "', 
 					'" . $args->customer_id . "', 
 					'" . $opp_id . "', 
@@ -53,6 +53,7 @@ if($subject == "createCase"){
 					'" . $args->office_charge . "', 
 					'" . $args->btw . "',
 					'" . $args->adviesdossier . "',  
+					'" . $args->incassodossier . "',  
 					'" . $args->belang . "', 
 					'" . $args->prognose . "', 
 					'" . $args->rolnaam . "',
@@ -234,8 +235,8 @@ if($subject == "insert_declaration_credits"){
 //add_payment
 if($subject == "add_payment"){
 
-	$sql = "INSERT INTO payments (invoice_id, amount, type)
-			VALUES ( '" . $args->payment_id . "', '" . $args->amount . "', '" . $args->paymenttype . "')";
+	$sql = "INSERT INTO payments (invoice_id, amount, type, date)
+			VALUES ( '" . $args->payment_id . "', '" . $args->amount . "', '" . $args->paymenttype . "', '" . $args->payment_date . "')";
 
 				if ($conn->query($sql) === TRUE) {
 				    $result = "New record created successfully";

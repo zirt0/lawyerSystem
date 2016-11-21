@@ -126,41 +126,45 @@ app.controller('paymentDetailCtrl',function($scope, $rootScope, $routeParams, $h
 			$scope.payment.amount = $scope.payment.amount.toFixed(2);
 			$scope.payment.amount_show = $scope.payment.amount;
 			console.log($scope.payment.amount);
+			data = 0;
 		}
 	}
 
-	$http.post("server/read.php",{'subject': "get_paymentinfo", 'args': $scope.payment})
-	.success(function (response) {
-		$scope.payment.payemntinfo = response.records[0]
-		console.log($scope.payment.payemntinfo);
-		$scope.payment.amount = $scope.payment.payemntinfo.total;
-		checkDataisloaded();
-	});
+	$scope.checkifPayed = function(){
+		$http.post("server/read.php",{'subject': "get_paymentinfo", 'args': $scope.payment})
+		.success(function (response) {
+			$scope.payment.payemntinfo = response.records[0]
+			console.log($scope.payment.payemntinfo);
+			$scope.payment.amount = $scope.payment.payemntinfo.total;
+			checkDataisloaded();
+		});
 
-	$http.post("server/read.php",{'subject': "get_paymentinfo_payed", 'args': $scope.payment})
-	.success(function (response) {
-		console.log(response.records[0])
-		
-		if(response.records[0]['total_amount']){
-			$scope.payment.payed = response.records[0]['total_amount'];	
-		}
-		//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
-		checkDataisloaded();
-	});
+		$http.post("server/read.php",{'subject': "get_paymentinfo_payed", 'args': $scope.payment})
+		.success(function (response) {
+			console.log(response.records[0])
+			
+			if(response.records[0]['total_amount']){
+				$scope.payment.payed = response.records[0]['total_amount'];	
+			}
+			//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
+			checkDataisloaded();
+		});
+	}
+	$scope.checkifPayed();	
 
-	$http.post("server/read.php",{'subject': "get_paymentinfo_payed_rows", 'args': $scope.payment})
-	.success(function (response) {
-		console.log(response.records)
-		$scope.payment.rows = response.records
-		//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
-		//checkDataisloaded();
-	});
+	$scope.getPaymentsData = function(){
+		$http.post("server/read.php",{'subject': "get_paymentinfo_payed_rows", 'args': $scope.payment})
+		.success(function (response) {
+			console.log(response.records)
+			$scope.payment.rows = response.records
+			//$scope.payment.amount = $scope.payment.amount - $scope.payment.payed;
+			//checkDataisloaded();
+		});
+	}
+	$scope.getPaymentsData();
 
+	$scope.payment.payment_date = moment();
 
-
-
-	
-	console.log($scope.payment);
 	$scope.payment.pay_invoice = function(){
 		console.log($scope.payment.amount);
 		console.log($scope.payment);
@@ -172,10 +176,15 @@ app.controller('paymentDetailCtrl',function($scope, $rootScope, $routeParams, $h
 			alert("Kies een betaalmethode")
 			return false;
 		}
+		//$scope.end_date.format("YYYY-MM-DD");
+		$scope.payment.payment_date = $scope.payment.payment_date.format("YYYY-MM-DD");
 		$http.post("server/insert.php",{'subject': "add_payment", 'args': $scope.payment})
 		.success(function (response) {
 			console.log(response)
-			$rootScope.succesModalBox(true, "Betaling is succesvol opgeslagen", "/invoices/")
+			$rootScope.succesModalBox(true, "Betaling is succesvol opgeslagen", "/invoices/"+$scope.payment.payment_id + "/payment");
+			$scope.getPaymentsData();
+			$scope.checkifPayed();
+			$scope.payment.payment_date = moment();
 
 		});
 

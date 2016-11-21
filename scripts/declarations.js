@@ -182,6 +182,49 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	}
 	$scope.getDeclaration_credits();
 
+		$scope.removeCredit = function(id){
+
+		console.log('remove credit is removed');
+		var r = confirm("Weet u zeker dat u wilt verwijderen?");
+	    
+	    if (r == true) {
+	    	$http.post("server/remove.php",{'subject': "remove_declarations_credits", 'id': id})
+			.success(function (response) {
+				console.log(response)
+				$scope.getDeclaration_credits();
+
+			});
+	    }
+
+		
+	}
+	 
+	$scope.creditChange = {};
+
+	$scope.editCredit = function(id){
+		console.log(id);
+
+		$scope.creditChange.modal = true;
+
+		$scope.creditChange.array = $scope.declaration_credits.credits[id];
+
+		console.log($scope.creditChange);
+
+	}
+
+	$scope.saveEditCredits = function(){
+		//$scope.creditChange.array
+		$http.post("server/update.php",{'subject': "update_credits", 'args': $scope.creditChange.array})
+		.success(function (response) {
+			console.log(response);
+			$scope.creditChange.modal = false;
+
+			//$scope.closeDeclarationModal();
+			$rootScope.succesModalBox(true, "Declaratie is succesvol gewijzigd")
+		});
+
+	}
+
 	$scope.getDeclarations = function(args){
 
 		if(args){

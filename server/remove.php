@@ -80,6 +80,24 @@ if($subject == "remove_subscription"){
 				//$outp = $sql;
 }
 
+//remove_declarations_credits
+
+if($subject == "remove_declarations_credits"){
+
+	$sql = "DELETE FROM declarations_credits
+			WHERE id='" . $id . "';";
+
+				if ($conn->query($sql) === TRUE) {
+				    
+				    $result = "Removed";
+				    
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				    //$result = "false";
+				}
+				$outp = $result;
+				//$outp = $sql;
+}
 
 
 $conn->close();

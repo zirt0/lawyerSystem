@@ -171,27 +171,46 @@ app.controller('statsCtrl',function($scope, $rootScope, $http){
 	}
 
 	$scope.stats = {};
-	$http.post("server/read.php",{'subject': "users_stats"})
-	.success(function (response) {
-		console.log(response.records)
-		$scope.stats.users = response.records;
-		console.log($scope.stats.users);
-		//$scope.dashboard.count_customers = response.records[0].count_customers;
-		//console.log($scope.dashboard.count_declaration);
+	$scope.start_date = moment().subtract(30, 'day');
+	$scope.end_date = moment();
+	
+	$scope.getStatsofUser = function(){
 
-		$scope.labels = [];
-		$scope.data = [];
-		angular.forEach($scope.stats.users, function(value, key) {
-		 	
-		 	$scope.data.push(value['amount']);
-		 	$scope.labels.push(value['fname'] + " " + value['lname']);
-		 	console.log($scope.labels);
-		 	//console.log(value['amount'] + " " +key);
+		$scope.stats.start_date = $scope.start_date.format('YYYY-MM-DD');
+		$scope.stats.end_date = $scope.end_date.format("YYYY-MM-DD");
+		console.log($scope.stats.start_date);
+
+		$http.post("server/read.php",{'subject': "users_stats", "args": $scope.stats})
+		.success(function (response) {
+			console.log(response);
+			console.log(response.records)
+			$scope.stats.users = response.records;
+			console.log($scope.stats.users);
+			//$scope.dashboard.count_customers = response.records[0].count_customers;
+			//console.log($scope.dashboard.count_declaration);
+
+			$scope.labels = [];
+			$scope.data = [];
+			angular.forEach($scope.stats.users, function(value, key) {
+			 	
+			 	$scope.data.push(value['amount']);
+			 	$scope.labels.push(value['fname'] + " " + value['lname']);
+			 	console.log($scope.labels);
+			 	//console.log(value['amount'] + " " +key);
 
 
+			});
 		});
-	}); 
+	}
 
+	$scope.getStatsofUser();
+
+
+	$scope.submitDate = function(){
+		console.log("submit date");
+		$scope.getStatsofUser();
+
+	}
    //$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
   //$scope.data = [300, 500, 100];
 

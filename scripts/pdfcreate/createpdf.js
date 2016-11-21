@@ -104,7 +104,13 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 					var amount = parseFloat((hourrate / 60) * time).toFixed(2);
 					console.log(amount)
 
-				
+				//is het een incassodossier?
+				}else if($scope.caseDetails.adviesdossier == '1' && $scope.caseDetails.incassodossier == '1'){
+					console.log("INCASSODOSSIER");
+
+					var	hourrate = 130;
+					var amount = 0;
+
 				}else{
 					// adviesdossier
 					console.log("adviesdossier === 1");

@@ -142,6 +142,7 @@ if($subject == "update_case"){
 				a.office_charge = '" . $args->office_charge . "',
 				a.btw = '" . $args->btw . "',
 				a.adviesdossier = '" . $args->adviesdossier . "',
+				a.incassodossier = '" . $args->incassodossier . "',
 
 				b.opp_company = '" . $args->opp_company . "',
 				b.opp_fname = '" . $args->opp_fname . "',
@@ -206,6 +207,24 @@ if($subject == "update_declarations"){
 				declarations.amount = '" . $args->amount . "',
 				declarations.time = '" . $args->time . "',
 				declarations.comment = '" . $args->comment . "'
+				WHERE id='" . $args->id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				$outp = $sql;
+}
+
+//update_credits
+if($subject == "update_credits"){
+
+	$sql = "UPDATE declarations_credits 
+			SET declarations_credits.credit_name = '" . $args->credit_name . "',
+				declarations_credits.btw = '" . $args->btw . "',
+				declarations_credits.price_ex_btw = '" . $args->price_ex_btw . "'
 				WHERE id='" . $args->id . "'";
 
 				if ($conn->query($sql) === TRUE) {
