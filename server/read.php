@@ -942,7 +942,7 @@ if($subject == "declarations_minutes"){
 if($subject == "user_declarations_details"){
 
 	$sql = "SELECT declarations.amount, declarations.time, declarations.comment, declarations.declaration_date,
-cases.casename,
+cases.casename,	
 declarations_type.declaration_name  FROM declarations 
 LEFT JOIN cases ON declarations.case_id = cases.id 
 LEFT JOIN declarations_type ON declarations.type_declaration = declarations_type.id 
@@ -970,6 +970,45 @@ WHERE declarations.user_id = " . $args->user_id ;
 	$outp ='{"records":['.$outp.']}';
 	//$outp = $sql;
 }
+
+//
+
+//user_declarations_details
+if($subject == "user_declarations_details_for_chart"){
+
+	$sql = "SELECT DATE(declaration_date) as DATE, SUM(`time`) total_time, SUM(`amount`) total_amount
+FROM declarations ";
+if ($args->user_id){
+	$sql .= " WHERE declarations.user_id = " . $args->user_id;
+}
+
+
+if ($args->start_date && $args->end_date && !$args->user_id){
+	$sql .= " WHERE declaration_date BETWEEN '". $args->start_date ."' AND '". $args->end_date ." 23:59:00'";
+}	
+
+if ($args->start_date && $args->end_date && $args->user_id){
+	$sql .= " AND declaration_date BETWEEN '". $args->start_date ."' AND '". $args->end_date ." 23:59:00'";
+}	
+
+$sql .= " GROUP BY DATE(declaration_date)";
+			
+
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"DATE":"'  . $rs["DATE"] . '",';
+	    $outp .= '"total_time":"'  . $rs["total_time"] . '",';
+	    $outp .= '"total_amount":"'. $rs["total_amount"]    . '"}'; 
+	}
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
+
 
 
 $conn->close();

@@ -7,6 +7,33 @@ app.controller('userDetailsCtrl',function($scope, $rootScope, $http, $routeParam
 	$scope.systemUserDetail = {};
 	$scope.systemUserDetail.user_id = $routeParams.id;
 
+	$http.post("server/read.php",{'subject': "users", 'args': $scope.systemUserDetail})
+	.success(function (response) {
+		$scope.systemUserDetail.user_fname = response.records[0]['fname'];
+		$scope.systemUserDetail.user_lname = response.records[0]['lname'];
+		$scope.systemUserDetail.user_role = response.records[0]['role'];
+
+		//console.log($scope.userDetails);
+
+	});
+
+
+	$scope.start_date = moment().subtract(30, 'day');
+	$scope.end_date = moment();
+
+	
+	//$scope.data_time = [];
+	//$scope.data_amount = [];
+	$scope.total_time = [];
+	$scope.total_amount = [];
+
+	$scope.submitDate = function(){
+
+		$scope.systemUserDetail.start_date = $scope.start_date.format('YYYY-MM-DD');
+		$scope.systemUserDetail.end_date = $scope.end_date.format('YYYY-MM-DD');
+		$scope.getUserDeclarationDetails();
+	}
+
 	$scope.getUserDeclarationDetails = function(){
 		$http.post("server/read.php",{'subject': "user_declarations_details", 'args': $scope.systemUserDetail})
 		.success(function (response) {
@@ -15,22 +42,44 @@ app.controller('userDetailsCtrl',function($scope, $rootScope, $http, $routeParam
 			console.log($scope.systemUserDetail);
 
 		});
+
+		$http.post("server/read.php",{'subject': "user_declarations_details_for_chart", 'args': $scope.systemUserDetail})
+		.success(function (response) {
+			console.log(response)
+			$scope.systemUserDetail.chartdetails = response.records;
+			
+			$scope.data_time = [];
+			$scope.data_amount = [];
+			$scope.labels = [];
+			for(x in $scope.systemUserDetail.chartdetails){
+				$scope.labels.push($scope.systemUserDetail.chartdetails[x]['DATE']);
+				$scope.total_time.push($scope.systemUserDetail.chartdetails[x]['total_time']);
+				
+				$scope.total_amount.push($scope.systemUserDetail.chartdetails[x]['total_amount']);
+			}
+			$scope.data_time.push($scope.total_time);
+			$scope.data_amount.push($scope.total_amount);
+			console.log($scope.data);
+		});
+	}
+
+
+	$scope.throwBack = function(days){
+		$scope.start_date = moment().subtract(days, 'day');
 	}
 
 	$scope.getUserDeclarationDetails();
+	
 
-
-	$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
+  $scope.series_time = ['Tijd in minuten'];
+  $scope.series_amount = ['€'];
+  $scope.colors = ["rgba(139,195,74,1)"];
+ 
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
-  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-  $scope.options = {
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.options_time = {
     scales: {
       yAxes: [
         {
@@ -38,12 +87,18 @@ app.controller('userDetailsCtrl',function($scope, $rootScope, $http, $routeParam
           type: 'linear',
           display: true,
           position: 'left'
-        },
+        }
+      ]
+    }
+  };
+  $scope.options_amount = {
+    scales: {
+      yAxes: [
         {
-          id: 'y-axis-2',
+          id: 'y-axis-1',
           type: 'linear',
           display: true,
-          position: 'right'
+          position: 'left'
         }
       ]
     }

@@ -1,26 +1,74 @@
 
+<div class="row">
+	<div class="large-6 columns">
+	<h3><i class="fa fa-clock-o" aria-hidden="true"></i> Tijd Per Dag</h3>
+		<canvas id="line" class="chart chart-line" chart-data="data_time" chart-labels="labels" chart-series="series_time" chart-options="options_time"
+	chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas>
+	<br>
+	<br>
+	<br>
+	<h3><i class="fa fa-money" aria-hidden="true"></i> Bedrag Per Dag</h3>
+		<canvas id="line" class="chart chart-line" chart-data="data_amount" chart-labels="labels" chart-series="series_amount" chart-options="options_amount" chart-colors="colors" chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas> 
+	</div>
+	<div class="large-6 columns">
+		<div class="large-12 columns panel bg-black">
+		<h3 class='text-white'>Gebruiker: {{systemUserDetail.user_fname}} {{systemUserDetail.user_lname}} <small class='right'>{{systemUserDetail.user_role}}</small></h3>
+		</div>
+		<div class="large-12 columns panel">
 
-<div class="large-6 columns">
-	<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
-chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas> 
-</div>
-<div class="large-6 columns">
-<table>
-	<tr>
-		<th>Declaratienaam</th>
-		<th>Info</th>
-		<th>Zaak</th>
-		<th>Tijd</th>
-		<th>Bedrag</th>
-		<th>datum</th>
-	</tr>
-	<tr ng-repeat='x in systemUserDetail.array'>
-		<td>{{x.declaration_name}}</td>
-		<td>{{x.comment}}</td>
-		<td>{{x.casename}}</td>
-		<td>{{x.time}}</td>
-		<td>&euro; {{x.amount}}</td>
-		<td>{{x.declaration_date}}</td>
-	</tr>
-</table>
+	        <div class="small-text"><strong>Selecteer Periode</strong></div>
+	      
+	        <div class="large-4 columns">
+	        <label>Van</label>
+	        <input type="datetime" date-time min-view="date" auto-close="true"
+	        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.start_date'>
+	        </div>
+
+	        <div class="large-4 columns">
+	        
+	        <label>Tot</label>
+	        <input type="datetime" date-time min-view="date" auto-close="true"
+	        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='$parent.end_date'>
+
+	        </div>
+
+	        <div class="large-4 columns">
+	        <br>
+	          <button class="button radius tiny bg-green expand" ng-click="submitDate()">Verstuur</button>
+
+	        </div>
+	      	<div class="large-12 columns">
+	      	Hoeveel dagen wilt u terug?
+	      		<ul class='right'>
+	                <li class="label round bg-green"><a ng-click="throwBack(30)"><i class="text-white fontello-clock">1 maand</i></a>
+	                </li>
+	                <li class="label round bg-green"><a ng-click="throwBack(90)"><i class="text-white fontello-clock">3 maand</i></a>
+	                </li>
+	                <li class="label round bg-green"><a ng-click="throwBack(180)"><i class="text-white fontello-clock">6 maand</i></a>
+	                </li>
+	                <li class="label round bg-green"><a ng-click="throwBack(365)"><i class="text-white fontello-clock">1 Jaar</i></a>
+	                </li>
+	            </ul>
+	      	</div>
+	    </div>
+
+		<table>
+			<tr>
+				<th>Declaratienaam</th>
+				<th>Info</th>
+				<th>Zaak</th>
+				<th>Tijd</th>
+				<th>Bedrag</th>
+				<th>datum</th>
+			</tr>
+			<tr ng-repeat='x in systemUserDetail.array'>
+				<td>{{x.declaration_name}}</td>
+				<td>{{x.comment}}</td>
+				<td>{{x.casename}}</td>
+				<td>{{x.time}}</td>
+				<td>&euro; {{x.amount}}</td>
+				<td>{{x.declaration_date}}</td>
+			</tr>
+		</table>
+	</div>
 </div>

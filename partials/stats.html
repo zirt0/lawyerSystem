@@ -1,12 +1,20 @@
 
 <div class='row'>
-    <div class="large-10 columns ">
-    <h2 class='text-center'>Cirkeldiagram Declaratie overzicht gebruikers</h2>
-    <canvas id="pie" class="chart chart-pie"
-      chart-data="data" chart-labels="labels" chart-options="options">
-    </canvas> 
+<div class="large-12 columns panel">
+    
+    <div class="large-5 columns">
+        <h3 class='text-center'><i class="fa fa-money" aria-hidden="true"></i> Declaratie overzicht gebruikers</h3>
+        <canvas id="pie" class="chart chart-pie"
+          chart-data="data" chart-labels="labels" chart-options="options">
+        </canvas> 
     </div>
-    <div class="large-2 columns panel">
+    <div class="large-5 columns">
+        <h3 class='text-center'><i class="fa fa-clock-o" aria-hidden="true"> </i>  Tijd overzicht gebruiker</h3>
+        <canvas id="line" class="chart chart-bar" chart-data="data_time" chart-labels="labels" chart-options="options"
+    ></canvas> 
+    </div>
+    
+    <div class="large-2 columns">
 
         <div class="small-text"><strong>Selecteer Periode</strong></div>
       
@@ -25,13 +33,30 @@
 
         <div class="large-12 columns">
 
-          <button class="tiny" ng-click="submitDate()">Verstuur</button>
+          <button class="tiny button bg-green radius expand" ng-click="submitDate()">Verstuur</button>
 
         </div>
-      
+
+        <div class="large-12 columns">
+            <div class="box bg-light-green">
+                <div class="box-header bg-light-green ">
+                <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title "><i class="text-white  icon-thumbs-up"></i>
+                        <span class="text-white">Let OP!</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: block;">
+                    <p class="text-white"><strong>Dit is een indicatie</strong> Abonnementen worden niet meegerekend met het tarief in de diagrammen</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class='row'>
+
     <div ng-repeat='x in stats.users' class="large-3 columns left userbox">
         <div class="large-12 columns box bg-white">
             <div class="box-header bg-transparent">
@@ -53,10 +78,46 @@
                 <div class='right text-right'><i class='fontello-clock'></i>{{x.time / 60 | number:1}}uur<br><small>({{x.time}}min)</small></div>
             </div>
             <!--   <img src="img/bag.png"> -->
-            <h6 class="large-12 columns bg-black text-white text-center"><strong>{{x.fname}} {{x.lname}}</strong></h6>
+            <a href="#/users/{{x.user_id}}"><h6 class="large-12 columns bg-black text-white text-center"><strong>{{x.fname}} {{x.lname}}</strong></h6></a>
         </div>
-    </div>
+        </div>
 
-    
+</div>
+
+</div>
+<div class='row'>
+    <div class="large-12 columns panel">
+        <h3>Overzicht van alle declaraties</h3>
+        <div class="large-8 columns">
+            <h3><i class="fa fa-money" aria-hidden="true"></i> Bedrag Per Dag</h3>
+            <canvas id="line" class="chart chart-line" chart-data="decl_data_amount" chart-labels="decl_data_labels" chart-series="series_amount" chart-options="options_amount" chart-colors="colors" chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas> 
+        </div>
+        <div class="large-4 columns userbox">
+            <div class='box large-12 bg-white columns'>
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <h3 class="box-title"><i class="fontello-chart"></i>
+                        <span>Declaraties stats</span>
+                    </h3>
+                </div>
+                <div class='large-12 columns'>
+                    <strong>Total bedrag</strong>
+                     <div class='right'>&euro; {{decl_data_amount_total | number:2}}</div>
+                </div>
+                <div class='large-12 columns'>
+                    <strong>Piek bedrag</strong>
+                     <div class='right'>&euro; {{decl_data_amount_max | number:2}}</div>
+                </div>
+                <div class='large-12 columns'>
+                    <strong>Dal bedrag</strong>
+                    <div class='right'>&euro; {{decl_data_amount_min | number:2}}</div>
+                </div>
+                <div class='large-12 columns'>
+                    <strong>Gemiddeld bedrag</strong>
+                    <div class='right'>&euro; {{decl_data_amount_avg | number:2}}</div>
+                </div>
+            </div>
+        </div>  
+    </div>
 </div>
 
