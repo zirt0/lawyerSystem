@@ -82,7 +82,7 @@
   </thead>
 
   <tbody>
-      <tr ng-repeat="(k,x) in declarationDetail | orderObjectBy:x.time track by $index ">
+      <tr ng-repeat="(k,x) in declarationDetail | orderObjectBy:x.declaration_date track by $index ">
 
       <td>
         <label id="{{x.id}}"></label>
@@ -98,7 +98,7 @@
         {{x.casename}}
       </td>
       <td>
-        {{x.fname}} {{x.lname}}
+        {{x.fname}} {{x.lname}}aaa
       </td>
       <td>
         {{x.declaration_name}} 
@@ -236,19 +236,21 @@
     <p ng-repeat='x in declarationChange.array'></p>
     <div class="small-6 columns">
         <label>Datum</label>
-        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.declaration_date"/>
+        <!-- <input name="datechange" class="small-6 columns" type="datetime" format="DD-MM-YYYY" ng-model="declarationChange.array.declaration_date"/> -->
+        <input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='declarationChange.array.declaration_date'>
     </div>
     <div class="small-6 columns">
         <label>Info</label>
-        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.comment"/>
+        <input name="info" class="small-6 columns" type="text" ng-model="declarationChange.array.comment"/>
     </div>
     <div class="small-6 columns">
         <label>Tijd</label>
-        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.time"/>
+        <input name="time" class="small-6 columns" type="text" ng-model="declarationChange.array.time"/>
     </div>
     <div class="small-6 columns">
         <label>Bedrag</label>
-        <input name="firstPassword" class="small-6 columns" type="text" ng-model="declarationChange.array.amount"/>
+        <input name="amount" class="small-6 columns" type="text" ng-model="declarationChange.array.amount"/>
     </div>
     
     

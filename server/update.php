@@ -113,6 +113,23 @@ if($subject == "close_case"){
 				$outp = $sql;
 }
 
+///reopenCase
+
+if($subject == "reopen_case"){
+
+	$sql = "UPDATE cases 
+			SET cases.status = 0
+			WHERE id='" . $id . "'";
+
+				if ($conn->query($sql) === TRUE) {
+				    $result = "New record created successfully";
+				} else {
+				    $result = "Error: " . $sql . "<br>" . $conn->error;
+				}
+				$outp = $result;
+				$outp = $sql;
+}
+
 if($subject == "test"){
 
 	$sql = "UPDATE invoice 

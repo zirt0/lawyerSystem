@@ -292,7 +292,7 @@ if($subject == "declarations"){
 	$sql .= " FROM declarations 
 			LEFT JOIN declarations_type ON declarations.type_declaration = declarations_type.id
 			LEFT JOIN cases ON declarations.case_id = cases.id
-			LEFT JOIN users ON cases.user_id = users.id";
+			LEFT JOIN users ON declarations.user_id = users.id";
 	
 	if ($decl->case_id && !$decl->get_from_date && !$decl->all_invoiced){
 		$sql .= " WHERE case_id ='" . $decl->case_id ."' AND declarations.invoiced = 0 ORDER BY declarations.`declaration_date` DESC";
@@ -952,6 +952,7 @@ WHERE declarations.user_id = " . $args->user_id ;
 	if ($args->check_invoiced){
 		$sql .= " AND invoiced != '0'" ;
 	}
+$sql .= " ORDER BY declarations.declaration_date DESC";
 
 
 	$result = $conn->query($sql);

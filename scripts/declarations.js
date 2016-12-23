@@ -60,11 +60,6 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 	});
 
 
-	$scope.changeDateFormat = function(date){
-
-		return moment(date).format('DD-MM-YYYY');  
-	}
-
 	console.log($scope.args);
 	$scope.submitDate = function(){
 
@@ -241,7 +236,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.getDeclarationfromcase})
 		.success(function (response) {
-			//console.log(response);
+			console.log(response);
 			$scope.declarationDetail = response.records;
 
 			$scope.editingData = {};
@@ -394,6 +389,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		$scope.declarationChange.modal = true;
 
 		$scope.declarationChange.array = $scope.declarationDetail[id];
+		//$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date).format('DD-MM-YYYY')
 
 		console.log($scope.declarationDetail[id]);
 
@@ -401,12 +397,19 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 	$scope.saveEditDeclaration = function(id){
 		
+		//$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date).format('DD-MM-YYYY');
+		
+		console.log(moment($scope.declarationChange.array.declaration_date, "MM-DD-YYYY").add(1, 'd'));
+		$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date, "MM-DD-YYYY").format("YYYY-MM-DD HH:mm:ss");
+		console.log($scope.declarationChange.array);
+		//return false;
 		///save to database
 		$http.post("server/update.php",{'subject': "update_declarations", 'args': $scope.declarationChange.array})
 		.success(function (response) {
 			console.log(response);
 			
-			$scope.closeDeclarationModal();
+			///$scope.closeDeclarationModal();
+			$scope.declarationChange.modal = false
 			$rootScope.succesModalBox(true, "Declaratie is succesvol gewijzigd")
 		});
 

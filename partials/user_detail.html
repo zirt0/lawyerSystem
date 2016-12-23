@@ -59,15 +59,15 @@
 				<th>Zaak</th>
 				<th>Tijd</th>
 				<th>Bedrag</th>
-				<th>datum</th>
+				<th>Datum</th>
 			</tr>
-			<tr ng-repeat='x in systemUserDetail.array'>
+			<tr ng-repeat='x in systemUserDetail.array | orderBy: "x.declaration_date"'>
 				<td>{{x.declaration_name}}</td>
 				<td>{{x.comment}}</td>
 				<td>{{x.casename}}</td>
 				<td>{{x.time}}</td>
 				<td>&euro; {{x.amount}}</td>
-				<td>{{x.declaration_date}}</td>
+				<td>{{changeDateFormat(x.declaration_date)}}</td>
 			</tr>
 		</table>
 	</div>

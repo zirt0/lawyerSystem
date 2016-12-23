@@ -5,7 +5,32 @@ app.controller('userDetailsCtrl',function($scope, $rootScope, $http, $routeParam
 	$rootScope.pageData.breadcrumps = ["Gebruiker"];
 	console.log("userDetailsCtrl");
 	$scope.systemUserDetail = {};
-	$scope.systemUserDetail.user_id = $routeParams.id;
+
+	
+
+	if($routeParams.id === 'you'){
+		//$rootScope.userDetail.id
+
+		console.log("Its me and i am no admin ");
+		var user_id = $rootScope.userDetail.id;
+	
+	}else if ($routeParams.id != $rootScope.userDetail.id && $rootScope.userDetail.userRole != 'admin'){
+
+		var user_id = $rootScope.userDetail.id;
+		console.log("Its me and i am NOT ADMIN ");
+	
+	}else if ($routeParams.id != $rootScope.userDetail.id && $rootScope.userDetail.userRole === 'admin'){
+
+		console.log("Its me and i am THE ADMIN ");
+
+		var user_id = $routeParams.id;
+
+	}else{
+
+		var user_id = $rootScope.userDetail.id;
+	}
+
+	$scope.systemUserDetail.user_id = user_id;
 
 	$http.post("server/read.php",{'subject': "users", 'args': $scope.systemUserDetail})
 	.success(function (response) {

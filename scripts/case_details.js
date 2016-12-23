@@ -75,12 +75,22 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 				$rootScope.succesModalBox(true,'Dossier is succesvol gesloten', '/cases');
 			});	
 	    }
-		
-
-		
-
 	}
 
+	//reopenCase
+	$scope.reopenCase = function(){
+		console.log("reopenCase");
+
+		var r = confirm("Weet u zeker dat u deze zaak wilt heropenen verwijderen?");
+	    if (r == true) {
+	    	$http.post("server/update.php",{'subject': "reopen_case", 'id': $scope.caseDetail.caseId
+			}).success(function (response) {
+				$scope.case = response;
+				console.log($scope.case);
+				$rootScope.succesModalBox(true,'Dossier is succesvol heropend', '/cases');
+			});	
+	    }
+	}
 
 	function checkOpponent(input){
 		if(input != 0 ){

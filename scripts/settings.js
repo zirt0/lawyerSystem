@@ -114,19 +114,26 @@ app.controller('settingsCtrl',function($scope, $rootScope, $http){
 	$scope.settings = {};
 
 	$http.post("server/read.php",{'subject': "options", "args": 'invoice_number' })
-		.success(function (response) {
-			console.log(response);
-			$scope.settings.invoice_number =  response;
-		});
+	.success(function (response) {
+		console.log(response);
+		$scope.settings.invoice_number =  response;
+	});
+	
 	$http.post("server/read.php",{'subject': "options", "args": 'case_number' })
-		.success(function (response) {
-			console.log(response);
-			$scope.settings.case_number =  response;
-		});
+	.success(function (response) {
+		console.log(response);
+		$scope.settings.case_number =  response;
+	});
 
-		// $scope.momentnu = moment();
-		 $scope.momentnu = moment();
-		 console.log($scope.momentnu);
+	$http.post("server/read.php",{'subject': "options", "args": 'verlaagd_tarief' })
+	.success(function (response) {
+		console.log(response);
+		$scope.settings.verlaagd_tarief =  response;
+	});
+
+	// $scope.momentnu = moment();
+	 $scope.momentnu = moment();
+	 console.log($scope.momentnu);
 
 	// $http.post("server/read.php",{'subject': "get_options"})
 	// .success(function (response) {

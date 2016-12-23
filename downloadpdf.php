@@ -1,7 +1,8 @@
 <?php 
 
 
-$conn = new mysqli("localhost", "root", "karlik", "customersystem");
+///$conn = new mysqli("localhost", "root", "karlik", "customersystem");
+require_once('server/config.php');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

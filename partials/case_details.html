@@ -716,14 +716,14 @@
                                 <th>Declar.type</th>
                                 <th>Declaratie</th>
                                 <th>Tijd</th>
-                                <th>Datum</th>
+                                <th>DatumASDAS</th>
 
                             </tr>
                                 <tr ng-repeat="x in declaration_summary track by $index" class="fadeIn animated">
                                     <td>{{x.declaration_name}}</td>
                                     <td>&euro; {{x.amount}}</td>
                                     <td>{{x.time}}</td>
-                                    <td>{{x.declaration_date}}</td>
+                                    <td>{{x.declaration_date | date: 'dd-MM-yyyy'}}</td>
 
                                 </tr>
                                 <tr ng-if='declaration_summary.length === 0'><td colspan='4' class='text-center'>Geen declaraties </td></tr>
@@ -740,7 +740,9 @@
 
 
          <div class="large-12 columns">
-            <button class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier afsluiten</button>
+
+            <button ng-if='case.status === "0"' class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier afsluiten</button>
+            <button ng-if='case.status === "1" && login.role === "admin"' class="tiny radius button bg-green left" ng-click="reopenCase()" >Dossier Heropenen</button>
             <button class="tiny radius button bg-green right" ng-click="createCase()" >Opslaan</button>
         </div>
         <!-- <pre>form={{caseCreate.case.case_name}}</pre>
