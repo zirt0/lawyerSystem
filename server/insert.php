@@ -17,11 +17,28 @@ $notes = $request->notes;
 if($subject == "createCase"){
 
 	$opp_id = "";
+	$opp_lawyer_id = "";
+
+	//opp_lawyer
+	if($args->opp_lawyer){
+		
+		$opponent = "INSERT INTO opponent_lawyer (lawyer_company)
+		VALUES ('".$args->opp_lawyer."')
+				";
+		if ($conn->query($opponent) === TRUE) {
+		    $opp_lawyer_id = $conn->insert_id;
+
+		} else {
+		    $result = "Error: " . $sql . "<br>" . $conn->error;
+		    //$result = "false";
+		}
+	}
 
 	if($args->opponentcheck){
 		
-		$opponent = "INSERT INTO opponents (opp_company, opp_fname, opp_lname, opp_tel, opp_email, opp_address, opp_zipcode, opp_city, opp_comment)
-		VALUES ('".$args->opp_company."',
+		$opponent1 = "INSERT INTO opponents (opp_lawyer_id, opp_company, opp_fname, opp_lname, opp_tel, opp_email, opp_address, opp_zipcode, opp_city, opp_comment)
+		VALUES ('".$opp_lawyer_id."',
+				'".$args->opp_company."',
 				'".$args->opp_fname."',
 				'".$args->opp_lname."',
 				'".$args->opp_tel."',
@@ -31,7 +48,7 @@ if($subject == "createCase"){
 				'".$args->opp_city."',
 				'".$args->opp_comment."')
 				";
-		if ($conn->query($opponent) === TRUE) {
+		if ($conn->query($opponent1) === TRUE) {
 		    $opp_id = $conn->insert_id;
 
 		} else {
@@ -68,7 +85,7 @@ if($subject == "createCase"){
 				    //$result = "false";
 				}
 				$outp = $result;
-				//$outp = $sql;
+				//$outp = $opponent1;
 				//$outp =$opponent;
 }
 
@@ -156,8 +173,8 @@ if($subject == "options"){
 
 if($subject == "insert_subscription"){
 
-	$sql = "INSERT INTO subscription (customer_id, start_date, end_date, minutes, amount)
-			VALUES ( '" . $args->customer_id . "', '" . $args->start_date . "', '" . $args->end_date . "', '" . $args->minutes . "', '" . $args->amount . "')";
+	$sql = "INSERT INTO subscription (customer_id, start_date, end_date, minutes, amount, reduced_hourrate)
+			VALUES ( '" . $args->customer_id . "', '" . $args->start_date . "', '" . $args->end_date . "', '" . $args->minutes . "', '" . $args->amount . "', '" . $args->reduced_hourrate . "')";
 
 				if ($conn->query($sql) === TRUE) {
 				    $result = "New record created successfully";
@@ -253,13 +270,28 @@ if($subject == "add_lawyer"){
 	$sql = "INSERT INTO opponent_lawyer (lawyer_company, lawyer_fname, lawyer_lname, lawyer_tel, lawyer_email, lawyer_address, lawyer_zipcode, lawyer_city)
 			VALUES ( '" . $args->lawyer_company . "', '" . $args->lawyer_fname . "', '" . $args->lawyer_lname . "', '" . $args->lawyer_tel . "', '" . $args->lawyer_email . "', '" . $args->lawyer_address . "', '" . $args->lawyer_zipcode . "', '" . $args->lawyer_city . "')";
 
-				if ($conn->query($sql) === TRUE) {
-				    $result = "New record created successfully";
-				} else {
-				    $result = "Error: " . $sql . "<br>" . $conn->error;
-				}
+		if ($conn->query($sql) === TRUE) {
+		    $opp_lawyer_id = $conn->insert_id;
+
+		} else {
+		    $result = "Error: " . $sql . "<br>" . $conn->error;
+		    //$result = "false";
+		}
+
+
+		$sql = "UPDATE opponents
+				SET opp_lawyer_id = " . $opp_lawyer_id . "
+				WHERE opponents.id = " . $args->opp_id ;
+
+		if ($conn->query($sql) === TRUE) {
+		    $result = $sql;
+
+		} else {
+		    $result = "Error: " . $sql . "<br>" . $conn->error;
+		    //$result = "false";
+		}
 				
-				$outp = $result;
+				$outp = $sql;
 }
 
 $conn->close();

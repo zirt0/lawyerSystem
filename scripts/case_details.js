@@ -16,24 +16,27 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	console.log("case id " + $scope.caseDetail.caseId);
 
 	//get customerinfo
-	$http.post("server/read.php",{
-		'subject': "casedetail", 'id': $scope.caseDetail.caseId
-	}).success(function (response) {
-		$scope.case = response;
-		console.log($scope.case);
+	$scope.reloadCasedata = function(){
+		$http.post("server/read.php",{
+			'subject': "casedetail", 'id': $scope.caseDetail.caseId
+		}).success(function (response) {
+			$scope.case = response;
+			console.log($scope.case);
 
-		//switches
-		$scope.case.process = boleonType($scope.case.process);
-		$scope.case.confidential = boleonType($scope.case.confidential);
-		$scope.case.toevoeging = boleonType($scope.case.toevoeging);
-		$scope.case.office_charge = boleonType($scope.case.office_charge);
-		$scope.case.btw = boleonType($scope.case.btw);
-		$scope.case.opponentcheck = checkOpponent($scope.case.opponent_id);
-		$scope.case.adviesdossier = checkOpponent($scope.case.adviesdossier);
-		$scope.case.incassodossier = checkOpponent($scope.case.incassodossier);
-		//adviesdossier
-		$rootScope.pageData.breadcrumps.push($scope.case.casename);
-	});
+			//switches
+			$scope.case.process = boleonType($scope.case.process);
+			$scope.case.confidential = boleonType($scope.case.confidential);
+			$scope.case.toevoeging = boleonType($scope.case.toevoeging);
+			$scope.case.office_charge = boleonType($scope.case.office_charge);
+			$scope.case.btw = boleonType($scope.case.btw);
+			$scope.case.opponentcheck = checkOpponent($scope.case.opponent_id);
+			$scope.case.adviesdossier = checkOpponent($scope.case.adviesdossier);
+			$scope.case.incassodossier = checkOpponent($scope.case.incassodossier);
+			//adviesdossier
+			$rootScope.pageData.breadcrumps.push($scope.case.casename);
+		});
+	}
+	$scope.reloadCasedata();
 
 	$scope.editCase = function(){
 		
@@ -468,15 +471,20 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	}
 
 	$scope.add_lawyer = {};
+	
 	$scope.add_lawyer.save = function(){
+		$scope.add_lawyer.opp_id = $scope.case.opp_id;
 
 		console.log($scope.add_lawyer);
-		// $http.post("server/insert.php",{'subject': "add_lawyer", 'args': $scope.add_lawyer})
-		// .success(function (response) {
-		// 	console.log(response)
-		// 	$scope.notes_from = response.records
+		$http.post("server/insert.php",{'subject': "add_lawyer", 'args': $scope.add_lawyer})
+		.success(function (response) {
+			console.log(response)
+			$scope.add_lawyer.modal = false;
+			$scope.reloadCasedata();
+			//$scope.notes_from = response.records
 
-		// });
+		});
+
 
 		angular.forEach($scope.add_lawyer, function(value, key) {
 		  

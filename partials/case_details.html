@@ -348,9 +348,7 @@
                                      <a href='mailto:{{case.lawyer_email}}?SUBJECT=Dossiernummer: {{case.case_id_alias}} - {{case.casename}}'>{{case.lawyer_email}}</a>
                                  </div>
                             </div>
-                            <div class="large-12 columns"">
-                                <br>
-                            </div>
+
                         </div>
 
 
@@ -364,7 +362,7 @@
                                  <input type="text" id="opp_lname" ng-model="case.opp_company">
                              </div>
                              <div ng-show="editCaseDetails" class="large-6 columns">
-                                 {{case.opp_company}}
+                                 {{case.opp_company}}{{case.id}}
                              </div>
                              
                         </div>
@@ -741,7 +739,7 @@
 
          <div class="large-12 columns">
 
-            <button ng-if='case.status === "0"' class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier afsluiten</button>
+            <button ng-if='case.status === "0"' class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier archiveren</button>
             <button ng-if='case.status === "1" && login.role === "admin"' class="tiny radius button bg-green left" ng-click="reopenCase()" >Dossier Heropenen</button>
             <button class="tiny radius button bg-green right" ng-click="createCase()" >Opslaan</button>
         </div>

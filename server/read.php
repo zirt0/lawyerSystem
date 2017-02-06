@@ -155,7 +155,8 @@ if($subject == "cases"){
 if($subject == "casedetail"){
 
 	$sql = "SELECT *, cases.id as case_id, 
-	customers.company, customers.fname, customers.lname FROM cases
+	customers.company, customers.fname, customers.lname, opponents.id as 'opp_id'
+	FROM cases
 	LEFT JOIN customers ON customers.id = cases.customer_id 
 	LEFT JOIN opponents ON opponents.id = cases.opponent_id
 	LEFT JOIN opponent_lawyer ON opponents.opp_lawyer_id = opponent_lawyer.id 
@@ -198,6 +199,7 @@ if($subject == "casedetail"){
 	    $outp .= '"btwnr":"'. $rs["btwnr"]    . '",'; 
 
 	    $outp .= '"opp_lawyer_id":"'   . $rs["opp_lawyer_id"]. '",';
+	    $outp .= '"opp_id":"'   . $rs["opp_id"]. '",';
 	    $outp .= '"lawyer_company":"'   . $rs["lawyer_company"]. '",';
 	    $outp .= '"lawyer_fname":"'   . $rs["lawyer_fname"]. '",';
 	    $outp .= '"lawyer_lname":"'   . $rs["lawyer_lname"]. '",';
@@ -280,7 +282,7 @@ if($subject == "declaration_type"){
 
 if($subject == "declarations"){
 
-	$sql = "SELECT declarations.id, declarations.time, declarations.amount, declarations.invoiced,  declarations.paid, declarations.comment, declarations.declaration_date,
+	$sql = "SELECT declarations.id, declarations.time, declarations.amount, declarations.invoiced, declarations.comment, declarations.declaration_date,
 		declarations_type.declaration_name,
 		cases.casename, cases.id as case_id, cases.customer_id, cases.office_charge,
 		users.fname, users.lname, users.hourrate, users.hourrate_reduced";
@@ -326,6 +328,51 @@ if($subject == "declarations"){
 		$sql .= " GROUP BY case_id";
 	}
 
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"case_id":"'  . $rs["case_id"] . '",';
+	    $outp .= '"customer_id":"'  . $rs["customer_id"] . '",';
+	    $outp .= '"casename":"'  . $rs["casename"] . '",';
+	   	$outp .= '"declaration_name":"'  . $rs["declaration_name"] . '",';
+	   	$outp .= '"alias":"'  . $rs["alias"] . '",';
+	   	$outp .= '"time":"'  . $rs["time"] . '",';
+	   	$outp .= '"amount":"'  . $rs["amount"] . '",';
+	   	//$outp .= '"paid":"'  . $rs["paid"] . '",';
+	   	$outp .= '"invoiced":"'  . $rs["invoiced"] . '",';
+	   	$outp .= '"total_amount":"'  . $rs["total_amount"] . '",';
+	   	$outp .= '"declaration_date":"'  . date("Y-m-d", strtotime($rs["declaration_date"])) . '",';
+	   	$outp .= '"comment":"'  . $rs["comment"] . '",';
+
+		$outp .= '"fname":"'  . $rs["fname"] . '",';	   	
+		$outp .= '"lname":"'  . $rs["lname"] . '",';
+		$outp .= '"hourrate":"'  . $rs["hourrate"] . '",';
+		$outp .= '"hourrate_reduced":"'  . $rs["hourrate_reduced"] . '",';
+
+	    $outp .= '"declaration_name":"'. $rs["declaration_name"]    . '"}'; 
+	}
+		
+	$outp ='{"records":['.$outp.']}';
+	//$outp = $sql;
+}
+
+if($subject == "subscription_history"){
+
+	$sql = "SELECT declarations.id, declarations.time, declarations.amount, declarations.invoiced, declarations.comment, declarations.declaration_date,
+		declarations_type.declaration_name,
+		cases.casename, cases.id as case_id, cases.customer_id, cases.office_charge,
+		users.fname, users.lname, users.hourrate, users.hourrate_reduced FROM declarations 
+			LEFT JOIN declarations_type ON declarations.type_declaration = declarations_type.id
+			LEFT JOIN cases ON declarations.case_id = cases.id
+			LEFT JOIN users ON declarations.user_id = users.id
+			 WHERE declarations.subscription_id = " . $args->subscription_id;
+
+
+	
+
 
 	$result = $conn->query($sql);
 
@@ -340,7 +387,7 @@ if($subject == "declarations"){
 	   	$outp .= '"alias":"'  . $rs["alias"] . '",';
 	   	$outp .= '"time":"'  . $rs["time"] . '",';
 	   	$outp .= '"amount":"'  . $rs["amount"] . '",';
-	   	$outp .= '"paid":"'  . $rs["paid"] . '",';
+	   	//$outp .= '"paid":"'  . $rs["paid"] . '",';
 	   	$outp .= '"invoiced":"'  . $rs["invoiced"] . '",';
 	   	$outp .= '"total_amount":"'  . $rs["total_amount"] . '",';
 	   	$outp .= '"declaration_date":"'  . date("Y-m-d", strtotime($rs["declaration_date"])) . '",';
@@ -446,7 +493,8 @@ if($subject == "subscription_time"){
 	    $outp .= '"end_date":"'  . $rs["end_date"] . '",';
 	    $outp .= '"minutes":"'  . $rs["minutes"] . '",';
 	    $outp .= '"minutes_used":"'  . $rs["minutes_used"] . '",';
-	    $outp .= '"amount":"'. $rs["amount"] . '"}'; 
+	    $outp .= '"amount":"'  . $rs["amount"] . '",';
+	    $outp .= '"reduced_hourrate":"'. $rs["reduced_hourrate"] . '"}'; 
 	}
 	$outp ='{"records":['.$outp.']}';
 }
@@ -521,6 +569,10 @@ if($subject == "subscription"){
 
 	if ($id){
 		$sql .= " WHERE subscription.customer_id ='" . $id ."'";
+	}
+
+	if ($args->subscription_id){
+		$sql .= " WHERE subscription.id ='" . $args->subscription_id ."'";
 	}
 
 	$sql .= " ORDER BY DiffDate DESC";

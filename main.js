@@ -126,6 +126,10 @@
 		    controller: 'subscriptionsCtrl',
 		    templateUrl: 'partials/subscriptions.html'
 		})
+		.when('/subscriptions/:id', {
+		    controller: 'subscriptionsDetailsCtrl',
+		    templateUrl: 'partials/subscription_details.html'
+		})
 		.when('/test', {
 		    controller: 'testCtrl',
 		    templateUrl: 'partials/test.html'
@@ -299,12 +303,24 @@
 			});
 		}
 
+		// $rootScope.get_option = function(option_name){
+			
+		// 	$rootScope.test = 0; 
+
+		// 	$http.post("server/read.php",{'subject': "options", "args": option_name })
+		// 	.success(function (response) {
+		// 		if(response){
+		//            return response;
+		//         }
+				
+		// 	});
+
+
+		// }
 		$rootScope.get_option = function(option_name){
-			$http.post("server/read.php",{'subject': "options", "args": option_name })
-			.success(function (response) {
-				console.log(response);
-				return response;
-			});
+		    return $http.post("server/read.php",{
+		    	'subject': "options", "args": option_name 
+		    	})
 		}
 
 		$rootScope.colorGenerator = function(value){

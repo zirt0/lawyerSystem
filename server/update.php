@@ -57,23 +57,58 @@ if($subject == "mark_as_read"){
 				//$outp = $sql;
 }
 
-if($subject == "update_declarations"){
+if($subject == "update_declarations_invoice"){
 
 	$outp = "";
-	foreach ($args->selected as $id){
+	// foreach ($args->selected as $id){
+	// 	$sql = "UPDATE declarations 
+	// 			SET invoiced = '" . $args->invoiceId . "'
+	// 			WHERE id='" . $id . "'";
+
+	// 	if ($conn->query($sql) === TRUE) {
+	// 	    $result = "New record created successfully";
+	// 	} else {
+	// 	    $result = "Error: " . $sql . "<br>" . $conn->error;
+	// 	}
+	// 	$outp = $result;
+	// 	$outp = $sql;
+
+	// }
+
+	$selected = implode(", ",$args->selected);
+
 		$sql = "UPDATE declarations 
 				SET invoiced = '" . $args->invoiceId . "'
-				WHERE id='" . $id . "'";
+				WHERE declarations.id in (" . $selected . ")";
 
 		if ($conn->query($sql) === TRUE) {
 		    $result = "New record created successfully";
 		} else {
 		    $result = "Error: " . $sql . "<br>" . $conn->error;
 		}
-		$outp = $result;
+		//$outp = $result;
 		$outp = $sql;
 
-	}
+}
+
+if($subject == "update_declarations_subscription_id"){
+
+	$outp = "";
+
+
+	$selected = implode(", ",$args->subsciption_used);
+
+		$sql = "UPDATE declarations 
+				SET subscription_id = '" . $args->subscription_id . "'
+				WHERE declarations.id in (" . $selected . ")";
+
+		if ($conn->query($sql) === TRUE) {
+		    $result = "New record created successfully";
+		} else {
+		    $result = "Error: " . $sql . "<br>" . $conn->error;
+		}
+		//$outp = $result;
+		$outp = $sql;
 
 }
 

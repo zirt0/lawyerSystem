@@ -47,13 +47,6 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 
 	 		}
 
-	 			
-	 		// if(calculateTime == false){
-	 		// 	//if there are no subscription minutes left
-	 		// 	return Math.abs(calculateTime) + "over minutes" //
-	 		// }
-
-	 		// return $scope.subscription_minutes_left + " zijn over"
 	 	}
 
 
@@ -69,6 +62,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 		$scope.minutes = 0;
 		$scope.office_charge = 0;
 		$scope.usersubscription.minutes_used_total = 0; 
+		$scope.subsciption_used = [];
 		
 		for(x in declarationDetail){
 			console.log("it is looping")
@@ -100,7 +94,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 
 					console.log("adviesdossier === 0")
 					//var amount = 
-					var	hourrate = 130;
+					var	hourrate = $scope.usersubscription.reduced_hourrate;
 					var amount = parseFloat((hourrate / 60) * time).toFixed(2);
 					console.log(amount)
 
@@ -108,7 +102,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 				}else if($scope.caseDetails.adviesdossier == '1' && $scope.caseDetails.incassodossier == '1'){
 					console.log("INCASSODOSSIER");
 
-					var	hourrate = 130;
+					var	hourrate = $scope.usersubscription.reduced_hourrate;
 					var amount = 0;
 
 				}else{
@@ -136,6 +130,9 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 							$scope.usersubscription.minutes_used_total += $scope.usersubscription.minutes_used; 
 							$scope.usersubscription.minutes_left = $scope.usersubscription.minutes_left - $scope.usersubscription.minutes_used;
 							
+
+							$scope.subsciption_used.push($scope.declarationDetail[x]['id']);
+
 							var	hourrate = "ABO";
 							var amount = 0;
 							console.log($scope.usersubscription.minutes_left);
@@ -148,7 +145,7 @@ function createPDFfunction ($scope, $rootScope, base64, $window, $http, $filter,
 						}
 					}else{
 						//when you dont have enough minutes to use
-						var	hourrate = 130;
+						var	hourrate = $scope.usersubscription.reduced_hourrate;
 						var amount = ((hourrate / 60) * time).toFixed(2);
 						console.log(amount)
 
@@ -426,8 +423,8 @@ $scope.checkdataisloaded = function(){
 	$scope.counter++;
 	console.log($scope.counter);
 	if($scope.counter === 2){
-		console.log($scope.invoiceInfo.pdf_one);
-		console.log($scope.invoiceInfo.pdf_two);
+		//console.log($scope.invoiceInfo.pdf_one);
+		//console.log($scope.invoiceInfo.pdf_two);
 
 		$http.post("server/insert.php",{'subject': "insert_invoice", 'args': $scope.invoiceInfo})
 		.success(function (response) {
@@ -464,7 +461,7 @@ $scope.downloadPDF = function(data){
  if(data){
 
  	pdfMake.createPdf(docDefinition).getBase64(function(dataURL){
- 		console.log(dataURL);
+ 		//console.log(dataURL);
  		$scope.invoiceInfo.pdf_one = dataURL;
  		$scope.checkdataisloaded();
 
@@ -490,8 +487,9 @@ $scope.downloadPDF = function(data){
  	docDefinition.content[3]['table']['body'] = [];
  	console.log(docDefinition.content[2]);
  	console.log(docDefinition.content);
- 	console.log($scope.invoiceDetail)
-	
+ 	console.log($scope.invoiceDetail);
+ 	console.log($scope.subsciption_used);
+ 	console.log($scope.selection);
  } ;
 
 
@@ -506,13 +504,28 @@ $scope.createInvoice = function(){
 
  	var data = true
  	$scope.downloadPDF(data);
+ 	$scope.invoiceInfo.subsciption_used = $scope.subsciption_used;
 
  	//add declaration invoice nummer
 	console.log($scope.invoiceInfo);
- 	$http.post("server/update.php",{'subject': "update_declarations", 'args': $scope.invoiceInfo})
+ 	$http.post("server/update.php",{'subject': "update_declarations_invoice", 'args': $scope.invoiceInfo})
 	.success(function (response) {
 		console.log(response)
 	});
+
+	console.log($scope.invoiceInfo.subsciption_used);
+	
+	//if there is a subscription
+	if($scope.invoiceInfo.subsciption_used){
+		console.log("There is a abbo");
+		$scope.invoiceInfo.subscription_id = $scope.usersubscription.id;
+		$http.post("server/update.php",{'subject': "update_declarations_subscription_id", 'args': $scope.invoiceInfo})
+		.success(function (response) {
+			console.log(response)
+		});
+	}else{
+		console.log("NO Abo");
+	}
 	//add declaration credits invoice nummer
 	console.log($scope.invoiceInfo);
  	$http.post("server/update.php",{'subject': "update_declarations_credits", 'args': $scope.invoiceInfo})

@@ -519,7 +519,10 @@ i.fontello-check.green{
 }
 
 .subscription_item {
-        border-top: 1px solid rgba(128, 128, 128, 0.09);
+    border-top: 1px solid rgba(128, 128, 128, 0.09);
+    background-color: #f7f7f7;
+    padding: 1px 15px;
+    border-radius: 5px;
 }
 
 .internnotes .events-nest ul li {
@@ -666,7 +669,8 @@ span.label.edumix-noft {
 
 .lawyer_box.columns {
     background-color: #299a94;
-    padding: 20px 0;
+    padding: 10px 0;
+    margin-bottom: 10px;
 }
 
 .tabs-content > .content.active {
@@ -674,9 +678,12 @@ span.label.edumix-noft {
 }
 
 a.removeSubscription {
-    padding: 3px 3px;
+    padding: 7px 11px;
     text-align: right;
-    font-size: 8px;
+    font-size: 9px;
+    margin-left: 10px;
+    margin-top: 7px;
+
     
 }
 
@@ -695,4 +702,17 @@ a.removeSubscription {
     background-color: rgba(128, 128, 128, 0.82) !important;
     margin-left: 57px;
     padding: 9px 32px;
+}
+
+.subscription_panel_box div{
+  margin: 0;
+}
+
+ul.no-style {
+    list-style: none;
+    margin-left: 0;
+}
+
+.progress {
+    background-color: #daecec;
 }

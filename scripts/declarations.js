@@ -297,6 +297,22 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			$scope.usersubscription.start_date = response.records[0]['start_date'];
 			$scope.usersubscription.end_date = response.records[0]['end_date'];
 			$scope.usersubscription.id = response.records[0]['id'];
+			
+			if(response.records[0]['reduced_hourrate']){
+
+				$scope.usersubscription.reduced_hourrate = response.records[0]['reduced_hourrate'];
+
+			}else{
+				
+				$rootScope.get_option('verlaagd_tarief').success(function (response) {
+			     	$scope.usersubscription.reduced_hourrate = response;
+				});
+			}
+			
+			
+
+
+
 			console.log($scope.usersubscription);
 
 			$scope.usersubscription.minutes_left = 0;
@@ -385,6 +401,7 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 	$scope.editDeclaration = function(id){
 		console.log(id);
+		console.log($scope.declarationDetail);
 
 		$scope.declarationChange.modal = true;
 
@@ -397,8 +414,9 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 	$scope.saveEditDeclaration = function(id){
 		
-		//$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date).format('DD-MM-YYYY');
-		
+		$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date).format('DD-MM-YYYY');
+		console.log($scope.declarationChange.array);
+
 		console.log(moment($scope.declarationChange.array.declaration_date, "MM-DD-YYYY").add(1, 'd'));
 		$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date, "MM-DD-YYYY").format("YYYY-MM-DD HH:mm:ss");
 		console.log($scope.declarationChange.array);
