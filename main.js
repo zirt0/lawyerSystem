@@ -158,6 +158,10 @@
 		    controller: 'opponent_lawyersCtrl',
 		    templateUrl: 'partials/opponent_lawyers.html'
 		 })
+		.when('/opponents/lawyers/:id', {
+		    controller: 'opponent_lawyers_detailsCtrl',
+		    templateUrl: 'partials/opponent_lawyer_details.html'
+		 })
 		.otherwise({
 			redirectTo:'/dashboard'
 		});

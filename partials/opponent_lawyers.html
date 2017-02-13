@@ -16,6 +16,6 @@
      		<td>{{x.lawyer_tel}}</td>
      		<td><a href='mailto:{{x.lawyer_email}}'>{{x.lawyer_email}}</a></td>
      		<td>{{x.lawyer_address}}<br>{{x.lawyer_zipcode}} {{x.lawyer_city}}</td>
-               <td><button class="tiny radius bg-green" ng-click="editOpponentLawyer($index)"><i class="fontello-edit"></i></button></td>
+               <td><a class="button tiny radius bg-blue" href="#/opponents/lawyers/{{x.id}}">Bekijk</a></td>
      	</tr>
      </table>

@@ -36,9 +36,17 @@
     .red {
         border: 1px solid red !Important;
     }
-    .f-dropdown li {
-        width: 100%;
+    .dropdown-nest.open li {
+       width: 100%;
     }
+
+    .margin-bottom {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #444444;
+        padding-bottom: 5px;
+    }
+
+
 
     /* when hiding the thing */
 </style>
@@ -237,7 +245,7 @@
                                             
                                             <!-- Announcement -->   
 
-                                            <ul ng-if="searchboxTop.length > 2" class="dropdown dropdown-nest searchresult animate-if" style="clip: auto;">
+                                            <ul ng-if="searchboxTop.length > 2" class="dropdown dropdown-nest searchresult animate-if" style="clip: auto; position: absolute; left: -99999px; top: 46px;" aria-hidden="true">
 
                                                 
                                                 <li>

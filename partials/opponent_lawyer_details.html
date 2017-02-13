@@ -1,0 +1,156 @@
+  <!-- Container Begin -->
+    <div class="row" style="margin-top:-20px">
+
+        <!-- customerinfo -->
+        <div class="large-6 columns">
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title"><i class="fa fa-users"></i>
+                        <span>Advocaatgegevens</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body " style="display: inline-block;" >
+                    <div class="large-12 columns">
+                    <div class="large-12 columns">
+                            <h6>Algemeen</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Bedrijf:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_company}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="lawyer.data.lawyer_company"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Voornaam:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_fname}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="lawyer.data.lawyer_fname"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Achternaam:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_lname}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="lawyer.data.lawyer_lname"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Tel:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_tel}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="lawyer.data.lawyer_tel"></div>
+                        </div>
+                        
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Email:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails"><a href="mailto:{{lawyer.data.lawyer_email}}">{{lawyer.data.lawyer_email}}</a></div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="lawyer.data.lawyer_email"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <br>
+                        </div>
+                         <div class="large-12 columns">
+                            <br>
+                            <h6>Adres</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Straat + huisnr:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_address}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="lawyer.data.lawyer_address"></div>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Postcode:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_zipcode}} {{lawyer.data.lawyer_city}}</div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                             <input type="text" ng-model="lawyer.data.lawyer_zipcode">
+                             <input type="text" ng-model="lawyer.data.lawyer_city"></div>
+                        </div>
+                        <!-- <div class="large-12 columns">
+                            <br>
+                            <h6>Opmerking</h6>
+                        </div>
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><strong>Opmerking:</strong> </div>
+                             <div class="large-6 columns" ng-show="editCustomerDetails">{{lawyer.data.lawyer_comment}}
+                             </div>
+                             <div class="large-6 columns" ng-show="!editCustomerDetails">
+                                <textarea ng-model='lawyer.data.lawyer_comment'></textarea>
+                             </div>
+                        </div> -->
+                        
+                      <!--   <div class="large-12 columns">
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="editCustomerDetails"  ng-click="editCustomerDetails = false" class="tiny radius button bg-yellow right">Bewerk</a>
+                            </span>
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="!editCustomerDetails"  ng-click="editCustomerDetails = true" class="tiny radius button bg-red right">Cancel</a>
+                            </span>
+                            <span class="box-btn" data-widget="collapse">
+                                <a ng-show="!editCustomerDetails"  ng-click="saveCustomer()" class="tiny radius button bg-green right">Opslaan</a>
+                            </span>
+                        </div> -->
+
+                    </div>
+                </div>
+
+
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- customerinfo -->
+
+        <!-- Zaken -->
+        <div class="large-6 columns">
+            <!-- box -->
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="fontello-folder"></i>
+                        <span>Zaken</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div style="display: inline-block; width: 100%;" >
+                    <div class="large-12 columns">
+                        <table class="table table-striped no-border">
+                            <tr>
+                                <th>
+                                    Client v. adv
+                                </th>
+                                <th>
+                                    Zaak
+                                </th>
+                                <th>
+                                    Datum-Tijd
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr ng-repeat="case in lawyer.case_details">
+                                <td>{{case.opp_fname}} {{case.opp_lname}}</td>
+                                <td>{{case.casename}}</td>
+                                <td>{{case.create_date}}</td>
+                                <td><a href="#/cases/{{case.case_id}}" class="tiny radius button bg-light-green">Bekijk</a></td>
+                            </tr>
+                            <tr ng-show="!lawyer.case_details.length"><td colspan="4" class="text-center">Geen zaken</td></tr>
+                           
+                        </table>
+                    </div>
+                </div>
+                <!-- end .timeline -->
+            </div>
+        </div>
+    </div>
+    <!-- End of Container Begin -->

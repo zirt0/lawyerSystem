@@ -859,6 +859,12 @@ if($subject == "opponents"){
 if($subject == "lawyers"){
 
 	$sql = "SELECT * FROM opponent_lawyer";
+
+	if ($args->id){
+		$sql .= " WHERE opponent_lawyer.id ='" . $args->id ."'";
+	}
+
+
 	$result = $conn->query($sql);
 
 	$outp = "";
@@ -873,6 +879,36 @@ if($subject == "lawyers"){
 	    $outp .= '"lawyer_address":"'  . $rs["lawyer_address"] . '",';
 	    $outp .= '"lawyer_zipcode":"'  . $rs["lawyer_zipcode"] . '",';
 	    $outp .= '"lawyer_city":"'  . $rs["lawyer_city"] . '"}';
+	}
+	$outp ='{"records":['.$outp.']}';
+}
+
+if($subject == "lawyers_case_details"){
+
+	$sql = "SELECT *, opponents.id as opp_id, cases.id as case_id FROM opponents 
+			JOIN cases ON opponents.id = cases.opponent_id
+			WHERE opponents.opp_lawyer_id = " . $args->id . " 
+			GROUP BY cases.id
+			";
+
+	// if ($args->id){
+	// 	$sql .= " WHERE opponent_lawyer.id ='" . $args->id ."'";
+	// }
+
+
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"opp_fname":"'  . $rs["opp_fname"] . '",';
+	    $outp .= '"opp_lname":"'   . $rs["opp_lname"]        . '",';
+	    $outp .= '"opp_company":"'   . $rs["opp_company"]        . '",';
+	    $outp .= '"opp_id":"'  . $rs["opp_id"] . '",';
+	    $outp .= '"casename":"'  . $rs["casename"] . '",';
+	    $outp .= '"case_id":"'  . $rs["case_id"] . '",';
+	    $outp .= '"create_date":"'  . $rs["create_date"] . '"}';
 	}
 	$outp ='{"records":['.$outp.']}';
 }
