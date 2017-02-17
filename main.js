@@ -146,6 +146,10 @@
 		    controller: 'profileCtrl',
 		    templateUrl: 'partials/profile.html'
 		})
+		.when('/profile/:id', {
+		    controller: 'profileCtrl',
+		    templateUrl: 'partials/profile.html'
+		})
 		.when('/email', {
 		    controller: 'accountCtrl',
 		    templateUrl: 'partials/email/quickstart.html'

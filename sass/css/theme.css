@@ -2245,4 +2245,19 @@ ul.no-style {
 .progress {
   background-color: #daecec; }
 
+.archivedcase {
+  border: 2px dashed #F20556;
+  color: #F20556 !important;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 20px; }
+
+.userspage {
+  text-align: right;
+  width: 480px; }
+
+.userspage a, .userspage button {
+  margin-left: 5px; }
+
 /*# sourceMappingURL=theme.css.map */

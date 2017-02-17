@@ -34,13 +34,13 @@
                     </div>
 
                     <h3 class="box-title"><i class="fa fa-users"></i>
-                        <span>Dossier</span> 
+                        <span>Dossier</span> </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body " style="display: inline-block;" >
                     <div class="large-12 columns">
                     <div class="large-12 columns">
-
+                            <div class='archivedcase' ng-if='case.status === "1"'>Dossier gearchiveerd</div>
                             <h6>Zaaknaam:  {{case.casename}} <small class="right">
                             Dossierid: <div class='right'ng-show="editCaseDetails">{{case.case_id_alias}}</div>
                             <div ng-show="!editCaseDetails" class="large-6 columns right">
@@ -534,7 +534,7 @@
             
         </div>
         <!-- Notities -->
-        <div class="box declarationBottom" style="display: inline-block;">
+        <div class="box declarationBottom" style="display: inline-block;" ng-if='case.status === "0"'>
 
         
             <div class="large-4 columns">
@@ -738,9 +738,8 @@
 
 
          <div class="large-12 columns">
-
             <button ng-if='case.status === "0"' class="tiny radius button bg-red left" ng-click="closeCase()" >Dossier archiveren</button>
-            <button ng-if='case.status === "1" && login.role === "admin"' class="tiny radius button bg-green left" ng-click="reopenCase()" >Dossier Heropenen</button>
+            <button ng-if='case.status === "1" && userDetail.userRole === "admin"' class="tiny radius button bg-green left" ng-click="reopenCase()" >Dossier Heropenen</button>
             <button class="tiny radius button bg-green right" ng-click="createCase()" >Opslaan</button>
         </div>
         <!-- <pre>form={{caseCreate.case.case_name}}</pre>

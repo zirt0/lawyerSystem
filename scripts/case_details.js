@@ -69,7 +69,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	$scope.closeCase = function(){
 		console.log("closecase");
 
-		var r = confirm("Weet u zeker dat u wilt verwijderen?");
+		var r = confirm("Weet u zeker dat u wilt archiveren?");
 	    if (r == true) {
 	    	$http.post("server/update.php",{'subject': "close_case", 'id': $scope.caseDetail.caseId
 			}).success(function (response) {
@@ -84,7 +84,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	$scope.reopenCase = function(){
 		console.log("reopenCase");
 
-		var r = confirm("Weet u zeker dat u deze zaak wilt heropenen verwijderen?");
+		var r = confirm("Weet u zeker dat u deze zaak wilt heropenen?");
 	    if (r == true) {
 	    	$http.post("server/update.php",{'subject': "reopen_case", 'id': $scope.caseDetail.caseId
 			}).success(function (response) {

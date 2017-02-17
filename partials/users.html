@@ -8,8 +8,8 @@
 				<th>Status</th>
 				<th>Uurtarief</th>
 				<th>Rol</th>
-				<th>Wachtwoord</th>				
-				<th>Verwijder</th>
+				
+				<th>Acties</th>
 
 			</tr>
 		  	<tr ng-repeat="x in gebruikers">
@@ -19,8 +19,7 @@
 			    <td>{{ x.status }}</td>
 			    <td>&euro; {{ x.hourrate }}</td>
 			    <td>{{ x.role }}</td>
-			    <td><button ng-click="showPasswordModal(x.id)" class="tiny button bg-yellow radius"><i class="fontello-lock-1 "></i>Wijzig Wachtwoord</button></td>
-			    <td><button ng-click="removeUser(x.id)" class="tiny button alert radius"><i class="fa fa-trash"></i><i class="fa fa-times" aria-hidden="true"></i> Verwijder</button></td>
+			    <td class='userspage'><a href='#/profile/{{ x.id }}' class='button tiny radius bg-green'><i class='fontello-eye-outline'></i> Bewerk gebruiker </a><button ng-click="showPasswordModal(x.id)" class="tiny button bg-yellow radius"><i class="fontello-lock-1 "></i>Wijzig Wachtwoord</button><button ng-click="removeUser(x.id)" class="tiny button alert radius"><i class="fa fa-trash"></i><i class="fa fa-times" aria-hidden="true"></i> Verwijder</button></td>
 
 		  	</tr>
 		</table>

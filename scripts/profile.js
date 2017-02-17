@@ -1,4 +1,4 @@
-app.controller('profileCtrl',function($scope, $rootScope, $http, md5){
+app.controller('profileCtrl',function($scope, $rootScope, $http, md5, $routeParams){
 
 	$rootScope.pageData.header = "Profiel";
 	$rootScope.pageData.subtitle = "Overzicht";
@@ -8,7 +8,14 @@ app.controller('profileCtrl',function($scope, $rootScope, $http, md5){
 
 	var args = {};
 	args.user_id = $rootScope.userDetail.id;
-	console.log(args.user_id);
+
+	if($routeParams.id){
+		console.log("THERE IS A USER ID" + $rootScope.userDetail);
+		if($rootScope.userDetail.userRole === "admin"){
+			args.user_id = $routeParams.id;
+		}	
+	}
+	
 
 	$http.post("server/read.php",{'subject': "users", 'args': args})
 	.success(function (response) {
