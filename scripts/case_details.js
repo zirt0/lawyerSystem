@@ -321,6 +321,8 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 
 		console.log("clicked on showmodal");
 		$scope.notes.modal = true;
+		$rootScope.modalbox.load = true;
+
 	}
 
 	$scope.appointment = {};
@@ -346,6 +348,7 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 	$scope.closeModal = function(){
 		console.log("clicked on showmodal");
 		$scope.notes.modal = false;
+		$rootScope.modalbox.load = false;
 	}
 
 	$scope.saveNote = function(){
@@ -385,8 +388,9 @@ app.controller('caseDetailCtrl',function($rootScope, $scope, $http, $filter, $ro
 				$scope.notes.content = "";
 
 				$rootScope.succesModalBox(true, "Notitie is succesvol opgeslagen", "/cases/" + $scope.notes.case_id )
-
+				$rootScope.modalbox.load = false;
 				$scope.getNotes();
+
 				//$scope.declaration_summary = response.records;
 			});
 		}

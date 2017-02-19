@@ -1,0 +1,17 @@
+    <div class="box bg-aqua newnotification animate-if" ng-if='modalbox.notification'>
+        <div class="box-header bg-aqua ">
+            <!-- tools box -->
+            <div class="pull-right box-tools">
+                <span class="box-btn" data-widget="remove" ng-click='modalbox.notification = false; modalbox.load = false;'><i class="icon-cross"></i>
+                </span>
+            </div>
+            <h3 class="box-title "><i class="text-white  icon-thumbs-up"></i>
+                <span class="text-white">U heeft een nieuwe notificatie gekregen</span>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body " style="display: block;">
+            <p class="text-white"><strong>Bekijk direct u notificaties</strong></p>
+            <p class="text-white"><a ng-click='modalbox.notification = false; modalbox.load = false;'' href='#/notifications/' class='button tiny radius'>Klik hier</a> om uw notificaties te bekijken </p>
+        </div>
+    </div>

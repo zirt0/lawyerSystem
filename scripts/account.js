@@ -1,4 +1,4 @@
-app.controller('accountCtrl',function($scope, $rootScope, $http){
+app.controller('accountCtrl',function($scope, $rootScope, $http, $routeParams){
 
 	$rootScope.pageData.header = "Account";
 	$rootScope.pageData.subtitle = "Account details";
@@ -6,6 +6,14 @@ app.controller('accountCtrl',function($scope, $rootScope, $http){
 
 	$scope.args = {}
 	$scope.args.user_id = $rootScope.userDetail.id;
+
+	if($routeParams.id != 'notifications'){
+		console.log("THERE IS A USER ID" + $routeParams.id);
+		if($rootScope.userDetail.userRole === "admin"){
+			$scope.args.user_id = $routeParams.id;
+		}	
+	}
+	
 	$scope.args.readed = true;
 	console.log($scope.args);
 	
@@ -29,6 +37,18 @@ app.controller('accountCtrl',function($scope, $rootScope, $http){
 		$scope.declaration_items = response.records
 	});
 
+	$rootScope.get_option('declaration_items').success(function (response) {
+		$scope.args.groupBy = 1;
+
+		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.args})
+		.success(function (response) {
+			console.log(response)
+			$scope.declaration_items.case_sorted = response.records
+		});
+
+
+	});
+	
 	
 	///get readed notes
 	$scope.getNotes = function(){

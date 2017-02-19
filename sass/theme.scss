@@ -728,9 +728,26 @@ ul.no-style {
 
 .userspage {
     text-align: right;
-    width: 480px;
+    width: 540px;
 }
 
 .userspage a, .userspage button  {
     margin-left: 5px;
+}
+.newnotification{
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    transform: translate(-50%, -50%);
+        width: 510px;
+}
+
+#modalbackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.87);
+    z-index: 9999;
 }

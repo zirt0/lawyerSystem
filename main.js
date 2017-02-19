@@ -104,7 +104,7 @@
 		})
 		.when('/invoices/:id', {
 		    controller: 'invoicesDetailCtrl',
-		    templateUrl: 'partials/invoices.html'
+		    templateUrl: 'partials/invoices_user.html'
 		})
 		.when('/invoices/:id/payment', {
 		    controller: 'paymentDetailCtrl',
@@ -138,7 +138,11 @@
 		    controller: 'accountCtrl',
 		    templateUrl: 'partials/account.html'
 		 })
-		.when('/account/notifications', {
+		.when('/account/:id', {
+		    controller: 'accountCtrl',
+		    templateUrl: 'partials/account.html'
+		 })
+		.when('/notifications/', {
 		    controller: 'accountCtrl',
 		    templateUrl: 'partials/notifications.html'
 		 })
@@ -201,20 +205,33 @@
 			console.log("COOKIE NO");
 		}
 
+		$rootScope.modalbox = {};
+		$rootScope.modalbox.load = false;
+		$rootScope.modalbox.notification = false;
+		$rootScope.notification_count = 0;
 		//get notification
 		$rootScope.getNotification = function(){
 			
 			args = {};
 			args.user_id = $rootScope.userDetail.id;
 			args.readed = true;
-
+			
 			//console.log(args);		
 			$http.post("server/read.php",{'subject': "notes", "args": args })
 			.success(function (response) {
-				//console.log("notification return");
-				//console.log(response);
+				console.log(response.records);
 				$rootScope.notification = response.records;
-				//console.log($rootScope.notification);
+				
+				console.log($rootScope.notification_count)
+				console.log($rootScope.notification)
+
+				if($rootScope.notification.length > $rootScope.notification_count){
+					//console.log
+					$rootScope.modalbox.load = true;
+					$rootScope.modalbox.notification = true;
+				}
+
+				$rootScope.notification_count = $rootScope.notification.length;
 			});
 		}
 

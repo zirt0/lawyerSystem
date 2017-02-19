@@ -74,36 +74,38 @@ app.controller('invoicesCtrl',function($scope, $rootScope, $http, $base64, $wind
 
 //invoicesCtrl
 app.controller('invoicesDetailCtrl',function($scope, $rootScope, $routeParams, $http){
+	console.log("WE ARE IN INVOICEDETAILS")
 	$rootScope.pageData.header = "Facturen";
 	$rootScope.pageData.subtitle = "Overzicht";
 	$rootScope.pageData.breadcrumps = ["Facturen"];
 
 	$scope.declarationDetail = {};
-	$scope.declarationDetail.customer_id = "" + $routeParams.id + "";
-	console.log($scope.declarationDetail.customer_id)
+	$scope.declarationDetail.user_id = "" + $routeParams.id + "";
+	console.log($scope.declarationDetail.user_id)
 
-	$http.post("server/read.php",{'subject': "invoices", 'decl': $scope.declarationDetail})
+	$http.post("server/read.php",{'subject': "get_invoices", 'args': $scope.declarationDetail})
 	.success(function (response) {
-		$scope.invoiceDetail = response;
+		console.log(response);
+		$scope.invoiceDetail = response.records;
 
 		//make an array from object
-		$scope.invoiceDetail = $.map($scope.invoiceDetail, function(value, index) {
-		    return [value];
-		});
+		// $scope.invoiceDetail = $.map($scope.invoiceDetail, function(value, index) {
+		//     return [value];
+		// });
 
-		$scope.invoiceDetail = $scope.invoiceDetail[0]
+		// $scope.invoiceDetail = $scope.invoiceDetail[0]
 
-		$scope.filteredListInvoices = $scope.invoiceDetail;
-		console.log($scope.filteredListInvoices);
+		// $scope.filteredListInvoices = $scope.invoiceDetail;
+		// console.log($scope.filteredListInvoices);
 
-		$scope.updateFilteredList = function() {
-		    $scope.filteredListInvoices = $filter("filter")($scope.invoiceDetail, $scope.query);
-		  };
-		$scope.config = {
-		    itemsPerPlname: 1,
-		    maxPlnames: 2,
-		    fillLastPlname: "yes"
-		};
+		// $scope.updateFilteredList = function() {
+		//     $scope.filteredListInvoices = $filter("filter")($scope.invoiceDetail, $scope.query);
+		//   };
+		// $scope.config = {
+		//     itemsPerPlname: 1,
+		//     maxPlnames: 2,
+		//     fillLastPlname: "yes"
+		// };
 	});
 });
 

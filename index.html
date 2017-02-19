@@ -58,6 +58,9 @@
         <div id="status">&nbsp;</div>
     </div>
 
+    <div id="modalbackground" ng-if="modalbox.load">
+    </div>
+
     <div ng-show="!loggedIn" ng-controller="loginCtrl">
          <div class="inner-wrap">
         <div class="wrap-fluid" style="width: 100%;">
@@ -210,7 +213,7 @@
                             <ul class="left">
 
                                 <li class="has-dropdown bg-white">
-                                    <a class="bg-white" href="#/account/notifications"><i class="text-red fa fa-bell" ></i> <span class="label edumix-noft">{{notification.length}}</span>
+                                    <a class="bg-white" href="#/notifications"><i class="text-red fa fa-bell" ></i> <span class="label edumix-noft">{{notification.length}}</span>
                                     </a>
                                     <!-- <ul class="dropdown dropdown-nest if-animate">
                                         <li class="top-dropdown-nest"><span class="label round bg-red">Notification</span>
@@ -245,7 +248,7 @@
                                             
                                             <!-- Announcement -->   
 
-                                            <ul ng-if="searchboxTop.length > 2" class="dropdown dropdown-nest searchresult animate-if" style="clip: auto; position: absolute; left: -99999px; top: 46px;" aria-hidden="true">
+                                            <ul ng-if="searchboxTop.length > 2" class="dropdown dropdown-nest searchresult animate-if" style="clip: auto; position: absolute; top: 46px;" aria-hidden="true">
 
                                                 
                                                 <li>
@@ -371,6 +374,7 @@
                 <h1 class="headerTitle">{{pageData.header}} <small>{{pageData.subtitle}}</small></h1>
 
                 <!-- Container Begin -->
+                <div ng-include="'partials/modalbox/new_notification.html'"></div>
                 
                 <div ng-view class="pageView" >
                 </div>

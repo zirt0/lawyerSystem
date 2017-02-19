@@ -19,7 +19,12 @@
 			    <td>{{ x.status }}</td>
 			    <td>&euro; {{ x.hourrate }}</td>
 			    <td>{{ x.role }}</td>
-			    <td class='userspage'><a href='#/profile/{{ x.id }}' class='button tiny radius bg-green'><i class='fontello-eye-outline'></i> Bewerk gebruiker </a><button ng-click="showPasswordModal(x.id)" class="tiny button bg-yellow radius"><i class="fontello-lock-1 "></i>Wijzig Wachtwoord</button><button ng-click="removeUser(x.id)" class="tiny button alert radius"><i class="fa fa-trash"></i><i class="fa fa-times" aria-hidden="true"></i> Verwijder</button></td>
+			    <td class='userspage'>
+                        <a href='#/account/{{ x.id }}' class='button tiny radius bg-light-green' title='Bekijk werkzaamheden van gebruiker'><i class='fontello-eye-outline'></i>  Werkzaamheden </a>
+                         <a href='#/profile/{{ x.id }}' class='button tiny radius bg-green' title="Bewerk profiel van gebruiker: naam, achternaam, wachtwoord, uurloon etc."><i class='fontello-edit'></i>Bewerk </a>
+                        <a ng-click="showPasswordModal(x.id)" class="tiny button bg-yellow radius" title="Wijzig wachtwoord"><i class="fontello-lock-1 "></i>Wijzig Wachtwoord</a>
+                          <a ng-click="removeUser(x.id)" class="tiny button alert radius" title="Verwijder gebruiker"><i class="fa fa-trash"></i><i class="fa fa-times" aria-hidden="true"></i> Verwijder</a>
+                      </td>
 
 		  	</tr>
 		</table>

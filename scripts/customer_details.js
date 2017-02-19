@@ -127,8 +127,8 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 	$scope.subscription.hours = 5; 
 	$scope.subscription.minutes = $scope.subscription.hours * 60;
 	$scope.subscription.amount = "";
-	$scope.subscription.start_date = moment();
-	$scope.subscription.end_date = moment().subtract(30, 'day');
+	//$scope.subscription.start_date = moment();
+	//$scope.subscription.end_date = moment().subtract(30, 'day');
 	
 	$rootScope.get_option('verlaagd_tarief').success(function (response) {
      	$scope.subscription.reduced_hourrate = response;
@@ -137,10 +137,15 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 	$scope.start_date = moment();
 	$scope.end_date = moment().add(1, 'year');
 
+	$scope.$watch('start_date', function() {
+        console.log($scope.start_date);
+        console.log($scope.end_date.format("YYYY-MM-DD"));
+    });
+
 	$scope.save_subscription = function(event){
 		console.log("Save");
-		$scope.subscription.start_date = $scope.start_date;
-		$scope.subscription.end_date = $scope.end_date;
+		$scope.subscription.start_date = $scope.start_date.format("YYYY-MM-DD");
+		$scope.subscription.end_date = $scope.end_date.format("YYYY-MM-DD");
 
 		for(x in $scope.subscription){
 			if($scope.subscription[x] == ""){
