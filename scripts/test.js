@@ -4,9 +4,17 @@ app.controller('testCtrl',function($scope, $rootScope, $http, $window){
 
 	$http.post("server/read.php",{'subject': "testcase"})
 		.success(function (response) {
-			console.log(response.records)
+		console.log(response.records)
 
-		});
+	});
+
+	$scope.declaration_date = moment();
+
+	$scope.$watch('declaration_date', function() {
+    console.log("Declaration minutes are changed");
+        
+
+    });
 
 	// var win = window.open("","_blank","titlebar=yes");
  //        win.document.title = "My Title";

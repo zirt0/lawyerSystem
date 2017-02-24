@@ -219,11 +219,11 @@
 			//console.log(args);		
 			$http.post("server/read.php",{'subject': "notes", "args": args })
 			.success(function (response) {
-				console.log(response.records);
+				//console.log(response.records);
 				$rootScope.notification = response.records;
 				
-				console.log($rootScope.notification_count)
-				console.log($rootScope.notification)
+				//console.log($rootScope.notification_count)
+				//console.log($rootScope.notification)
 
 				if($rootScope.notification.length > $rootScope.notification_count){
 					//console.log

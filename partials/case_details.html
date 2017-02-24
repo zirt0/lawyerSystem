@@ -1,5 +1,6 @@
   <!-- Container Begin -->
  <!--  <span class="right bg-green radius" style='position: absolute; right: 33px; margin-top: -30px; padding: 10px 30px;'><i class="fa fa-clock-o" aria-hidden="true"></i> {{case.total_minute}}{{case.total_minute_invoiced}}/{{case.total_minute_not_invoiced}} minutes</span>  -->
+
   <table style='position: absolute; right: 30px; margin-top: -60px;'>
     <tr class=>
         <th class='text-white1'>Totaal Minuten</th>
@@ -534,7 +535,7 @@
             
         </div>
         <!-- Notities -->
-        <div class="box declarationBottom" style="display: inline-block;" ng-if='case.status === "0"'>
+        <div class="box declarationBottom" style="display: inline-block;" ng-show='case.status === "0"'>
 
         
             <div class="large-4 columns">
