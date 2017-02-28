@@ -211,6 +211,11 @@
 		$rootScope.notification_count = 0;
 		//get notification
 		$rootScope.getNotification = function(){
+			//console.log(response.records);
+			console.log("Hello");
+			if(!$rootScope.loggedIn){
+				return false;
+			}
 			
 			args = {};
 			args.user_id = $rootScope.userDetail.id;
@@ -219,7 +224,7 @@
 			//console.log(args);		
 			$http.post("server/read.php",{'subject': "notes", "args": args })
 			.success(function (response) {
-				//console.log(response.records);
+				console.log(response.records);
 				$rootScope.notification = response.records;
 				
 				//console.log($rootScope.notification_count)
