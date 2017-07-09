@@ -6,10 +6,14 @@ app.controller('accountCtrl',function($scope, $rootScope, $http, $routeParams){
 
 	$scope.args = {}
 	$scope.args.user_id = $rootScope.userDetail.id;
+	$scope.args.order_decl = "DESC";
+	console.log("THIS IS THE USERDETAIL");
+	console.log($rootScope.userDetail.id);
 
 	if($routeParams.id != 'notifications'){
 		console.log("THERE IS A USER ID" + $routeParams.id);
 		if($rootScope.userDetail.userRole === "admin"){
+			console.log("USER IS ADMIN");
 			$scope.args.user_id = $routeParams.id;
 		}	
 	}
@@ -28,18 +32,22 @@ app.controller('accountCtrl',function($scope, $rootScope, $http, $routeParams){
 	.success(function (response) {
 		$scope.customerCases = response.records;
 		console.log($scope.customerCases);
-
 	});
 
 	$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.args})
 	.success(function (response) {
+		console.log("declaration_items")
 		console.log(response)
 		$scope.declaration_items = response.records
+		console.log("END declaration_items")
+
 	});
 
 	$rootScope.get_option('declaration_items').success(function (response) {
 		$scope.args.groupBy = 1;
-
+		$scope.args.order_decl = false;
+		console.log("getoption");
+		console.log($scope.args);
 		$http.post("server/read.php",{'subject': "declarations", 'decl': $scope.args})
 		.success(function (response) {
 			console.log(response)
@@ -48,7 +56,6 @@ app.controller('accountCtrl',function($scope, $rootScope, $http, $routeParams){
 
 
 	});
-	
 	
 	///get readed notes
 	$scope.getNotes = function(){
@@ -62,11 +69,8 @@ app.controller('accountCtrl',function($scope, $rootScope, $http, $routeParams){
 
 	}
 
-
 	$scope.markasRead = function(id, x){
 		console.log(id + " " + x);
-		
-
 		$scope.notes.splice(x,1)
 
 		$http.post("server/update.php",{'subject': "mark_as_read", 'id': id})

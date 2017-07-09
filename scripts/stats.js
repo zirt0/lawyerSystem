@@ -57,7 +57,6 @@ app.controller('statsCtrl',function($scope, $rootScope, $http){
 			 	$scope.data.push(value['amount']);
 			 	$scope.labels.push(value['fname'] + " " + value['lname']);
 			 	console.log($scope.labels);
-			 	//console.log(value['amount'] + " " +key);
 
 
 			});

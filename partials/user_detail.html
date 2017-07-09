@@ -1,13 +1,13 @@
 
 <div class="row">
 	<div class="large-6 columns">
-	<h3><i class="fa fa-clock-o" aria-hidden="true"></i> Tijd Per Dag</h3>
+	<h3><i class="fa fa-clock-o" aria-hidden="true"></i> Tijd Per Dag <span class="right smalltxt">Totaal min.: {{amountMinutes}}</span></h3>
 		<canvas id="line" class="chart chart-line" chart-data="data_time" chart-labels="labels" chart-series="series_time" chart-options="options_time"
 	chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas>
 	<br>
 	<br>
 	<br>
-	<h3><i class="fa fa-money" aria-hidden="true"></i> Bedrag Per Dag</h3>
+	<h3><i class="fa fa-money" aria-hidden="true"></i> Bedrag Per Dag <span class="right smalltxt">Totaal; &euro;{{amountDeclaration}}</span></h3>
 		<canvas id="line" class="chart chart-line" chart-data="data_amount" chart-labels="labels" chart-series="series_amount" chart-options="options_amount" chart-colors="colors" chart-dataset-override="datasetOverride" chart-click="onClick" ></canvas> 
 	</div>
 	<div class="large-6 columns">

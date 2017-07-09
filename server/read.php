@@ -320,12 +320,16 @@ if($subject == "declarations"){
 		$sql .= " ORDER BY declarations.`declaration_date` " . $decl->orderBy;
 	}
 
+	if ($decl->order_decl){
+		$sql .= " ORDER BY declarations.`declaration_date` " . $decl->order_decl;
+	}
+
 	if ($decl->limit){
 		$sql .= " LIMIT " . $decl->limit;
 	}
 
 	if ($decl->groupBy){
-		$sql .= " GROUP BY case_id";
+		$sql .= " GROUP BY case_id ORDER BY MAX(declarations.declaration_date) DESC, declarations.id DESC";
 	}
 
 	$result = $conn->query($sql);
@@ -1040,6 +1044,10 @@ WHERE declarations.user_id = " . $args->user_id ;
 	if ($args->check_invoiced){
 		$sql .= " AND invoiced != '0'" ;
 	}
+
+	if ($args->start_date && $args->end_date && $args->user_id){
+	$sql .= " AND declaration_date BETWEEN '". $args->start_date ."' AND '". $args->end_date ." 23:59:00'";
+}	
 $sql .= " ORDER BY declarations.declaration_date DESC";
 
 

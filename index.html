@@ -259,7 +259,7 @@
 
                                                             <div ng-repeat="x in searchPeople | filter:searchboxTop ">
                                                                 <i class="icon-user"></i>
-                                                                <a href="#/customers/{{x.id}}" ng-click="searchboxTop = ''">
+                                                                <a href="#/customers/{{x.id}}" ng-click="searchboxTopremove()">
                                                                     <h3>{{x.fname}} {{x.lname}} <span class="text-green fontello-record"></span></h3>
                                                                     <p>{{x.company}}</p>
                                                                 </a>

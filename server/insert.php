@@ -113,13 +113,44 @@ if($subject == "createCustomer"){
 
 				if ($conn->query($sql) === TRUE) {
 				    $insertedId = $conn->insert_id;
+
+				    if($args->bsnnumber){
+				    	
+				    	$sql2= "INSERT INTO bsn (customer_id, name, bsnno, parent) 
+				    	VALUES ('" . $insertedId . "', 
+				    			'" . $args->fname .  " " . $args->lname ."',
+				    			'" . $args->bsnnumber . "',
+				    			1)";
+
+
+				    		$values =  "";
+				    		if($args->choices){
+
+				    			
+				    			foreach ($args->choices as $choice ) {
+				    				
+				    				$values .= ", ('" . $insertedId . "',
+				    								'" . $choice->name .  "', 
+				    								'" . $choice->bsnno ."',
+				    								0)";
+				    			}
+				    		}		
+
+				    	$sql2 .=  $values;
+				    	
+				    	if ($conn->query($sql2) === TRUE) {
+				    		$result = $sql2;
+				    	}
+				    }
+
+				    // $result = $sql2;
 				    $result = $insertedId;
 				} else {
 				    //$result = "Error: " . $sql . "<br>" . $conn->error;
 				    $result = "false";
 				}
 				$outp = $result;
-				//$outp = $sql;
+				//$outp = $sql2;
 }
 
 if($subject == "declaration_add"){

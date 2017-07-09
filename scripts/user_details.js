@@ -76,15 +76,26 @@ app.controller('userDetailsCtrl',function($scope, $rootScope, $http, $routeParam
 			$scope.data_time = [];
 			$scope.data_amount = [];
 			$scope.labels = [];
+			$scope.total_time = [];
+			$scope.total_amount = [];
+
+			$scope.amountDeclaration = 0;
+			$scope.amountMinutes = 0;
+			console.log($scope.systemUserDetail.chartdetails);
 			for(x in $scope.systemUserDetail.chartdetails){
+				
 				$scope.labels.push($scope.systemUserDetail.chartdetails[x]['DATE']);
 				$scope.total_time.push($scope.systemUserDetail.chartdetails[x]['total_time']);
-				
 				$scope.total_amount.push($scope.systemUserDetail.chartdetails[x]['total_amount']);
+
+				//s
+				$scope.amountDeclaration += parseInt($scope.systemUserDetail.chartdetails[x]['total_amount'], 10);
+				$scope.amountMinutes += parseInt($scope.systemUserDetail.chartdetails[x]['total_time'], 10);
 			}
 			$scope.data_time.push($scope.total_time);
 			$scope.data_amount.push($scope.total_amount);
-			console.log($scope.data);
+			console.log($scope.data_time);
+			console.log($scope.data_amount);
 		});
 	}
 

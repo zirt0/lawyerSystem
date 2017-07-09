@@ -41,7 +41,7 @@ app.controller('createCaseCtrl',function($scope, $rootScope, $http, $routeParams
 		var getDate = new Date();
 		var year = "" + getDate.getFullYear();
 		year = year.slice(-2)
-		var month = getDate.getMonth() + 1 ;
+		var month = ("0" + (getDate.getMonth() + 1)).slice(-2);
 		//month = "" + $scope.args.from_month + "" ;
 		$scope.case.dossiernummer  = $scope.case.dossiernummercount + year + month;
 	

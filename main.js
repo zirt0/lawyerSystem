@@ -212,7 +212,7 @@
 		//get notification
 		$rootScope.getNotification = function(){
 			//console.log(response.records);
-			console.log("Hello");
+			//console.log("Hello");
 			if(!$rootScope.loggedIn){
 				return false;
 			}
@@ -224,7 +224,7 @@
 			//console.log(args);		
 			$http.post("server/read.php",{'subject': "notes", "args": args })
 			.success(function (response) {
-				console.log(response.records);
+				//console.log(response.records);
 				$rootScope.notification = response.records;
 				
 				//console.log($rootScope.notification_count)
@@ -261,6 +261,9 @@
 			console.log($rootScope.searchPeople);
 		}); 
 
+		$rootScope.searchboxTopremove = function (){
+			$rootScope.searchboxTop = "";
+		}
 		///check every minute for notifications
 		var timerID = setInterval(function() {
 		    // your code goes here...

@@ -80,6 +80,24 @@
                                 <input type="text" id="lname" ng-model="customerAdd.lname" required>
                              </div>
                         </div>
+
+                        <div class="large-12 columns">
+                            <div class="large-6 columns"><label for="bsnnumber"><strong>BSN nummer:</strong></label> </div>
+
+                             <div class="large-6 columns">
+                                <input type="text" id="bsnnumber" ng-model="customerAdd.bsnnumber" required>
+                                
+
+                                <fieldset  data-ng-repeat="choice in choices" class="extraBSNfield">
+                                <h4>Extra bsn</h4>
+                                  <input type="text" name="bsnname" ng-model="choice.name" placeholder="Naam & Achternaam">
+                                  <input type="text" ng-model="choice.bsnno" name="" placeholder="Voeg extra BSN">
+                                  <button class="tiny radius button bg-red right" ng-show="$last" ng-click="removeChoice()">-</button>
+                               </fieldset>
+                               <button class="tiny radius button bg-blue right" ng-click="clickExtraBSN()">+ Voeg extra bsn</button>
+                             </div>
+                        </div>
+
                         <div class="large-12 columns">
                             <div class="large-6 columns"><label for="tel"><strong>Tel:</strong></label> </div>
                              <div class="large-6 columns">

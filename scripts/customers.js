@@ -46,6 +46,15 @@ app.controller('createCustomerCtrl', function($scope, $rootScope, $http, $locati
 	$scope.createCustomer = function(){
 		console.log("create case is pressed");
 
+		if($scope.choices.length){
+			console.log("hellooo" + $scope.choices.length);
+			$scope.customerAdd.choices = $scope.choices;
+		}
+
+		console.log($scope.customerAdd);
+
+		//return;
+
 		$scope.submitted = true;
 
 		$http.post("server/insert.php",{
@@ -54,7 +63,6 @@ app.controller('createCustomerCtrl', function($scope, $rootScope, $http, $locati
 			 })
 		.success(function (response) {
 			console.log(response);
-
 			if (response){
 				
 				$rootScope.succesModalBox(true, "Klant is succesvol toegevoegd", "/customers/" + response)
@@ -64,12 +72,16 @@ app.controller('createCustomerCtrl', function($scope, $rootScope, $http, $locati
 			}
 			
 		});
+    }
+    $scope.choices =  []; 
+
+    $scope.clickExtraBSN = function (){
+
+    	var choiceslength = $scope.choices.length+1;
+
+    	$scope.choices.push({'id': choiceslength});
 
     }
 
-
-
-
 });
 
-//createCustomerCtrl
