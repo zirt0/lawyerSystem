@@ -59,6 +59,13 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 
 	});
 
+	$http.post("server/read.php",{
+		'subject': "declaration_type"
+	}).success(function (response) {
+		$scope.declaration_type = response.records;
+		console.log($scope.declaration_type);
+	});
+
 
 	console.log($scope.args);
 	$scope.submitDate = function(){
@@ -411,8 +418,14 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 		console.log($scope.declarationDetail[id]);
 
 	}
+	$scope.adem = "4";
 
 	$scope.saveEditDeclaration = function(id){
+
+		console.log($scope.declarationChange.array);
+		console.log($scope.declarationChange.array.type_declaration);
+
+		// return;
 		
 		$scope.declarationChange.array.declaration_date = moment($scope.declarationChange.array.declaration_date).format('DD-MM-YYYY');
 		console.log($scope.declarationChange.array);
@@ -428,7 +441,8 @@ app.controller('declarationDetailsCtrl',function($scope, $rootScope, $routeParam
 			
 			///$scope.closeDeclarationModal();
 			$scope.declarationChange.modal = false
-			$rootScope.succesModalBox(true, "Declaratie is succesvol gewijzigd")
+			$rootScope.succesModalBox(true, "Declaratie is succesvol gewijzigd");
+			$scope.getDeclarations();
 		});
 
 	}

@@ -10,6 +10,7 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 	console.log($scope.subscription.minutes);
 	$scope.customerId = "" + $routeParams.id + "";
 	$args.customer_id = $scope.customerId;
+	$scope.customerDetails = []
 	console.log($args);
 	console.log("customerjs " + $scope.customerId);
 
@@ -28,6 +29,13 @@ app.controller('customerCtrl', ['$scope', '$rootScope', '$routeParams', '$http',
 
 		$rootScope.pageData.breadcrumps.push($scope.customerDetails.fname + " " + $scope.customerDetails.lname )
 		console.log(response);
+	});
+
+	//get bsn of customers
+	$http.post("server/read.php",{'subject': "get_bsn", 'id': $scope.customerId})
+	.success(function (response) {
+		console.log(response)
+		$scope.customerDetails.bsn = response.records;
 	});
 
 	//get_customer_financial_details

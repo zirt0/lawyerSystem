@@ -98,6 +98,25 @@ if($subject == "customer"){
 	$outp = $outp;
 }
 
+
+if($subject == "get_bsn"){
+
+	$sql = "SELECT * FROM bsn WHERE customer_id = '" . $id . "'";
+	$result = $conn->query($sql);
+
+	$outp = "";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+	    if ($outp != "") {$outp .= ",";}
+	    $outp .= '{"id":"'  . $rs["id"] . '",';
+	    $outp .= '"name":"'  . $rs["name"] . '",';
+	    $outp .= '"bsnno":"'  . $rs["bsnno"] . '",';
+	    $outp .= '"parent":"'. $rs["parent"]    . '"}'; 
+	}
+		
+	$outp = '{"records":['.$outp.']}';
+}
+
+
 if($subject == "customers"){
 
 	$sql = "SELECT * FROM customers";
@@ -282,10 +301,10 @@ if($subject == "declaration_type"){
 
 if($subject == "declarations"){
 
-	$sql = "SELECT declarations.id, declarations.time, declarations.amount, declarations.invoiced, declarations.comment, declarations.declaration_date,
+	$sql = "SELECT declarations.id, declarations.time, declarations.amount, declarations.invoiced, declarations.comment, declarations.declaration_date, declarations.type_declaration,
 		declarations_type.declaration_name,
 		cases.casename, cases.id as case_id, cases.customer_id, cases.office_charge,
-		users.fname, users.lname, users.hourrate, users.hourrate_reduced";
+		users.id as user_id, users.fname, users.lname, users.hourrate, users.hourrate_reduced";
 
 	if ($decl->groupBy){
 		$sql .= ", SUM(amount) as total_amount";
@@ -341,6 +360,7 @@ if($subject == "declarations"){
 	    $outp .= '"case_id":"'  . $rs["case_id"] . '",';
 	    $outp .= '"customer_id":"'  . $rs["customer_id"] . '",';
 	    $outp .= '"casename":"'  . $rs["casename"] . '",';
+	    $outp .= '"type_declaration":"'  . $rs["type_declaration"] . '",';
 	   	$outp .= '"declaration_name":"'  . $rs["declaration_name"] . '",';
 	   	$outp .= '"alias":"'  . $rs["alias"] . '",';
 	   	$outp .= '"time":"'  . $rs["time"] . '",';
@@ -351,6 +371,7 @@ if($subject == "declarations"){
 	   	$outp .= '"declaration_date":"'  . date("Y-m-d", strtotime($rs["declaration_date"])) . '",';
 	   	$outp .= '"comment":"'  . $rs["comment"] . '",';
 
+		$outp .= '"user_id":"'  . $rs["user_id"] . '",';
 		$outp .= '"fname":"'  . $rs["fname"] . '",';	   	
 		$outp .= '"lname":"'  . $rs["lname"] . '",';
 		$outp .= '"hourrate":"'  . $rs["hourrate"] . '",';

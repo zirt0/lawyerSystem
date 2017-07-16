@@ -234,26 +234,47 @@
     <h2>Wijzig Declaratie met ID {{declarationChange.array.id}}</h2>
 
     <p ng-repeat='x in declarationChange.array'></p>
-    <div class="small-6 columns">
-        <label>Datum</label>
-        <!-- <input name="datechange" class="small-6 columns" type="datetime" format="DD-MM-YYYY" ng-model="declarationChange.array.declaration_date"/> -->
-        <input type="datetime" date-time min-view="date" auto-close="true"
-        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='declarationChange.array.declaration_date'>
+    <div class="small-12 columns">
+      <div class="small-4 columns"><strong>Datum</strong></div>   
+      <div class="small-8 columns"><input type="datetime" date-time min-view="date" auto-close="true"
+        view="date" maxlength="10" placeholder="Set Date" format="DD-MM-YYYY" ng-model='declarationChange.array.declaration_date'></div>
     </div>
-    <div class="small-6 columns">
-        <label>Info</label>
-        <input name="info" class="small-6 columns" type="text" ng-model="declarationChange.array.comment"/>
+    <div class="small-12 columns">
+      <div class="small-4 columns"><strong>Info</strong></div>   
+      <div class="small-8 columns"><input name="info" class="small-6 columns" type="text" ng-model="declarationChange.array.comment"/></div>
     </div>
-    <div class="small-6 columns">
-        <label>Tijd</label>
-        <input name="time" class="small-6 columns" type="text" ng-model="declarationChange.array.time"/>
+    <div class="small-12 columns">
+      <div class="small-4 columns"><strong>Categorie</strong></div>   
+      <div class="small-8 columns">
+<!--        <select id="declaratie" ng-options="d.id as d.declaration_name for d in declaration_type | orderBy:['declaration_name'] track by d.id.toString()" ng-model="declarationChange.array.type_declaration">
+                                     </select> -->
+                                 <!--     {{declaration_type}}
+                                     {{declarationChange.array.type_declaration}}
+                                     {{$scope.declarationChange.array.category}} -->
+                                   <!--   {{declarationChange.array.type_declaration}} -->
+         <select id="declaratie" ng-model="declarationChange.array.type_declaration_id">
+            <option ng-repeat="d in declaration_type | orderBy:['declaration_name'] track by d.id"  ng-selected="declarationChange.array.type_declaration != d.id" value="{{d.id}}">{{d.declaration_name}}</option>
+          </select>                     
+<!--           {{declarationChange.array.type_declaration_id}}
+ -->
+          <!-- <select id="declaratie" 
+          ng-model="adem"
+          ng-options="d.id as d.declaration_name for d in declaration_type track by d.id" >
+          </select>
+          
+          <select ng-model="badem">
+            <option ng-repeat="d in declaration_type | orderBy:['declaration_name'] track by d.id" ng-selected="d[id] == '1'" >{{d.declaration_name}} {{d.id}} {{d[id]}}</options>
+          </select>
+          <pre>{{declaration_type}}</pre> -->
+          <!-- {{declaration_type}} -->
+      </div>
     </div>
-    <div class="small-6 columns">
-        <label>Bedrag</label>
-        <input name="amount" class="small-6 columns" type="text" ng-model="declarationChange.array.amount"/>
+    <div class="small-12 columns">
+      <div class="small-4 columns"><strong>Tijd </strong>(in minuten)</div>   
+      <div class="small-8 columns"><input name="time" class="small-6 columns" type="text" ng-model="declarationChange.array.time"/></div>
     </div>
-    
-    
+
+
     <p><a ng-click="saveEditDeclaration()" class="secondary button bg-green">Declaratie Opslaan</a>
     </p>
     <a ng-click="declarationChange.modal = false" class="close-reveal-modal">&#215;</a>

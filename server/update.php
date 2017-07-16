@@ -254,9 +254,11 @@ if($subject == "update_customer"){
 
 if($subject == "update_declarations"){
 
+	$amount = ($args->hourrate / 60) * $args->time;
 	$sql = "UPDATE declarations 
 			SET declarations.declaration_date = '" . $args->declaration_date . "',
-				declarations.amount = '" . $args->amount . "',
+				declarations.amount = '" . $amount . "',
+				declarations.type_declaration = '" . $args->type_declaration_id . "',
 				declarations.time = '" . $args->time . "',
 				declarations.comment = '" . $args->comment . "'
 				WHERE id='" . $args->id . "'";

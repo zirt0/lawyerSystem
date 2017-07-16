@@ -39,6 +39,7 @@
                              <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.lname}}</div>
                              <div class="large-6 columns" ng-show="!editCustomerDetails"><input type="text" ng-model="customerDetails.lname"></div>
                         </div>
+
                         <div class="large-12 columns">
                             <div class="large-6 columns"><strong>Tel:</strong> </div>
                              <div class="large-6 columns" ng-show="editCustomerDetails">{{customerDetails.tel}}</div>
@@ -368,6 +369,51 @@
                            
                         </table>
                         <a href="#/customers/{{customerId}}/create/" class="button expand bg-red">Nieuw zaak aanmaken</a>
+                    </div>
+                </div>
+                <!-- end .timeline -->
+            </div>
+        </div>
+        <!-- Zaken -->
+
+        <!-- Zaken -->
+        <div class="large-6 columns">
+            <!-- box -->
+            <div class="box">
+                <div class="box-header bg-transparent">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+
+                        <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
+                        </span>
+                        <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
+                        </span>
+                    </div>
+                    <h3 class="box-title">
+                        <i class="fontello-folder"></i>
+                        <span>BSN nummer</span>
+                    </h3>
+                </div>
+                <!-- /.box-header -->
+                <div style="display: inline-block; width: 100%;" >
+                    <div class="large-12 columns">
+                        <table class="table table-striped no-border">
+                            <tr>
+                                <th>
+                                    Naam & Achternaam
+                                </th>
+                                <th>
+                                    Nummer
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr ng-repeat="bsn in customerDetails.bsn">
+                                 <td>{{bsn.name}}</td>
+                                 <td>{{bsn.bsnno}}</td>
+                             </tr>
+                           
+                        </table>
                     </div>
                 </div>
                 <!-- end .timeline -->
