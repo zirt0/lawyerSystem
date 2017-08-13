@@ -31,7 +31,7 @@
     "angular-animate": "^1.5.5",
     "angular": "^1.5.8",
     "angular-md5": "^0.1.10",
-    "pdfmake": "^0.1.20",
+    "pdfmake": "latest",
     "animate.css": "^3.5.2",
     "angular-base64": "^2.0.5",
     "angular-file-saver": "^1.1.2",
